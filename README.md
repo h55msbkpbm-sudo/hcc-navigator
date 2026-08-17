@@ -1,7 +1,14 @@
-# HK HCC Demographics Mapper
+# HCC Simulator
 
-Interactive single-page tool for mapping unresectable HCC patient profiles against IMbrave150, HIMALAYA (STRIDE), and CheckMate 9DW trial baselines — with Chinese-population efficacy data.
+Educational trial-baseline comparison tool for unresectable HCC.
 
-**Company Restricted** — For internal AstraZeneca use only. Educational discussion aid; not a prescription.
+Maps a typical patient profile against **IMbrave150**, **HIMALAYA + SIERRA**, and **CheckMate 9DW**.
 
-Open `index.html` locally or deploy as a static site (Vercel / GitHub Pages).
+- Flow: Disease → Fitness → Safety → trial comparison
+- Optional labs: ALBI / mALBI, PAGE-B / mPAGE-B
+- Educational BCLC / CNLC staging
+- Not a prescription or eligibility tool
+
+Open `index.html` or deploy as a static site (Vercel).
+
+Based on NCCN 2026 and BCLC 2026 framing. For education only.
