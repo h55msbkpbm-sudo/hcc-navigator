@@ -3,11 +3,32 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#0c1520">
 <title>HCC Simulator</title>
-<link rel="stylesheet" href="styles.css">
+<style>
+body{margin:0;font-family:system-ui,sans-serif;background:#0c1520;color:#e2e8f0;display:flex;align-items:center;justify-content:center;min-height:100vh}
+.boot{text-align:center;padding:24px}.boot p{opacity:.7;font-size:14px}
+</style>
 </head>
 <body>
-<div id="root">Loading HCC Simulator…</div>
-<script src="app.js" defer></script>
+<div class="boot" id="boot"><p>Loading HCC Simulator…</p></div>
+<script>
+(async function () {
+  try {
+    var res = await fetch('payload.b64');
+    if (!res.ok) throw new Error('payload ' + res.status);
+    var b64 = (await res.text()).trim();
+    var bin = atob(b64);
+    var bytes = new Uint8Array(bin.length);
+    for (var i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+    var ds = new DecompressionStream('gzip');
+    var stream = new Blob([bytes]).stream().pipeThrough(ds);
+    var html = await new Response(stream).text();
+    document.open(); document.write(html); document.close();
+  } catch (e) {
+    document.getElementById('boot').innerHTML = '<p>Could not load simulator.</p><p style="font-size:12px;opacity:.5">' + e + '</p>';
+  }
+})();
+</script>
 </body>
 </html>
