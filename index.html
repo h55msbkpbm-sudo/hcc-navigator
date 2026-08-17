@@ -15,9 +15,10 @@ body{margin:0;font-family:system-ui,sans-serif;background:#0c1520;color:#e2e8f0;
 <script>
 (async function () {
   try {
-    var res = await fetch('payload.b64');
-    if (!res.ok) throw new Error('payload ' + res.status);
-    var b64 = (await res.text()).trim();
+    var parts = await Promise.all([fetch('payload.0.b64'), fetch('payload.1.b64'), fetch('payload.2.b64'), fetch('payload.3.b64')]);
+    for (var i = 0; i < parts.length; i++) if (!parts[i].ok) throw new Error('payload ' + parts[i].status);
+    var texts = await Promise.all(parts.map(function (r) { return r.text(); }));
+    var b64 = texts.map(function (t) { return t.trim(); }).join('');
     var bin = atob(b64);
     var bytes = new Uint8Array(bin.length);
     for (var i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
