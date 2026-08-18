@@ -1,14 +1,7 @@
 # HCC Simulator
 
-Educational trial-baseline comparison tool for unresectable HCC.
+**→ Open the tool:** https://hcc-navigator-oncologist-refined-20.vercel.app/
 
-Maps a typical patient profile against **IMbrave150**, **HIMALAYA + SIERRA**, and **CheckMate 9DW**.
+Maps unresectable HCC profiles to IMbrave150, HIMALAYA + SIERRA, and CheckMate 9DW.
 
-- Flow: Disease → Fitness → Safety → trial comparison
-- Optional labs: ALBI / mALBI, PAGE-B / mPAGE-B
-- Educational BCLC / CNLC staging
-- Not a prescription or eligibility tool
-
-Open `index.html` or deploy as a static site (Vercel).
-
-Based on NCCN 2026 and BCLC 2026 framing. For education only.
+NCCN / BCLC 2026 · Education only · Not a prescription
