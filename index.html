@@ -2,24 +2,35 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#0c1520">
+<meta name="apple-mobile-web-app-capable" content="yes">
 <title>HCC Simulator</title>
 <style>
-body{margin:0;font-family:system-ui,sans-serif;background:#0c1520;color:#e2e8f0;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}
-.card{max-width:420px;background:#111827;border:1px solid #1f2937;border-radius:16px;padding:28px}
-h1{margin:0 0 8px;font-size:22px}
-p{margin:0 0 14px;line-height:1.5;color:#94a3b8;font-size:14px}
-a.btn{display:inline-block;background:#0d7377;color:#fff;text-decoration:none;padding:12px 18px;border-radius:10px;font-weight:600;font-size:14px}
-a.btn:hover{background:#0b5f62}
-.meta{font-size:12px;color:#64748b;margin-top:16px}
+html,body{margin:0;height:100%;font-family:system-ui,-apple-system,sans-serif;background:#0c1520;color:#e2e8f0}
+.boot{display:flex;align-items:center;justify-content:center;min-height:100%;text-align:center;padding:24px}
+.boot p{opacity:.75;font-size:14px;margin:0}
 </style>
 </head>
 <body>
-<div class="card">
-  <h1>HCC Simulator</h1>
-  <p>Educational trial comparison for unresectable HCC (IMbrave150 · HIMALAYA + SIERRA · CheckMate 9DW).</p>
-  <p><a class="btn" href="https://hcc-navigator-oncologist-refined-20.vercel.app/">Open live tool</a></p>
-  <p class="meta">NCCN / BCLC 2026 · For education only · Not a prescription</p>
-</div>
+<div class="boot" id="boot"><p>Loading HCC Simulator…</p></div>
+<script>
+(async function () {
+  try {
+    var parts = await Promise.all([fetch('c0.b64'), fetch('c1.b64'), fetch('c2.b64'), fetch('c3.b64'), fetch('c4.b64'), fetch('c5.b64'), fetch('c6.b64'), fetch('c7.b64'), fetch('c8.b64'), fetch('c9.b64'), fetch('c10.b64'), fetch('c11.b64'), fetch('c12.b64'), fetch('c13.b64'), fetch('c14.b64'), fetch('c15.b64')]);
+    for (var i = 0; i < parts.length; i++) if (!parts[i].ok) throw new Error('chunk ' + i + ' ' + parts[i].status);
+    var texts = await Promise.all(parts.map(function (r) { return r.text(); }));
+    var b64 = texts.map(function (t) { return t.trim(); }).join('');
+    var bin = atob(b64);
+    var bytes = new Uint8Array(bin.length);
+    for (var i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+    var stream = new Blob([bytes]).stream().pipeThrough(new DecompressionStream('gzip'));
+    var html = await new Response(stream).text();
+    document.open(); document.write(html); document.close();
+  } catch (e) {
+    document.getElementById('boot').innerHTML = '<p>Could not load.</p><p style="font-size:12px;opacity:.5">' + e + '</p>';
+  }
+})();
+</script>
 </body>
 </html>
