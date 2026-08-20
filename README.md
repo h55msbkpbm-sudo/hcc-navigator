@@ -1,7 +1,9 @@
 # HCC Simulator
 
-**→ Open the tool:** https://hcc-navigator-oncologist-refined-20.vercel.app/
+Simplified 9-question flow for unresectable HCC trial baseline mapping.
 
-Maps unresectable HCC profiles to IMbrave150, HIMALAYA + SIERRA, and CheckMate 9DW.
+**Live:** open `index.html` after all `c*.b64` payloads are present, or deploy this repo to Vercel.
+
+Maps profiles to IMbrave150, HIMALAYA + SIERRA, and CheckMate 9DW.
 
 NCCN / BCLC 2026 · Education only · Not a prescription
