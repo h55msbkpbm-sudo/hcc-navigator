@@ -29,8 +29,8 @@
   --accent: #002f7a;
   --gold: #003da5;
   --gold-soft: #eef2f8;
-  --amber: #8a5a1b;
-  --amber-bg: #f7f3ea;
+  --amber: #1a365d;
+  --amber-bg: #f4f1ea;
   --red: #8a2f2f;
   --red-bg: #f7eeee;
   --green: #2d5a45;
@@ -199,7 +199,7 @@ button:disabled, .btn:disabled { cursor: not-allowed; }
 }
 .nav-item:hover { background: rgba(241, 245, 249, .9); color: var(--gray-800); }
 .nav-item.active {
-  background: linear-gradient(90deg, var(--teal-wash), rgba(245, 237, 214, .35));
+  background: linear-gradient(90deg, var(--teal-wash), rgba(244, 241, 234, .55));
   color: var(--teal-dark);
   border-left-color: var(--gold);
   font-weight: 650;
@@ -392,8 +392,8 @@ button:disabled, .btn:disabled { cursor: not-allowed; }
   letter-spacing: .02em;
 }
 .tag.risk { background: var(--red-bg); color: var(--red); border: 1px solid #fecaca; }
-.tag.caut { background: var(--amber-bg); color: var(--amber); border: 1px solid #fed7aa; }
-.tag.safe { background: var(--green-bg); color: var(--green); border: 1px solid #a7f3d0; }
+.tag.caut { background: var(--amber-bg); color: var(--amber); border: 1px solid #d8d2c8; }
+.tag.safe { background: var(--green-bg); color: var(--green); border: 1px solid #d8d2c8; }
 
 .cv-risk-live {
   margin-top: 14px;
@@ -403,8 +403,8 @@ button:disabled, .btn:disabled { cursor: not-allowed; }
   font-weight: 600;
   line-height: 1.45;
 }
-.cv-risk-live.low { background: #ecfdf5; color: #047857; border: 1px solid #a7f3d0; }
-.cv-risk-live.mod { background: #fffbeb; color: #b45309; border: 1px solid #fde68a; }
+.cv-risk-live.low { background: #f4f1ea; color: #003da5; border: 1px solid #d8d2c8; }
+.cv-risk-live.mod { background: #fffbeb; color: #b45309; border: 1px solid #d8d2c8; }
 .cv-risk-live.high { background: #fef2f2; color: #b91c1c; border: 1px solid #fecaca; }
 
 .note {
@@ -499,7 +499,7 @@ button:disabled, .btn:disabled { cursor: not-allowed; }
 .live-box.stride { background: linear-gradient(135deg, #002f7a, #003da5); }
 .live-box.stride li::before { color: #5eead4; }
 .live-box.nivo { background: #003da5; color: #fff; }
-.live-box.nivo li::before { color: #fde68a; }
+.live-box.nivo li::before { color: #d8d2c8; }
 .live-box.tki { background: linear-gradient(135deg, #5b21b6, #7c3aed); }
 .live-box.tki li::before { color: #c4b5fd; }
 .live-box.bsc { background: linear-gradient(135deg, #334155, #475569); }
@@ -581,9 +581,9 @@ button:disabled, .btn:disabled { cursor: not-allowed; }
 .snap .val { font-size: 12.5px; font-weight: 650; font-weight: 600; margin-top: 2px; color: var(--gray-800); }
 .snap.risk { background: var(--red-bg); border-color: #fecaca; }
 .snap.risk .val { color: var(--red); }
-.snap.good { background: var(--green-bg); border-color: #a7f3d0; }
+.snap.good { background: var(--green-bg); border-color: #d8d2c8; }
 .snap.good .val { color: var(--green); }
-.snap.flag { background: var(--amber-bg); border-color: #fde68a; }
+.snap.flag { background: var(--amber-bg); border-color: #d8d2c8; }
 .snap.flag .val { color: var(--amber); }
 
 .cuse-mini, .cuse-block, .cuse-grid, .cuse-card { display: none !important; }
@@ -648,7 +648,7 @@ button:disabled, .btn:disabled { cursor: not-allowed; }
 }
 .compare-table td:first-child { font-weight: 600; color: var(--gray-700); }
 .compare-table .hl { background: #f0fdf4; font-weight: 600; color: var(--green); }
-.compare-table td.ok { color: #047857; }
+.compare-table td.ok { color: #003da5; }
 .compare-table td.mid { color: #b45309; }
 .compare-table td.bad { color: #b91c1c; }
 .regimen a { color: #0f766e; text-decoration: none; border-bottom: 1px solid rgba(15, 118, 110, .3); }
@@ -669,10 +669,10 @@ button:disabled, .btn:disabled { cursor: not-allowed; }
   margin-top: 3px;
 }
 .compare-table td.hl-col {
-  background: #ecfdf5;
+  background: #f4f1ea;
   font-weight: 600;
   color: #065f46;
-  box-shadow: inset 0 0 0 1px #a7f3d0;
+  box-shadow: inset 0 0 0 1px #d8d2c8;
 }
 .match-callout {
   display: flex;
@@ -680,8 +680,8 @@ button:disabled, .btn:disabled { cursor: not-allowed; }
   gap: 12px;
   padding: 14px 16px;
   border-radius: 12px;
-  background: linear-gradient(135deg, #ecfdf5, #f4f1ea);
-  border: 1px solid #a7f3d0;
+  background: linear-gradient(135deg, #f4f1ea, #f4f1ea);
+  border: 1px solid #d8d2c8;
   margin-bottom: 14px;
   font-size: 13.5px;
   line-height: 1.5;
@@ -765,7 +765,7 @@ button:disabled, .btn:disabled { cursor: not-allowed; }
   border-radius: 0 10px 10px 0;
   line-height: 1.55;
 }
-.why.warn { background: #fff7ed; border-left-color: var(--amber); }
+.why.warn { background: #f4f1ea; border-left-color: var(--amber); }
 .next-actions {
   background: #fff;
   border: 1px solid var(--gray-200);
@@ -887,8 +887,8 @@ button:disabled, .btn:disabled { cursor: not-allowed; }
 .sim-card ul.mm { color: #b45309; }
 
 .discuss-box {
-  background: linear-gradient(135deg, #ecfdf5, #f4f1ea);
-  border: 1px solid #a7f3d0;
+  background: linear-gradient(135deg, #f4f1ea, #f4f1ea);
+  border: 1px solid #d8d2c8;
   border-radius: 14px;
   padding: 16px 18px;
   margin-bottom: 14px;
@@ -1048,7 +1048,7 @@ button:disabled, .btn:disabled { cursor: not-allowed; }
   border-color: #5eead4;
 }
 .gap-strip.dual-elig {
-  background: linear-gradient(90deg, #ecfdf5, #eff6ff);
+  background: linear-gradient(90deg, #f4f1ea, #eff6ff);
   border: 1px solid #d8d2c8;
   border-radius: 14px;
   padding: 10px 12px;
@@ -1114,7 +1114,7 @@ button:disabled, .btn:disabled { cursor: not-allowed; }
   box-shadow: var(--shadow-xs);
 }
 .step-meta .chip b { color: var(--teal-dark); font-family: var(--mono); font-size: 12px; }
-.step-meta .chip.ok { background: var(--green-bg); border-color: #a7f3d0; color: var(--green); }
+.step-meta .chip.ok { background: var(--green-bg); border-color: #d8d2c8; color: var(--green); }
 
 /* Rank badge on trial cards */
 .sim-card:empty { display: none !important; }
@@ -1313,8 +1313,8 @@ body.view-results .res-toc { display: none; }
   font-weight: 600;
   line-height: 1.45;
 }
-.albi-live.g1 { background: var(--green-bg); border-color: #a7f3d0; color: var(--green); }
-.albi-live.g2 { background: var(--amber-bg); border-color: #fde68a; color: var(--amber); }
+.albi-live.g1 { background: var(--green-bg); border-color: #d8d2c8; color: var(--green); }
+.albi-live.g2 { background: var(--amber-bg); border-color: #d8d2c8; color: var(--amber); }
 .albi-live.g3 { background: var(--red-bg); border-color: #fecaca; color: var(--red); }
 
 /* MDCalc-style clinical summary */
@@ -1400,9 +1400,9 @@ body.view-results .res-toc { display: none; }
   color: var(--gray-400);
 }
 .pathway-chip .pc-val { font-weight: 700; font-size: 13.5px; }
-.pathway-chip.open { background: var(--green-bg); border-color: #a7f3d0; }
+.pathway-chip.open { background: var(--green-bg); border-color: #d8d2c8; }
 .pathway-chip.open .pc-val { color: var(--green); }
-.pathway-chip.caution { background: var(--amber-bg); border-color: #fde68a; }
+.pathway-chip.caution { background: var(--amber-bg); border-color: #d8d2c8; }
 .pathway-chip.caution .pc-val { color: var(--amber); }
 .pathway-chip.blocked { background: var(--red-bg); border-color: #fecaca; }
 .pathway-chip.blocked .pc-val { color: var(--red); }
@@ -1552,17 +1552,17 @@ body.view-results .res-toc { display: none; }
 .crit-card .cc-lbl { font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--gray-400); }
 .crit-card .cc-val { font-family: var(--display); font-size: 18px; font-weight: 600; margin-top: 4px; color: var(--ink); }
 .crit-card .cc-sub { font-size: 12px; color: var(--gray-600); margin-top: 4px; line-height: 1.4; }
-.crit-card.in { border-color: #a7f3d0; background: var(--green-bg); }
+.crit-card.in { border-color: #d8d2c8; background: var(--green-bg); }
 .crit-card.out { border-color: #fecaca; background: var(--red-bg); }
-.crit-card.borderline { border-color: #fde68a; background: var(--amber-bg); }
+.crit-card.borderline { border-color: #d8d2c8; background: var(--amber-bg); }
 
 /* Missing answers nudge on step */
 .miss-list {
   margin: 0 0 14px;
   padding: 10px 12px;
   border-radius: 12px;
-  background: #fff7ed;
-  border: 1px solid #fde68a;
+  background: #f4f1ea;
+  border: 1px solid #d8d2c8;
   font-size: 12.5px;
   color: #9a3412;
   display: none;
@@ -1676,7 +1676,7 @@ body.view-results .res-toc { display: none; }
   border: 1px solid transparent;
   background: var(--gray-50);
 }
-.res-toc a:hover { color: var(--teal-dark); border-color: rgba(11,110,99,.25); background: var(--teal-wash); }
+.res-toc a:hover { color: var(--teal-dark); border-color: rgba(0,61,165,.18); background: var(--teal-wash); }
 @media (max-width: 700px) {
   .res-toc { top: auto; position: relative; }
 }
@@ -1898,8 +1898,8 @@ body.view-results .sticky-actions { position: static; box-shadow: none; }
   --accent: #003da5;
   --gold: #003da5;
   --gold-soft: #eef2f8;
-  --amber: #8a5a1b;
-  --amber-bg: #f7f1e4;
+  --amber: #1a365d;
+  --amber-bg: #f4f1ea;
   --red: #8a2f2f;
   --red-bg: #f8f1ee;
   --green: #2d5a45;
@@ -5192,7 +5192,7 @@ function hkRiskScoresHtml() {
   function band(r) {
     if (r === 'High') return 'color:#b91c1c';
     if (r === 'Intermediate') return 'color:#8a5a1b';
-    return 'color:#047857';
+    return 'color:#003da5';
   }
   let body = '';
   if (cu) {
@@ -5730,8 +5730,30 @@ const HK_ACCESS = {
   initiation: 'GAP'
 };
 
-function hklcNoteHtml() { return ''; }
-function cuseHtml() { return ''; }
+function hklcNoteHtml() {
+  return `<div class="funnel-wrap" id="sec-hklc">
+    <h3>HKLC staging</h3>
+    <p class="funnel-lead">Hong Kong Liver Cancer (HKLC) is a separate Hong Kong staging system — not AJCC and not BCLC. HKCaR 2023 reports AJCC, not HKLC, and does not publish HKLC counts. This navigator does not assign an HKLC stage and does not invent HKLC numbers.</p>
+  </div>`;
+}
+
+function cuseHtml() {
+  let stageBit = 'BCLC is derived from disease and fitness on this profile. Not AJCC. Not HKLC.';
+  try {
+    const b = deriveBCLC();
+    if (b && b.label) stageBit = b.label + '. Not AJCC. Not HKLC.';
+  } catch (e) {}
+  return `<div class="funnel-wrap cuse-mdt" id="sec-cuse">
+    <h3>CUSE for MDT — BCLC 2026</h3>
+    <p class="funnel-lead">Discussion frame only. Not a score and not a drug table.</p>
+    <ul>
+      <li><strong>Complexity</strong> — liver function, comorbidity, anti-VEGF / IO safety</li>
+      <li><strong>Urgency</strong> — tumour pace, symptoms, need for rapid control</li>
+      <li><strong>Stage</strong> — ${stageBit}</li>
+      <li><strong>Extent</strong> — intrahepatic burden, macrovascular invasion, extrahepatic spread</li>
+    </ul>
+  </div>`;
+}
 
 function etiologyNmaHtml() {
   return `<div class="funnel-wrap" id="sec-eti">
@@ -6691,7 +6713,7 @@ function discussionPromptsHtml() {
   prompts.forEach(function(x) { if (!seen[x]) { seen[x] = 1; uniq.push(x); } });
   const items = uniq.slice(0, 4).map(function(t) { return '<li>' + t + '</li>'; }).join('');
   return `
-  <div class="tier" style="border-color:#fde68a">
+  <div class="tier" style="border-color:#d8d2c8">
     <div class="tier-head"><span class="badge t2">Discussion points</span><span>Suggested questions · not a script</span></div>
     <div class="regimen" style="padding-top:10px">
       <ol style="margin:0 0 0 18px;font-size:13px;line-height:1.55;color:var(--gray-700)">${items}</ol>
@@ -6769,11 +6791,11 @@ function showRec(partial = false) {
       <strong>Fitness note:</strong> CP-B8/C or ECOG ≥3 places this profile largely outside Phase III IO populations. Discussion often centres on supportive care rather than systemic IO.
     </div>`;
   } else if (d.primary === 'tki') {
-    safetyNote = `<div class="discuss-box" style="background:#fff7ed;border-color:#fed7aa;color:#9a3412">
+    safetyNote = `<div class="discuss-box" style="background:#f4f1ea;border-color:#d8d2c8;color:#9a3412">
       <strong>IO pathway note:</strong> Active autoimmune disease was flagged. IO suitability needs individual risk–benefit discussion; non-IO options may be preferred.
     </div>`;
   } else if (A.varices === 'untreated' || A.cardio === 'high') {
-    safetyNote = `<div class="discuss-box" style="background:#fffbeb;border-color:#fde68a;color:#92400e">
+    safetyNote = `<div class="discuss-box" style="background:#fffbeb;border-color:#d8d2c8;color:#92400e">
       <strong>Anti-VEGF safety signal:</strong> Untreated high-risk varices and/or high CV risk usually make bevacizumab-containing regimens a poorer fit for trial-like use — relevant when comparing baselines.
     </div>`;
   }
@@ -6903,7 +6925,7 @@ function showRec(partial = false) {
       <strong>Anti-VEGF pathway:</strong> ${av.detail}. Bevacizumab-containing regimens usually fit poorly for trial-like use — relevant when reading IMbrave150 similarity.
     </div>`;
   } else if (av.level === 'caution' && !(A.varices === 'untreated' || A.cardio === 'high')) {
-    avNote = `<div class="discuss-box" style="background:#fffbeb;border-color:#fde68a;color:#92400e">
+    avNote = `<div class="discuss-box" style="background:#fffbeb;border-color:#d8d2c8;color:#92400e">
       <strong>Anti-VEGF pathway:</strong> ${av.detail}. Weigh bleeding / CV risk before A+B-like regimens.
     </div>`;
   } else if (av.level === 'blocked' && A.egd === 'no' && A.varices !== 'untreated' && A.cardio !== 'high') {
@@ -6922,6 +6944,8 @@ function showRec(partial = false) {
     <a href="#sec-mc-mix">MODELLED mix</a>
     <a href="#sec-funnel">HKCaR 2023</a>
     <a href="#sec-access">HK access</a>
+    <a href="#sec-hklc">HKLC</a>
+    <a href="#sec-cuse">CUSE</a>
     <a href="#sec-tace">TACE+IO GAP</a>
     <a href="#sec-eti">Etiology NMA</a>
     <a href="#sec-ab3y">A+B 3-year RWE</a>
@@ -7026,6 +7050,8 @@ function showRec(partial = false) {
   </div>`;
   detailInner += (function(){ try { return hkFunnelHtml(false); } catch(e) { return ''; } })();
   detailInner += (function(){ try { return hkAccessHtml(false); } catch(e) { return ''; } })();
+  detailInner += (function(){ try { return hklcNoteHtml(); } catch(e) { return ''; } })();
+  detailInner += (function(){ try { return cuseHtml(); } catch(e) { return ''; } })();
   detailInner += (function(){ try { return taceIoGapHtml(); } catch(e) { return ''; } })();
   detailInner += (function(){ try { return etiologyNmaHtml(); } catch(e) { return ''; } })();
   detailInner += (function(){ try { return ab3yRweHtml(); } catch(e) { return ''; } })();
