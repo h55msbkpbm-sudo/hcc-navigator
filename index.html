@@ -5903,6 +5903,17 @@ function challengeHtml() {
   </div>`;
 }
 
+function odentCpbLine() {
+  return '<strong>MODELLED/GAP:</strong> 12-center first-line atezolizumab+bevacizumab RWE, including Child-Pugh B. Not a head-to-head versus STRIDE. Dual-eligibility for compensated dual-eligible A+B vs STRIDE unchanged. Odent AV, Campani C, Bouattour M, et al. <em>JHEP Reports</em> 2026. DOI 10.1016/j.jhepr.2026.101915. PMID 42276190. 2020–2024; 1,499 patients; 246 (16.4%) Child-Pugh B (72% B7 / 21.5% B8 / 6.5% B9; 73% ALBI 2, 27% ALBI 3). mOS 8.1 vs 16.8 months Child-Pugh A; mPFS 5.2 vs 8.6 months; both p<0.001. 2-year OS 20% vs 38%. A+B vs sorafenib p=0.002 (sorafenib HR, sorafenib n, and ORR are not shown). ALBI 1/2 plus metastases score 10.3 vs 7.9 vs 4.2. Improvement to Child-Pugh A 31%. Response HR 0.58, p=0.021; liver-function improvement HR 0.59, p=0.006.';
+}
+
+function odentCpbHtml() {
+  return `<div class="funnel-wrap" id="sec-odent">
+    <h3>12-center A+B including CP-B — MODELLED/GAP</h3>
+    <p class="funnel-lead">${odentCpbLine()}</p>
+  </div>`;
+}
+
 function taceIoGapHtml() {
   return `<div class="funnel-wrap" id="sec-tace">
     <h3>TACE + IO ± VEGF — GAP</h3>
@@ -6824,6 +6835,7 @@ function showRec(partial = false) {
     <a href="#sec-chen">Decompensated RWE</a>
     <a href="#sec-ohama-cpb">CP-B RWE</a>
     <a href="#sec-challenge">CHALLENGE</a>
+    <a href="#sec-odent">Odent CP-B</a>
     <a href="#sec-match">Trial match</a>
     <a href="#sec-design">Study design</a>
     <a href="#sec-efficacy">Efficacy</a>
@@ -6871,6 +6883,9 @@ function showRec(partial = false) {
   const recChalHtml = recAlt
     ? `<p class="rec-alt rec-5y">${challengeLine()}</p>`
     : '';
+  const recOdentHtml = recAlt
+    ? `<p class="rec-alt rec-5y">${odentCpbLine()}</p>`
+    : '';
   const nivoOk = A.ioContra !== 'yes' && A.liver === 'A' && A.ecog === '01' && recKey !== 'nivo' && recKey !== 'tki' && recKey !== 'bsc' && recKey !== 'incomplete';
   const rec9dwHtml = (recAlt && nivoOk)
     ? `<p class="rec-alt rec-9dw">${cm9dw4yLine()}</p>`
@@ -6911,6 +6926,7 @@ function showRec(partial = false) {
   detailInner += (function(){ try { return chenDecompHtml(); } catch(e) { return ''; } })();
   detailInner += (function(){ try { return ohamaCpbHtml(); } catch(e) { return ''; } })();
   detailInner += (function(){ try { return challengeHtml(); } catch(e) { return ''; } })();
+  detailInner += (function(){ try { return odentCpbHtml(); } catch(e) { return ''; } })();
   detailInner += criteriaHtml();
 
   const matchKey = topMatchKey();
@@ -6924,7 +6940,7 @@ function showRec(partial = false) {
   detailInner += mdtFold('fold-resources', 'Sources', evidenceResourcesHtml(), false);
   detailInner += mdtFold('fold-discuss', 'Discussion prompts', discussionPromptsHtml(), false);
 
-  const htmlOut = recAltHtml + rec5yHtml + recEtiHtml + recAb3yHtml + recTteHtml + recHiraokaHtml + recKournHtml + recE3Html + recAsiaHtml + recLoHtml + recAlHtml + recChenHtml + recCpbHtml + recChalHtml + rec9dwHtml +
+  const htmlOut = recAltHtml + rec5yHtml + recEtiHtml + recAb3yHtml + recTteHtml + recHiraokaHtml + recKournHtml + recE3Html + recAsiaHtml + recLoHtml + recAlHtml + recChenHtml + recCpbHtml + recChalHtml + recOdentHtml + rec9dwHtml +
     `<details class="mdt-fold" id="res-details"><summary>Details</summary><div class="fold-body">${detailInner}</div></details>`;
 
   const _rb = document.getElementById('resBody');
