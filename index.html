@@ -5947,6 +5947,17 @@ function abcHccHtml() {
   </div>`;
 }
 
+function kimLenva2lLine() {
+  return '<strong>MODELLED/GAP:</strong> not first-line A+B versus STRIDE; post-A+B second-line single-arm. Dual-eligibility A+B vs STRIDE unchanged. Kim HD et al. <em>J Hepatol</em> 2026 Feb;84(2):308–315. DOI 10.1016/j.jhep.2025.08.020. PMID 41038766. NCT06138769. KCSG HB23-04. <a href="https://snu.elsevierpure.com/en/publications/multicenter-single-arm-phase-ii-trial-of-lenvatinib-in-patients-w/" target="_blank" rel="noopener">Source</a>. Single-arm phase II lenvatinib after progression on first-line atezolizumab plus bevacizumab. n=50; 13 sites. Median PFS 5.4 months (95% CI 4.2–7.1); prespecified bar >4.5 months (met). Median OS 9.8 months (95% CI 8.1–NR). ORR 14.0%; DCR 82.0%; median DoR 9.4 months. Grade ≥3 AEs 46.0%. Median TTP on prior A+B 6.5 months. Follow-up 12.6 months. HR, RECIST version, Child-Pugh, BCLC, and ECOG are not shown.';
+}
+
+function kimLenva2lHtml() {
+  return `<div class="funnel-wrap" id="sec-kim2l">
+    <h3>Lenvatinib after 1L A+B (KCSG HB23-04) — MODELLED/GAP</h3>
+    <p class="funnel-lead">${kimLenva2lLine()}</p>
+  </div>`;
+}
+
 function taceIoGapHtml() {
   return `<div class="funnel-wrap" id="sec-tace">
     <h3>TACE + IO ± VEGF — GAP</h3>
@@ -6862,6 +6873,7 @@ function showRec(partial = false) {
     <a href="#sec-sierra">SIERRA</a>
     <a href="#sec-cares005">CARES-005</a>
     <a href="#sec-abchcc">ABC-HCC</a>
+    <a href="#sec-kim2l">2L lenvatinib</a>
     <a href="#sec-match">Trial match</a>
     <a href="#sec-design">Study design</a>
     <a href="#sec-efficacy">Efficacy</a>
@@ -6959,6 +6971,7 @@ function showRec(partial = false) {
   detailInner += (function(){ try { return sierraChanHtml(); } catch(e) { return ''; } })();
   detailInner += (function(){ try { return cares005Html(); } catch(e) { return ''; } })();
   detailInner += (function(){ try { return abcHccHtml(); } catch(e) { return ''; } })();
+  detailInner += (function(){ try { return kimLenva2lHtml(); } catch(e) { return ''; } })();
   detailInner += criteriaHtml();
 
   const matchKey = topMatchKey();
