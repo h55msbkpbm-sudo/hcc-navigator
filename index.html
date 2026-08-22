@@ -2,13 +2,13 @@
 <html lang="en"><head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#003da5"><title>HCC Simulator</title>
-<style>html,body{margin:0;height:100%;background:#f4f1ea;color:#003da5;font-family:system-ui,sans-serif}.boot{display:flex;align-items:center;justify-content:center;min-height:100%}</style>
+<style>html,body{margin:0;height:100%;background:#f4f1ea;color:#003da5;font-family:Georgia,serif}.boot{display:flex;align-items:center;justify-content:center;min-height:100%}</style>
 </head><body>
 <div class="boot" id="boot">Loading HCC Simulator…</div>
 <script>
 (async function () {
   try {
-    var parts = await Promise.all([fetch('ac0.b64'), fetch('ac1.b64'), fetch('ac2.b64'), fetch('ac3.b64'), fetch('ac4.b64'), fetch('ac5.b64'), fetch('ac6.b64'), fetch('ac7.b64'), fetch('ac8.b64'), fetch('ac9.b64'), fetch('ac10.b64'), fetch('ac11.b64'), fetch('ac12.b64'), fetch('ac13.b64'), fetch('ac14.b64'), fetch('ac15.b64'), fetch('ac16.b64'), fetch('ac17.b64'), fetch('ac18.b64'), fetch('ac19.b64'), fetch('ac20.b64'), fetch('ac21.b64'), fetch('ac22.b64'), fetch('ac23.b64'), fetch('ac24.b64'), fetch('ac25.b64'), fetch('ac26.b64'), fetch('ac27.b64'), fetch('ac28.b64')]);
+    var parts = await Promise.all([fetch('ad0.b64'), fetch('ad1.b64'), fetch('ad2.b64'), fetch('ad3.b64'), fetch('ad4.b64'), fetch('ad5.b64'), fetch('ad6.b64'), fetch('ad7.b64'), fetch('ad8.b64'), fetch('ad9.b64'), fetch('ad10.b64'), fetch('ad11.b64'), fetch('ad12.b64'), fetch('ad13.b64'), fetch('ad14.b64'), fetch('ad15.b64'), fetch('ad16.b64'), fetch('ad17.b64'), fetch('ad18.b64'), fetch('ad19.b64'), fetch('ad20.b64'), fetch('ad21.b64'), fetch('ad22.b64'), fetch('ad23.b64'), fetch('ad24.b64'), fetch('ad25.b64'), fetch('ad26.b64'), fetch('ad27.b64'), fetch('ad28.b64')]);
     var texts = await Promise.all(parts.map(function (r) { if (!r.ok) throw new Error(r.status); return r.text(); }));
     var bin = atob(texts.map(function (t) { return t.trim(); }).join(''));
     var bytes = new Uint8Array(bin.length);
