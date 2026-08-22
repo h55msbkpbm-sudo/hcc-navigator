@@ -5881,6 +5881,17 @@ function chenDecompHtml() {
   </div>`;
 }
 
+function ohamaCpbLine() {
+  return '<strong>MODELLED/GAP:</strong> CP-B, outside typical dual-eligibility (usually CP-A); comparable survival after IPW, different safety and liver-reserve trade-off. Dual-eligibility for compensated dual-eligible A+B vs STRIDE unchanged. Distinct from Ohama <em>Cancer Medicine</em> 2026 (DOI 10.1002/cam4.71640) and Hiraoka <em>Liver Cancer</em> 2026 (DOI 10.1159/000550924). Ohama H, Hiraoka A, Tada T, Hirooka M, Kariyama K, Tani J, et al. <em>Hepatol Res</em> 2026;56(5):716–724. DOI 10.1111/hepr.70115. n=211 consecutive uHCC CP-B first-line ICI. mPFS 5.0 vs 3.5 months atezolizumab+bevacizumab vs durvalumab+tremelimumab; mOS 10.5 vs 12.4 months. After IPW, no significant PFS or OS difference. DCR 75.2% vs 55.0%, p=0.02. irAE 10.5% vs 32.7%, p<0.01. n per arm, IPW HRs, ORR, and GI-bleed rates are not shown.';
+}
+
+function ohamaCpbHtml() {
+  return `<div class="funnel-wrap" id="sec-ohama-cpb">
+    <h3>CP-B 1L A+B vs STRIDE RWE — MODELLED/GAP</h3>
+    <p class="funnel-lead">${ohamaCpbLine()}</p>
+  </div>`;
+}
+
 function taceIoGapHtml() {
   return `<div class="funnel-wrap" id="sec-tace">
     <h3>TACE + IO ± VEGF — GAP</h3>
@@ -6800,6 +6811,7 @@ function showRec(partial = false) {
     <a href="#sec-alalwan">Older-adult TriNetX</a>
     <a href="#sec-9dw4y">9DW 4-year</a>
     <a href="#sec-chen">Decompensated RWE</a>
+    <a href="#sec-ohama-cpb">CP-B RWE</a>
     <a href="#sec-match">Trial match</a>
     <a href="#sec-design">Study design</a>
     <a href="#sec-efficacy">Efficacy</a>
@@ -6841,6 +6853,9 @@ function showRec(partial = false) {
   const recChenHtml = recAlt
     ? `<p class="rec-alt rec-5y">${chenDecompLine()}</p>`
     : '';
+  const recCpbHtml = recAlt
+    ? `<p class="rec-alt rec-5y">${ohamaCpbLine()}</p>`
+    : '';
   const nivoOk = A.ioContra !== 'yes' && A.liver === 'A' && A.ecog === '01' && recKey !== 'nivo' && recKey !== 'tki' && recKey !== 'bsc' && recKey !== 'incomplete';
   const rec9dwHtml = (recAlt && nivoOk)
     ? `<p class="rec-alt rec-9dw">${cm9dw4yLine()}</p>`
@@ -6879,6 +6894,7 @@ function showRec(partial = false) {
   detailInner += (function(){ try { return alAlwanRweHtml(); } catch(e) { return ''; } })();
   detailInner += (function(){ try { return cm9dw4yHtml(); } catch(e) { return ''; } })();
   detailInner += (function(){ try { return chenDecompHtml(); } catch(e) { return ''; } })();
+  detailInner += (function(){ try { return ohamaCpbHtml(); } catch(e) { return ''; } })();
   detailInner += criteriaHtml();
 
   const matchKey = topMatchKey();
@@ -6892,7 +6908,7 @@ function showRec(partial = false) {
   detailInner += mdtFold('fold-resources', 'Sources', evidenceResourcesHtml(), false);
   detailInner += mdtFold('fold-discuss', 'Discussion prompts', discussionPromptsHtml(), false);
 
-  const htmlOut = recAltHtml + rec5yHtml + recEtiHtml + recAb3yHtml + recTteHtml + recHiraokaHtml + recKournHtml + recE3Html + recAsiaHtml + recLoHtml + recAlHtml + recChenHtml + rec9dwHtml +
+  const htmlOut = recAltHtml + rec5yHtml + recEtiHtml + recAb3yHtml + recTteHtml + recHiraokaHtml + recKournHtml + recE3Html + recAsiaHtml + recLoHtml + recAlHtml + recChenHtml + recCpbHtml + rec9dwHtml +
     `<details class="mdt-fold" id="res-details"><summary>Details</summary><div class="fold-body">${detailInner}</div></details>`;
 
   const _rb = document.getElementById('resBody');
