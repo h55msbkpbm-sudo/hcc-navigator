@@ -1,28 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#003da5">
-<title>HCC Simulator</title>
-<style>html,body{margin:0;height:100%;background:#f4f1ea;color:#003da5;font-family:"Source Sans 3",system-ui,sans-serif}.boot{display:flex;align-items:center;justify-content:center;min-height:100%}</style>
-</head>
-<body>
+<html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#003da5"><title>HCC Simulator</title>
+<style>html,body{margin:0;height:100%;background:#f4f1ea;color:#003da5;font-family:system-ui,sans-serif}.boot{display:flex;align-items:center;justify-content:center;min-height:100%}</style>
+</head><body>
 <div class="boot" id="boot">Loading HCC Simulator…</div>
 <script>
 (async function () {
   try {
-    var parts = await Promise.all([fetch('p0.b64'), fetch('p1.b64'), fetch('p2.b64'), fetch('p3.b64'), fetch('p4.b64'), fetch('p5.b64'), fetch('p6.b64'), fetch('p7.b64'), fetch('p8.b64'), fetch('p9.b64'), fetch('p10.b64'), fetch('p11.b64'), fetch('p12.b64'), fetch('p13.b64'), fetch('p14.b64'), fetch('p15.b64'), fetch('p16.b64'), fetch('p17.b64'), fetch('p18.b64'), fetch('p19.b64'), fetch('p20.b64'), fetch('p21.b64'), fetch('p22.b64'), fetch('p23.b64'), fetch('p24.b64'), fetch('p25.b64'), fetch('p26.b64'), fetch('p27.b64')]);
+    var parts = await Promise.all([fetch('q0.b64'), fetch('q1.b64'), fetch('q2.b64'), fetch('q3.b64'), fetch('q4.b64'), fetch('q5.b64'), fetch('q6.b64'), fetch('q7.b64'), fetch('q8.b64'), fetch('q9.b64'), fetch('q10.b64'), fetch('q11.b64'), fetch('q12.b64'), fetch('q13.b64'), fetch('q14.b64'), fetch('q15.b64'), fetch('q16.b64'), fetch('q17.b64'), fetch('q18.b64'), fetch('q19.b64'), fetch('q20.b64'), fetch('q21.b64'), fetch('q22.b64'), fetch('q23.b64'), fetch('q24.b64'), fetch('q25.b64'), fetch('q26.b64'), fetch('q27.b64')]);
     var texts = await Promise.all(parts.map(function (r) { if (!r.ok) throw new Error(r.status); return r.text(); }));
     var bin = atob(texts.map(function (t) { return t.trim(); }).join(''));
     var bytes = new Uint8Array(bin.length);
     for (var i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
     var html = await new Response(new Blob([bytes]).stream().pipeThrough(new DecompressionStream('gzip'))).text();
     document.open(); document.write(html); document.close();
-  } catch (e) {
-    document.getElementById('boot').textContent = 'Could not load.';
-  }
+  } catch (e) { document.getElementById('boot').textContent = 'Could not load.'; }
 })();
-</script>
-</body>
-</html>
+</script></body></html>
