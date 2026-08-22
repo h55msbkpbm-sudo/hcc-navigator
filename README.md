@@ -1,5 +1,4 @@
 # HCC Simulator
 
-Locked Web Mayo visual language.
+Locked Web Mayo.
 https://hcc-simulator.vercel.app/
-https://hcc-navigator-oncologist-refined-20.vercel.app/
