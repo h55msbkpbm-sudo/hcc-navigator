@@ -2828,28 +2828,28 @@ body { font-family: "Source Sans 3", ui-sans-serif, system-ui, sans-serif !impor
             <div class="opt" data-val="1">
               <div class="radio"></div>
               <div>
-                <div class="opt-title">1 lesion</div>
-                <div class="opt-desc">Single discrete nodule</div>
+                <div class="opt-title">1</div>
+                <div class="opt-desc">Single lesion</div>
               </div>
             </div>
             <div class="opt" data-val="2to3">
               <div class="radio"></div>
               <div>
-                <div class="opt-title">2–3 lesions</div>
+                <div class="opt-title">2–3</div>
                 <div class="opt-desc">Oligonodular</div>
               </div>
             </div>
             <div class="opt" data-val="4to7">
               <div class="radio"></div>
               <div>
-                <div class="opt-title">4–7 lesions</div>
+                <div class="opt-title">4–7</div>
                 <div class="opt-desc">Multinodular</div>
               </div>
             </div>
             <div class="opt" data-val="ge8">
               <div class="radio"></div>
               <div>
-                <div class="opt-title">≥8 lesions</div>
+                <div class="opt-title">≥8</div>
                 <div class="opt-desc">Extensive multinodular disease</div>
               </div>
               <span class="tag caut">High count</span>
@@ -2858,7 +2858,7 @@ body { font-family: "Source Sans 3", ui-sans-serif, system-ui, sans-serif !impor
               <div class="radio"></div>
               <div>
                 <div class="opt-title">Diffuse / infiltrative</div>
-                <div class="opt-desc">No discrete countable lesions · infiltrative pattern across lobes</div>
+                <div class="opt-desc">Not discretely countable</div>
               </div>
               <span class="tag risk">Aggressive</span>
             </div>
@@ -4086,16 +4086,16 @@ function showStep(n) {
 }
 
 const QFLOW = [
-  { g:0, key:'lesions', group:'Disease', h:'How many intrahepatic lesions?', lead:'Count discrete enhancing nodules, or mark diffuse disease.' },
-  { g:0, key:'largest', group:'Disease', h:'Largest tumour size?', lead:'Maximum diameter of the dominant lesion.', extra:'burden' },
-  { g:0, key:'mvi', group:'Disease', h:'Macrovascular invasion?', lead:'Japanese Vp class, or hepatic vein / IVC.' },
-  { g:0, key:'ehs', group:'Disease', h:'Extrahepatic disease?' },
-  { g:1, key:'liver', group:'Fitness', h:'Child–Pugh class?' },
-  { g:1, key:'ecog', group:'Fitness', h:'ECOG performance status?' },
-  { g:2, key:'varices', group:'Safety', h:'Oesophageal varices?' },
-  { g:2, key:'egd', group:'Safety', h:'OGD within 6 months before A+B?', lead:'HA HAB-P365: endoscopy within 6 months before atezolizumab + bevacizumab.' },
-  { g:2, key:'cardioFactors', group:'Safety', h:'Cardiovascular history?', lead:'Select all that apply.' },
-  { g:2, key:'autoimmuneFactors', group:'Safety', h:'Any autoimmune disease?', lead:'Select all that apply.' }
+  { g:0, key:'lesions', group:'Disease', h:'Number of lesions', lead:'On the current staging CT or MRI.' },
+  { g:0, key:'largest', group:'Disease', h:'Largest lesion', lead:'Maximum diameter of the dominant lesion.', extra:'burden' },
+  { g:0, key:'mvi', group:'Disease', h:'Macrovascular invasion', lead:'Vp1–Vp4, or hepatic vein / IVC.' },
+  { g:0, key:'ehs', group:'Disease', h:'Extrahepatic spread' },
+  { g:1, key:'liver', group:'Fitness', h:'Child–Pugh class' },
+  { g:1, key:'ecog', group:'Fitness', h:'ECOG performance status' },
+  { g:2, key:'varices', group:'Safety', h:'Oesophageal varices' },
+  { g:2, key:'egd', group:'Safety', h:'OGD within 6 months', lead:'Required before atezolizumab + bevacizumab (HA HAB-P365).' },
+  { g:2, key:'cardioFactors', group:'Safety', h:'Cardiovascular history', lead:'Select all that apply.' },
+  { g:2, key:'autoimmuneFactors', group:'Safety', h:'Autoimmune disease', lead:'Select all that apply.' }
 ];
 let qIndex = 0;
 
@@ -5703,6 +5703,13 @@ const HK_ACCESS = {
   initiation: 'GAP'
 };
 
+function hklcNoteHtml() {
+  return `<div class="funnel-wrap" id="sec-hklc">
+    <h3>HKLC</h3>
+    <p class="funnel-lead">Hong Kong Liver Cancer (HKLC) is a separate Hong Kong staging system — not AJCC and not BCLC. HKCaR 2023 does not publish HKLC counts. No HKLC numbers are shown or modelled here.</p>
+  </div>`;
+}
+
 function cuseHtml() {
   return `<div class="funnel-wrap cuse-mdt" id="sec-cuse">
     <h3>CUSE for MDT — BCLC 2026</h3>
@@ -6443,6 +6450,7 @@ function showRec(partial = false) {
   }
   const recName = recNames[recKey] || d.title;
   let recLine = recWhy[recKey] || (d.sub || '').split('. ')[0];
+  if (recAlt) recLine = 'Both A+B and STRIDE are eligible on this profile; this option leads.';
   recLine = String(recLine).replace(/\d+(\.\d+)?%/g, '').replace(/\s+/g, ' ').trim();
   if (recLine && recLine.charAt(recLine.length - 1) !== '.') recLine += '.';
   if (_rt) _rt.textContent = recName;
@@ -6615,7 +6623,7 @@ function showRec(partial = false) {
   </nav>`;
 
   const recAltHtml = recAlt
-    ? `<p class="rec-alt">Also discussable: ${recAlt}.</p>`
+    ? `<p class="rec-alt">Also eligible (close): ${recAlt}</p>`
     : '';
 
   let detailInner = toc + summary;
@@ -6637,6 +6645,7 @@ function showRec(partial = false) {
   </div>`;
   detailInner += (function(){ try { return hkFunnelHtml(false); } catch(e) { return ''; } })();
   detailInner += (function(){ try { return hkAccessHtml(false); } catch(e) { return ''; } })();
+  detailInner += (function(){ try { return hklcNoteHtml(); } catch(e) { return ''; } })();
   detailInner += (function(){ try { return cuseHtml(); } catch(e) { return ''; } })();
   detailInner += criteriaHtml();
 
