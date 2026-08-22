@@ -5848,6 +5848,17 @@ function loPrinziRweHtml() {
   </div>`;
 }
 
+function alAlwanRweLine() {
+  return '<strong>MODELLED/GAP:</strong> no long-term head-to-head OS difference in older adults; the early 3-month difference is not a 1L ranking. Dual-eligibility A+B vs STRIDE unchanged. Complementary to Lo Prinzi (same network, older subset, not a replacement). Do not overwrite IMbrave150, HIMALAYA, or CheckMate-9DW trial medians. Al-Alwan A, Aloqaily M, Patel A, Buradkar A, Arora K, Awidi M, Thanikachalam K. <em>J Clin Oncol</em> 2026;44(16_suppl):e16232. DOI 10.1200/jco.2026.44.16_suppl.e16232. ASCO 2026. Age ≥65. Unmatched 4,926 atezolizumab+bevacizumab vs 793 durvalumab+tremelimumab. After 1:1 PSM on age, sex, comorbidities only: approximately 650 per group. 3-month OS 84.7% vs 78.4%, HR 0.67 (0.51–0.87), p<0.01. Long-term OS HR 0.95 (0.80–1.13), p=0.55. Hospitalization 41.3% vs 38.0%, RR 1.09. ED 13.4% vs 15.7%, RR 0.86. 1-year steroids: durvalumab+tremelimumab 50.0% vs atezolizumab+bevacizumab 38.5%, p<0.01. mOS, PFS, ORR, Child-Pugh, etiology, and GI-bleed rates are not reported. Matching did not include Child-Pugh or BCLC.';
+}
+
+function alAlwanRweHtml() {
+  return `<div class="funnel-wrap" id="sec-alalwan">
+    <h3>Older-adult TriNetX 1L A+B vs STRIDE — MODELLED/GAP</h3>
+    <p class="funnel-lead">${alAlwanRweLine()}</p>
+  </div>`;
+}
+
 function taceIoGapHtml() {
   return `<div class="funnel-wrap" id="sec-tace">
     <h3>TACE + IO ± VEGF — GAP</h3>
@@ -6764,6 +6775,7 @@ function showRec(partial = false) {
     <a href="#sec-emerald3">EMERALD-3</a>
     <a href="#sec-hima-asia">HIMALAYA Asia/HK</a>
     <a href="#sec-loprinzi">TriNetX RWE</a>
+    <a href="#sec-alalwan">Older-adult TriNetX</a>
     <a href="#sec-match">Trial match</a>
     <a href="#sec-design">Study design</a>
     <a href="#sec-efficacy">Efficacy</a>
@@ -6798,6 +6810,9 @@ function showRec(partial = false) {
     : '';
   const recLoHtml = recAlt
     ? `<p class="rec-alt rec-5y">${loPrinziRweLine()}</p>`
+    : '';
+  const recAlHtml = recAlt
+    ? `<p class="rec-alt rec-5y">${alAlwanRweLine()}</p>`
     : '';
   const nivoOk = A.ioContra !== 'yes' && A.liver === 'A' && A.ecog === '01' && recKey !== 'nivo' && recKey !== 'tki' && recKey !== 'bsc' && recKey !== 'incomplete';
   const rec9dwHtml = (recAlt && nivoOk)
@@ -6834,6 +6849,7 @@ function showRec(partial = false) {
   detailInner += (function(){ try { return emerald3Html(); } catch(e) { return ''; } })();
   detailInner += (function(){ try { return himalayaAsiaHtml(); } catch(e) { return ''; } })();
   detailInner += (function(){ try { return loPrinziRweHtml(); } catch(e) { return ''; } })();
+  detailInner += (function(){ try { return alAlwanRweHtml(); } catch(e) { return ''; } })();
   detailInner += criteriaHtml();
 
   const matchKey = topMatchKey();
@@ -6847,7 +6863,7 @@ function showRec(partial = false) {
   detailInner += mdtFold('fold-resources', 'Sources', evidenceResourcesHtml(), false);
   detailInner += mdtFold('fold-discuss', 'Discussion prompts', discussionPromptsHtml(), false);
 
-  const htmlOut = recAltHtml + rec5yHtml + recEtiHtml + recAb3yHtml + recTteHtml + recHiraokaHtml + recKournHtml + recE3Html + recAsiaHtml + recLoHtml + rec9dwHtml +
+  const htmlOut = recAltHtml + rec5yHtml + recEtiHtml + recAb3yHtml + recTteHtml + recHiraokaHtml + recKournHtml + recE3Html + recAsiaHtml + recLoHtml + recAlHtml + rec9dwHtml +
     `<details class="mdt-fold" id="res-details"><summary>Details</summary><div class="fold-body">${detailInner}</div></details>`;
 
   const _rb = document.getElementById('resBody');
