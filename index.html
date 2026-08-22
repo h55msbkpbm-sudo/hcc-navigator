@@ -6008,6 +6008,17 @@ function wangLMetaHtml() {
   </div>`;
 }
 
+function leiYTaceLine() {
+  return '<strong>MODELLED/GAP:</strong> TACE add-on to mixed Chinese PD-1/TKI, not first-line A+B versus STRIDE. Dual-eligibility A+B vs STRIDE unchanged. Lei Y, Bai Y, Bai X, Liu J, Sun B, Wu W, Zhi X, Su Y, Zhang H, Zheng C. <em>J Cancer</em> 2025;16(8):2750–2761. DOI 10.7150/jca.112706. PMID 40535820. NCT not printed. n=286, TACE plus TKI plus ICI 210 vs TKI plus ICI 76, 3 Chinese hospitals. mPFS 8.4 vs 4.0, P=0.0016. mOS 14.5 vs 10.0, P<0.0001. ORR 56.7% vs 21.1%. DCR 84.3% vs 72.4%. Multivariable PFS HR 0.61 (0.45–0.82). OS HR 0.53 (0.39–0.73). No treatment-related deaths. Table 2 ORR 56.7% vs CR 1.9% plus PR 39.0% is not reconciled.';
+}
+
+function leiYTaceHtml() {
+  return `<div class="funnel-wrap" id="sec-leiy">
+    <h3>TACE + TKI + ICI vs TKI + ICI (Lei Y) — MODELLED/GAP</h3>
+    <p class="funnel-lead">${leiYTaceLine()}</p>
+  </div>`;
+}
+
 function taceIoGapHtml() {
   return `<div class="funnel-wrap" id="sec-tace">
     <h3>TACE + IO ± VEGF — GAP</h3>
@@ -6019,6 +6030,7 @@ function taceIoGapHtml() {
       <li><strong>ABC-HCC</strong> (Galle PR et al., <em>J Clin Oncol</em> 2026;44(2_suppl):478, DOI 10.1200/JCO.2026.44.2_suppl.478) — A+B vs TACE, intermediate HCC. Interim TTFS 14.6 vs 9.5 mo, HR 0.55. Complementary to CARES-005; not 1L A+B vs STRIDE. OS/PFS/ORR not shown.</li>
       <li><strong>Wang</strong> (Wang K et al., <em>Signal Transduct Target Ther</em> 2025;10:328, DOI 10.1038/s41392-025-02427-0) — single-arm TACE then A+B, BCLC-B CP-A, n=45. Not 1L A+B vs STRIDE. No HR vs TACE or vs A+B alone.</li>
       <li><strong>Wang L meta-analysis</strong> (Wang L et al., <em>Ther Adv Gastroenterol</em> 2025, DOI 10.1177/17562848251396424) — EMERALD-1, LEAP-012, TALENTACE pooled ITT n=1,231. Pooled PFS HR 0.69; pooled OS HR 0.87 immature NS. TACE-eligible triplet vs TACE, not 1L A+B vs STRIDE.</li>
+      <li><strong>Lei Y</strong> (Lei Y et al., <em>J Cancer</em> 2025;16(8):2750–2761, DOI 10.7150/jca.112706) — TACE+TKI+ICI vs TKI+ICI RWE, n=286. Not 1L A+B vs STRIDE. NCT not printed.</li>
     </ul>
     <p class="funnel-note"><strong>GAP:</strong> TACE+IO combination PFS is not 1L A+B / STRIDE OS. Locoregional trial endpoints are not a substitute for unresectable first-line systemic OS.</p>
   </div>`;
@@ -6931,6 +6943,7 @@ function showRec(partial = false) {
     <a href="#sec-cosgrove">US community A+B</a>
     <a href="#sec-wang">TACE then A+B</a>
     <a href="#sec-wangmeta">TACE+IO meta</a>
+    <a href="#sec-leiy">Lei Y TACE RWE</a>
     <a href="#sec-match">Trial match</a>
     <a href="#sec-design">Study design</a>
     <a href="#sec-efficacy">Efficacy</a>
@@ -7034,6 +7047,7 @@ function showRec(partial = false) {
   detailInner += (function(){ try { return cosgroveAbHtml(); } catch(e) { return ''; } })();
   detailInner += (function(){ try { return wangTaceAbHtml(); } catch(e) { return ''; } })();
   detailInner += (function(){ try { return wangLMetaHtml(); } catch(e) { return ''; } })();
+  detailInner += (function(){ try { return leiYTaceHtml(); } catch(e) { return ''; } })();
   detailInner += criteriaHtml();
 
   const matchKey = topMatchKey();
