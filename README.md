@@ -1,9 +1,9 @@
 # HCC Simulator
 
-Simplified 9-question flow for unresectable HCC trial baseline mapping.
+Interactive unresectable HCC trial-alignment tool (educational only).
 
-**Live:** open `index.html` after all `c*.b64` payloads are present, or deploy this repo to Vercel.
+Live: https://hcc-navigator-oncologist-refined-20.vercel.app/
 
-Maps profiles to IMbrave150, HIMALAYA + SIERRA, and CheckMate 9DW.
+Maps typical uHCC profiles to IMbrave150, HIMALAYA + SIERRA, and CheckMate 9DW.
 
-NCCN / BCLC 2026 · Education only · Not a prescription
+Updated 2026-08-22: dual eligibility (A+B and STRIDE both eligible on near-tie ≤8 pp or caution VEGF), VEGF scoring cap, HK-leaning simulator.

@@ -17,7 +17,7 @@ html,body{margin:0;height:100%;font-family:system-ui,-apple-system,sans-serif;ba
 <script>
 (async function () {
   try {
-    var parts = await Promise.all([fetch('c0.b64'), fetch('c1.b64'), fetch('c2.b64'), fetch('c3.b64'), fetch('c4.b64'), fetch('c5.b64'), fetch('c6.b64'), fetch('c7.b64'), fetch('c8.b64'), fetch('c9.b64'), fetch('c10.b64'), fetch('c11.b64'), fetch('c12.b64'), fetch('c13.b64'), fetch('c14.b64'), fetch('c15.b64')]);
+    var parts = await Promise.all([fetch('c0.b64'), fetch('c1.b64'), fetch('c2.b64'), fetch('c3.b64'), fetch('c4.b64'), fetch('c5.b64'), fetch('c6.b64'), fetch('c7.b64'), fetch('c8.b64'), fetch('c9.b64'), fetch('c10.b64'), fetch('c11.b64'), fetch('c12.b64'), fetch('c13.b64'), fetch('c14.b64'), fetch('c15.b64'), fetch('c16.b64'), fetch('c17.b64'), fetch('c18.b64'), fetch('c19.b64'), fetch('c20.b64'), fetch('c21.b64'), fetch('c22.b64'), fetch('c23.b64'), fetch('c24.b64')]);
     for (var i = 0; i < parts.length; i++) if (!parts[i].ok) throw new Error('chunk ' + i + ' ' + parts[i].status);
     var texts = await Promise.all(parts.map(function (r) { return r.text(); }));
     var b64 = texts.map(function (t) { return t.trim(); }).join('');
