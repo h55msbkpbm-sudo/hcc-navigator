@@ -2675,6 +2675,44 @@ body { font-family: "Source Sans 3", ui-sans-serif, system-ui, sans-serif !impor
 }
 .sidebar, .panel, .progress-bar, #iosHint, .brand-mark { display: none !important; }
 
+/* Closer to mayoclinic.org */
+.topbar {
+  min-height: 84px !important;
+  padding: 20px 48px !important;
+  padding-top: calc(20px + env(safe-area-inset-top, 0px)) !important;
+}
+.topbar h1 {
+  font-size: 32px !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.03em !important;
+}
+.trust-bar {
+  text-align: left !important;
+  padding: 11px 48px !important;
+  background: #fff !important;
+}
+.mobile-steps {
+  justify-content: flex-start !important;
+  padding: 0 36px !important;
+  background: #fff !important;
+}
+.m-step { padding: 16px 20px !important; font-size: 15px !important; }
+.main { padding: 56px 48px 88px !important; max-width: 760px !important; }
+.step h1 { font-size: 40px !important; margin: 0 0 16px !important; }
+.lead { font-size: 18px !important; line-height: 1.55 !important; max-width: 36em; }
+.step.active .card.q-on { padding: 36px 38px !important; }
+.opt { gap: 14px; }
+.opt + .opt { margin-top: 8px; }
+.btn-primary, #next0, #next1, #next2 { min-width: 168px; }
+.res-banner h2 { font-size: 42px !important; }
+@media (max-width: 720px) {
+  .topbar, .trust-bar { padding-left: 20px !important; padding-right: 20px !important; }
+  .mobile-steps { padding: 0 8px !important; }
+  .main { padding: 32px 20px 64px !important; }
+  .step h1 { font-size: 30px !important; }
+  .res-banner h2 { font-size: 32px !important; }
+}
+
 </style>
 
 
@@ -6080,7 +6118,7 @@ function scoreBreakdownHtml(trials) {
   }
 
   const blocks = list.map(t => {
-    const barColor = t.pct >= 70 ? '#0d7377' : t.pct >= 40 ? '#d97706' : '#b91c1c';
+    const barColor = t.pct >= 70 ? '#003da5' : t.pct >= 40 ? '#8a5a1b' : '#8a2f2f';
     return `
     <div style="margin-bottom:16px;border:1px solid var(--gray-200);border-radius:10px;overflow:hidden">
       <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:var(--gray-50);border-bottom:1px solid var(--gray-200)">
@@ -6238,7 +6276,7 @@ function sierraContextHtml() {
   return `
   <div class="tier" style="border-color:#99f6e4">
     <div class="tier-head" style="background:#f0fdfa">
-      <span class="badge t3" style="background:#0d7377;color:#fff">SIERRA · Phase IIIb</span>
+      <span class="badge t3" style="background:#003da5;color:#fff">SIERRA · Phase IIIb</span>
       <span>STRIDE in poor-prognosis uHCC</span>
     </div>
     <div class="regimen" style="padding-top:10px">
