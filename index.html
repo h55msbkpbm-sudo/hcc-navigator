@@ -5936,6 +5936,17 @@ function cares005Html() {
   </div>`;
 }
 
+function abcHccLine() {
+  return '<strong>MODELLED/GAP:</strong> ABC-HCC is atezolizumab plus bevacizumab versus TACE in intermediate HCC, not first-line A+B versus STRIDE. Complementary to CARES-005 (A+B vs TACE, not TACE+IO vs TACE). Interim TTFS only; trial continued. OS, PFS, ORR, safety, p-value, NCT, and PMID are not shown. Dual-eligibility A+B vs STRIDE unchanged. Galle PR, Bruix J, Kloeckner R, et al; ABC-HCC Investigators. IKF-035/ABC-HCC. <em>J Clin Oncol</em> 2026;44(2_suppl):478. DOI 10.1200/JCO.2026.44.2_suppl.478. <a href="https://ascopubs.org/doi/10.1200/JCO.2026.44.2_suppl.478" target="_blank" rel="noopener">ASCOPubs</a>. Phase IIIb. Planned n=320; 206 enrolled; 194 randomized; interim analysis n=168 (87 vs 81). Median TTFS 14.6 vs 9.5 mo, HR 0.55 (0.36–0.83). Eligibility on abstract: ECOG 0–1; Child-Pugh A or B7; no extrahepatic spread; MVI except Vp1/2 allowed. Trial ID on page: 2024-512953-26-00.';
+}
+
+function abcHccHtml() {
+  return `<div class="funnel-wrap" id="sec-abchcc">
+    <h3>ABC-HCC A+B vs TACE (interim TTFS) — MODELLED/GAP</h3>
+    <p class="funnel-lead">${abcHccLine()}</p>
+  </div>`;
+}
+
 function taceIoGapHtml() {
   return `<div class="funnel-wrap" id="sec-tace">
     <h3>TACE + IO ± VEGF — GAP</h3>
@@ -5944,6 +5955,7 @@ function taceIoGapHtml() {
       <li><strong>LEAP-012</strong> (Kudo M et al., <em>Lancet</em> 8 Jan 2025, DOI 10.1016/S0140-6736(24)02575-3) — TACE + pembrolizumab + lenvatinib PFS 14.6 vs 10.0 months, HR 0.66; OS miss HR 0.80, p=0.087.</li>
       <li><strong>EMERALD-1</strong> (Sangro B et al., <em>Lancet</em> 8 Jan 2025, DOI 10.1016/S0140-6736(24)02551-0) — TACE + durvalumab + bevacizumab PFS 15.0 vs 8.2 months, HR 0.77; TACE + durvalumab alone missed PFS; OS not in that paper.</li>
       <li><strong>CARES-005 / CHANCE2005</strong> (Zhu HD et al., <em>J Clin Oncol</em> 2026;44(11):959, DOI 10.1200/JCO-25-01796) — TACE + camrelizumab + rivoceranib vs TACE; PFS 10.8 vs 3.2 months, HR 0.34; OS immature. Not interchangeable with LEAP-012, EMERALD-1, or EMERALD-3, and not 1L A+B vs STRIDE.</li>
+      <li><strong>ABC-HCC</strong> (Galle PR et al., <em>J Clin Oncol</em> 2026;44(2_suppl):478, DOI 10.1200/JCO.2026.44.2_suppl.478) — A+B vs TACE, intermediate HCC. Interim TTFS 14.6 vs 9.5 mo, HR 0.55. Complementary to CARES-005; not 1L A+B vs STRIDE. OS/PFS/ORR not shown.</li>
     </ul>
     <p class="funnel-note"><strong>GAP:</strong> TACE+IO combination PFS is not 1L A+B / STRIDE OS. Locoregional trial endpoints are not a substitute for unresectable first-line systemic OS.</p>
   </div>`;
@@ -6849,6 +6861,7 @@ function showRec(partial = false) {
     <a href="#sec-odent">Odent CP-B</a>
     <a href="#sec-sierra">SIERRA</a>
     <a href="#sec-cares005">CARES-005</a>
+    <a href="#sec-abchcc">ABC-HCC</a>
     <a href="#sec-match">Trial match</a>
     <a href="#sec-design">Study design</a>
     <a href="#sec-efficacy">Efficacy</a>
@@ -6945,6 +6958,7 @@ function showRec(partial = false) {
   detailInner += (function(){ try { return odentCpbHtml(); } catch(e) { return ''; } })();
   detailInner += (function(){ try { return sierraChanHtml(); } catch(e) { return ''; } })();
   detailInner += (function(){ try { return cares005Html(); } catch(e) { return ''; } })();
+  detailInner += (function(){ try { return abcHccHtml(); } catch(e) { return ''; } })();
   detailInner += criteriaHtml();
 
   const matchKey = topMatchKey();
