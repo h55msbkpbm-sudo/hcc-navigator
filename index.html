@@ -5991,6 +5991,17 @@ function bansalVaHtml() {
   </div>`;
 }
 
+function leeApac2lLine() {
+  return '<strong>MODELLED/GAP:</strong> post-A+B second-line Asia-Pacific RWE, not first-line A+B versus STRIDE. Dual-eligibility A+B vs STRIDE unchanged. Lee C-k, Yoo C, Hong JY, Park SJ, Kim JW, Tai DWM, et al. <em>Liver Cancer</em> 2025;14(2):127–141. DOI 10.1159/000540969. PMID 40255875. Protocol KCSG HB22-21. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12005689/" target="_blank" rel="noopener">PMC12005689</a>. Retrospective 22 tertiary hospitals in 5 APAC countries (South Korea, Hong Kong, Taiwan, Thailand, Singapore). n=1,141 first-line atezolizumab+bevacizumab; 629 (55.1%) subsequent treatment. Body n=605 analyzable (excluded 24 with follow-up <2 weeks): median follow-up after 2L start 12.3 mo (10.8–14.2); overall 2L mPFS 3.0 mo (2.7–3.4); 2L mOS 8.0 mo (7.2–9.3). Abstract prints mPFS 2.9 and mOS 8.0. Body 2L: sorafenib n=324 mPFS 2.3 (2.0–2.6) mOS 6.3 (5.3–7.8); lenvatinib n=154 mPFS 4.0 (3.5–4.9) mOS 8.0 (7.0–10.9); lenvatinib vs sorafenib PFS HR 0.53 (0.43–0.67) p<0.0001, OS HR 0.75 (0.59–0.96) p=0.0230; TKI+ICI n=50 mPFS 5.4 (3.0–8.8) mOS 12.6 (9.8–NR) vs sorafenib PFS HR 0.32 (0.22–0.47) OS HR 0.41 (0.26–0.64). 2L vs no 2L OS 14.7 vs 7.3, HR 0.64 (0.55–0.75) p<0.0001. Hong Kong affiliation printed: Prince of Wales Hospital, The Chinese University of Hong Kong. 2L ORR/DCR/DoR, country-split n, this paper’s NCT, and 1L A+B vs STRIDE from this cohort are not shown.';
+}
+
+function leeApac2lHtml() {
+  return `<div class="funnel-wrap" id="sec-lee2l">
+    <h3>APAC 2L after A+B (Lee) — MODELLED/GAP</h3>
+    <p class="funnel-lead">${leeApac2lLine()}</p>
+  </div>`;
+}
+
 function taceIoGapHtml() {
   return `<div class="funnel-wrap" id="sec-tace">
     <h3>TACE + IO ± VEGF — GAP</h3>
@@ -6910,6 +6921,7 @@ function showRec(partial = false) {
     <a href="#sec-apollo">APOLLO</a>
     <a href="#sec-replacement">REPLACEMENT</a>
     <a href="#sec-bansal">VA STRIDE RWE</a>
+    <a href="#sec-lee2l">APAC 2L after A+B</a>
     <a href="#sec-match">Trial match</a>
     <a href="#sec-design">Study design</a>
     <a href="#sec-efficacy">Efficacy</a>
@@ -7011,6 +7023,7 @@ function showRec(partial = false) {
   detailInner += (function(){ try { return apolloHtml(); } catch(e) { return ''; } })();
   detailInner += (function(){ try { return replacementHtml(); } catch(e) { return ''; } })();
   detailInner += (function(){ try { return bansalVaHtml(); } catch(e) { return ''; } })();
+  detailInner += (function(){ try { return leeApac2lHtml(); } catch(e) { return ''; } })();
   detailInner += criteriaHtml();
 
   const matchKey = topMatchKey();
