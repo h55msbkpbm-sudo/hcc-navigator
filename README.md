@@ -2,8 +2,8 @@
 
 Interactive unresectable HCC trial-alignment tool (educational only).
 
-Live: https://hcc-navigator-oncologist-refined-20.vercel.app/
+Live: https://hcc-simulator.vercel.app/
 
 Maps typical uHCC profiles to IMbrave150, HIMALAYA + SIERRA, and CheckMate 9DW.
 
-Updated 2026-08-22: dual eligibility (A+B and STRIDE both eligible on near-tie ≤8 pp or caution VEGF), VEGF scoring cap, HK-leaning simulator.
+Updated 2026-08-22: tighter dual eligibility (equal ≤5 pp, lean ≤8 pp; caution VEGF only if gap ≤10 pp) and HK caseload funnel (incident → early/advanced → HBV → IO-discussable → VEGF split).
