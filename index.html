@@ -6013,6 +6013,17 @@ function cosgroveAbHtml() {
   </div>`;
 }
 
+function wangTaceAbLine() {
+  return '<strong>MODELLED/GAP:</strong> single-arm TACE-then-A+B in treatment-naive BCLC-B Child-Pugh A (HBV 80%), not first-line A+B versus STRIDE. Dual-eligibility A+B vs STRIDE unchanged. Wang K, Feng J, Yu H, Cheng Y, Xiang Y, Liu Z, Qin Y, Liu E, Shan Y, Fan C, Zhai J, He D, Zhou H, Tang Y, Shi J, Guo W, Yan M, Yu L, Kudo M, Cheng S. <em>Signal Transduct Target Ther</em> 2025;10(1):328. DOI 10.1038/s41392-025-02427-0. PMID 41047409. ChiCTR2100049829. <a href="https://www.nature.com/articles/s41392-025-02427-0" target="_blank" rel="noopener">Nature</a>. Investigator-initiated single-arm multicenter phase 2 in China. n=45 enrolled (49 screened), 21 Aug 2021 to 10 Apr 2023. BCLC B, Child-Pugh A, ECOG 0–1, no prior locoregional or systemic HCC therapy. TACE then atezolizumab 1,200 mg IV plus bevacizumab 15 mg/kg IV q21d starting 2–14 days after first TACE. Median follow-up 26.7 mo (25.4–28.0). RECIST v1.1 ORR 47% (21/45); DCR 87% (39/45, 73–95%). mPFS 17.9 mo (13.8–28.3). mOS 33.0 mo (24.3–NR). mRECIST ORR 67% (30/45). Grade 3/4 AE 20/45 (44%). No grade 5 AEs. Permanent discontinuation after grade 3/4 AE 10/45 (22%). This paper’s NCT is not printed (ChiCTR2100049829 only). HR vs TACE, vs A+B alone, vs STRIDE, GI-bleed n, and CP-B efficacy are not shown.';
+}
+
+function wangTaceAbHtml() {
+  return `<div class="funnel-wrap" id="sec-wang">
+    <h3>TACE then A+B phase 2 (Wang) — MODELLED/GAP</h3>
+    <p class="funnel-lead">${wangTaceAbLine()}</p>
+  </div>`;
+}
+
 function taceIoGapHtml() {
   return `<div class="funnel-wrap" id="sec-tace">
     <h3>TACE + IO ± VEGF — GAP</h3>
@@ -6022,6 +6033,7 @@ function taceIoGapHtml() {
       <li><strong>EMERALD-1</strong> (Sangro B et al., <em>Lancet</em> 8 Jan 2025, DOI 10.1016/S0140-6736(24)02551-0) — TACE + durvalumab + bevacizumab PFS 15.0 vs 8.2 months, HR 0.77; TACE + durvalumab alone missed PFS; OS not in that paper.</li>
       <li><strong>CARES-005 / CHANCE2005</strong> (Zhu HD et al., <em>J Clin Oncol</em> 2026;44(11):959, DOI 10.1200/JCO-25-01796) — TACE + camrelizumab + rivoceranib vs TACE; PFS 10.8 vs 3.2 months, HR 0.34; OS immature. Not interchangeable with LEAP-012, EMERALD-1, or EMERALD-3, and not 1L A+B vs STRIDE.</li>
       <li><strong>ABC-HCC</strong> (Galle PR et al., <em>J Clin Oncol</em> 2026;44(2_suppl):478, DOI 10.1200/JCO.2026.44.2_suppl.478) — A+B vs TACE, intermediate HCC. Interim TTFS 14.6 vs 9.5 mo, HR 0.55. Complementary to CARES-005; not 1L A+B vs STRIDE. OS/PFS/ORR not shown.</li>
+      <li><strong>Wang</strong> (Wang K et al., <em>Signal Transduct Target Ther</em> 2025;10:328, DOI 10.1038/s41392-025-02427-0) — single-arm TACE then A+B, BCLC-B CP-A, n=45. Not 1L A+B vs STRIDE. No HR vs TACE or vs A+B alone.</li>
     </ul>
     <p class="funnel-note"><strong>GAP:</strong> TACE+IO combination PFS is not 1L A+B / STRIDE OS. Locoregional trial endpoints are not a substitute for unresectable first-line systemic OS.</p>
   </div>`;
@@ -6934,6 +6946,7 @@ function showRec(partial = false) {
     <a href="#sec-bansal">VA STRIDE RWE</a>
     <a href="#sec-lee2l">APAC 2L after A+B</a>
     <a href="#sec-cosgrove">US community A+B</a>
+    <a href="#sec-wang">TACE then A+B</a>
     <a href="#sec-match">Trial match</a>
     <a href="#sec-design">Study design</a>
     <a href="#sec-efficacy">Efficacy</a>
@@ -7037,6 +7050,7 @@ function showRec(partial = false) {
   detailInner += (function(){ try { return bansalVaHtml(); } catch(e) { return ''; } })();
   detailInner += (function(){ try { return leeApac2lHtml(); } catch(e) { return ''; } })();
   detailInner += (function(){ try { return cosgroveAbHtml(); } catch(e) { return ''; } })();
+  detailInner += (function(){ try { return wangTaceAbHtml(); } catch(e) { return ''; } })();
   detailInner += criteriaHtml();
 
   const matchKey = topMatchKey();
