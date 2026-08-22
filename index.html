@@ -6002,6 +6002,17 @@ function leeApac2lHtml() {
   </div>`;
 }
 
+function cosgroveAbLine() {
+  return '<strong>MODELLED/GAP:</strong> single-arm first-line A+B US community RWE, not first-line A+B versus STRIDE. Dual-eligibility A+B vs STRIDE unchanged. Cosgrove D, Tan R, Osterland AJ, Hernandez S, Ogale S, Mahrus S, Murphy J, Wilson T, Patton G, Loaiza-Bonilla A, Singal AG. <em>J Hepatocell Carcinoma</em> 2025;12:791–804. DOI 10.2147/JHC.S492881. PMID 40271535. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12015733/" target="_blank" rel="noopener">PMC12015733</a>. Retrospective US Oncology Network EHR plus chart review. Single-arm 1L atezolizumab plus bevacizumab. Screened 514; chart-abstracted 402; analyzed n=374. Trial-like subgroup n=132 (ECOG 0–1 plus CP-A plus ALBI 1–2). Median follow-up 5.6 mo (IQR 2.7–12.0). Overall n=374: median rwPFS 6.4 mo (5.1–7.7); median OS 13.2 mo (9.5–15.9); 12-mo OS 53.5% (47.4–59.2). Trial-like n=132: median rwPFS 9.4 mo (5.7–12.5); median OS 16.5 mo (13.2–NR). CP-A n=229 OS 16.5 (12.6–NR). CP-B n=91 OS 7.5 (4.7–9.9). CP-C n=12 OS 4.5 (1.3–NR). OS by CP P<0.0001. This paper’s NCT is not printed. KIRROS NCT06096779 is printed only as a separate ongoing CP-B trial. This-cohort ORR/DCR/CR/PR/RECIST, grade-level AE rates, HR vs a control, and any STRIDE comparator are not shown.';
+}
+
+function cosgroveAbHtml() {
+  return `<div class="funnel-wrap" id="sec-cosgrove">
+    <h3>US community 1L A+B RWE (Cosgrove) — MODELLED/GAP</h3>
+    <p class="funnel-lead">${cosgroveAbLine()}</p>
+  </div>`;
+}
+
 function taceIoGapHtml() {
   return `<div class="funnel-wrap" id="sec-tace">
     <h3>TACE + IO ± VEGF — GAP</h3>
@@ -6922,6 +6933,7 @@ function showRec(partial = false) {
     <a href="#sec-replacement">REPLACEMENT</a>
     <a href="#sec-bansal">VA STRIDE RWE</a>
     <a href="#sec-lee2l">APAC 2L after A+B</a>
+    <a href="#sec-cosgrove">US community A+B</a>
     <a href="#sec-match">Trial match</a>
     <a href="#sec-design">Study design</a>
     <a href="#sec-efficacy">Efficacy</a>
@@ -7024,6 +7036,7 @@ function showRec(partial = false) {
   detailInner += (function(){ try { return replacementHtml(); } catch(e) { return ''; } })();
   detailInner += (function(){ try { return bansalVaHtml(); } catch(e) { return ''; } })();
   detailInner += (function(){ try { return leeApac2lHtml(); } catch(e) { return ''; } })();
+  detailInner += (function(){ try { return cosgroveAbHtml(); } catch(e) { return ''; } })();
   detailInner += criteriaHtml();
 
   const matchKey = topMatchKey();
