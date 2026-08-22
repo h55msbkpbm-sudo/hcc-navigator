@@ -2,32 +2,25 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#003da5">
 <title>HCC Simulator</title>
-<style>
-html,body{margin:0;height:100%;font-family:"Source Sans 3",system-ui,sans-serif;background:#f4f1ea;color:#003da5}
-.boot{display:flex;align-items:center;justify-content:center;min-height:100%;text-align:center;padding:24px}
-.boot p{opacity:.7;font-size:14px;margin:0}
-</style>
+<style>html,body{margin:0;height:100%;background:#f4f1ea;color:#003da5;font-family:"Source Sans 3",system-ui,sans-serif}.boot{display:flex;align-items:center;justify-content:center;min-height:100%}</style>
 </head>
 <body>
-<div class="boot" id="boot"><p>Loading HCC Simulator…</p></div>
+<div class="boot" id="boot">Loading HCC Simulator…</div>
 <script>
 (async function () {
   try {
-    var parts = await Promise.all([fetch('m0.b64'), fetch('m1.b64'), fetch('m2.b64'), fetch('m3.b64'), fetch('m4.b64'), fetch('m5.b64'), fetch('m6.b64'), fetch('m7.b64'), fetch('m8.b64'), fetch('m9.b64'), fetch('m10.b64'), fetch('m11.b64'), fetch('m12.b64'), fetch('m13.b64'), fetch('m14.b64'), fetch('m15.b64'), fetch('m16.b64'), fetch('m17.b64'), fetch('m18.b64'), fetch('m19.b64'), fetch('m20.b64'), fetch('m21.b64'), fetch('m22.b64'), fetch('m23.b64'), fetch('m24.b64'), fetch('m25.b64'), fetch('m26.b64')]);
-    for (var i = 0; i < parts.length; i++) if (!parts[i].ok) throw new Error('chunk ' + i + ' ' + parts[i].status);
-    var texts = await Promise.all(parts.map(function (r) { return r.text(); }));
-    var b64 = texts.map(function (t) { return t.trim(); }).join('');
-    var bin = atob(b64);
+    var parts = await Promise.all([fetch('p0.b64'), fetch('p1.b64'), fetch('p2.b64'), fetch('p3.b64'), fetch('p4.b64'), fetch('p5.b64'), fetch('p6.b64'), fetch('p7.b64'), fetch('p8.b64'), fetch('p9.b64'), fetch('p10.b64'), fetch('p11.b64'), fetch('p12.b64'), fetch('p13.b64'), fetch('p14.b64'), fetch('p15.b64'), fetch('p16.b64'), fetch('p17.b64'), fetch('p18.b64'), fetch('p19.b64'), fetch('p20.b64'), fetch('p21.b64'), fetch('p22.b64'), fetch('p23.b64'), fetch('p24.b64'), fetch('p25.b64'), fetch('p26.b64'), fetch('p27.b64')]);
+    var texts = await Promise.all(parts.map(function (r) { if (!r.ok) throw new Error(r.status); return r.text(); }));
+    var bin = atob(texts.map(function (t) { return t.trim(); }).join(''));
     var bytes = new Uint8Array(bin.length);
     for (var i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
-    var stream = new Blob([bytes]).stream().pipeThrough(new DecompressionStream('gzip'));
-    var html = await new Response(stream).text();
+    var html = await new Response(new Blob([bytes]).stream().pipeThrough(new DecompressionStream('gzip'))).text();
     document.open(); document.write(html); document.close();
   } catch (e) {
-    document.getElementById('boot').innerHTML = '<p>Could not load.</p>';
+    document.getElementById('boot').textContent = 'Could not load.';
   }
 })();
 </script>
