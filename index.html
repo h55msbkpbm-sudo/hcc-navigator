@@ -5782,6 +5782,17 @@ function ab3yRweHtml() {
   </div>`;
 }
 
+function strideTteLine() {
+  return '<strong>MODELLED/GAP:</strong> A+B vs STRIDE real-world target-trial emulation. Shiraishi C, Shigyou M, Inoue R, Ogura T, Kaneshige S, Hayashi T. <em>Frontiers in Oncology</em> 22 Jan 2026;16:1776032. DOI 10.3389/fonc.2026.1776032. PSM 640 vs 640: mOS 19.4 vs 19.0 mo, HR 0.886 (0.743–1.057), p=0.179; 1-year OS 61.1% vs 54.9%, HR 0.806 (0.665–0.976), p=0.027. <strong>GAP:</strong> no RCT head-to-head; do not model the 1-year OS difference as causal; residual albumin/INR/platelet imbalance.';
+}
+
+function strideTteHtml() {
+  return `<div class="funnel-wrap" id="sec-tte">
+    <h3>A+B vs STRIDE RWE emulation — MODELLED/GAP</h3>
+    <p class="funnel-lead">${strideTteLine()}</p>
+  </div>`;
+}
+
 function taceIoGapHtml() {
   return `<div class="funnel-wrap" id="sec-tace">
     <h3>TACE + IO ± VEGF — GAP</h3>
@@ -6692,6 +6703,7 @@ function showRec(partial = false) {
     <a href="#sec-tace">TACE+IO GAP</a>
     <a href="#sec-eti">Etiology NMA</a>
     <a href="#sec-ab3y">A+B 3-year RWE</a>
+    <a href="#sec-tte">A+B vs STRIDE RWE</a>
     <a href="#sec-match">Trial match</a>
     <a href="#sec-design">Study design</a>
     <a href="#sec-efficacy">Efficacy</a>
@@ -6708,6 +6720,9 @@ function showRec(partial = false) {
     : '';
   const recAb3yHtml = recAlt
     ? `<p class="rec-alt rec-5y">${ab3yRweLine()}</p>`
+    : '';
+  const recTteHtml = recAlt
+    ? `<p class="rec-alt rec-5y">${strideTteLine()}</p>`
     : '';
   const nivoOk = A.ioContra !== 'yes' && A.liver === 'A' && A.ecog === '01' && recKey !== 'nivo' && recKey !== 'tki' && recKey !== 'bsc' && recKey !== 'incomplete';
   const rec9dwHtml = (recAlt && nivoOk)
@@ -6738,6 +6753,7 @@ function showRec(partial = false) {
   detailInner += (function(){ try { return taceIoGapHtml(); } catch(e) { return ''; } })();
   detailInner += (function(){ try { return etiologyNmaHtml(); } catch(e) { return ''; } })();
   detailInner += (function(){ try { return ab3yRweHtml(); } catch(e) { return ''; } })();
+  detailInner += (function(){ try { return strideTteHtml(); } catch(e) { return ''; } })();
   detailInner += criteriaHtml();
 
   const matchKey = topMatchKey();
@@ -6751,7 +6767,7 @@ function showRec(partial = false) {
   detailInner += mdtFold('fold-resources', 'Sources', evidenceResourcesHtml(), false);
   detailInner += mdtFold('fold-discuss', 'Discussion prompts', discussionPromptsHtml(), false);
 
-  const htmlOut = recAltHtml + rec5yHtml + recEtiHtml + recAb3yHtml + rec9dwHtml +
+  const htmlOut = recAltHtml + rec5yHtml + recEtiHtml + recAb3yHtml + recTteHtml + rec9dwHtml +
     `<details class="mdt-fold" id="res-details"><summary>Details</summary><div class="fold-body">${detailInner}</div></details>`;
 
   const _rb = document.getElementById('resBody');
