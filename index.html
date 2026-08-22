@@ -5859,6 +5859,17 @@ function alAlwanRweHtml() {
   </div>`;
 }
 
+function cm9dw4yLine() {
+  return 'VEGF-free, also eligible: nivolumab + ipilimumab (CheckMate 9DW). Original: Yau T et al., <em>Lancet</em> 8 May 2025, DOI 10.1016/S0140-6736(25)00403-9 (OS curves cross with more early deaths vs TKI). 4-year follow-up: Galle PR, Sangro B, Decaens T, et al. <em>J Clin Oncol</em> 2026;44(2_suppl):LBA479. DOI 10.1200/jco.2026.44.2_suppl.lba479. NCT04039607. ASCO GI 2026. Median follow-up 52.5 (44.0–66.1) mo. NIVO+IPI n=335 vs LEN/SOR n=333 (275/325 LEN, 85%). mOS 23.7 (18.8–29.4) vs 20.6 (17.7–22.5); OS HR 0.78 (0.65–0.93); 48-mo OS 31% (26–36) vs 18% (14–23). ORR 36% vs 13%; CR 8% vs 2%; mDOR 34.3 vs 12.9. <strong>MODELLED/GAP:</strong> VEGF-free 1L vs TKI durability update, not a head-to-head vs A+B or STRIDE. Dual-eligibility A+B vs STRIDE unchanged. Does not overwrite IMbrave150, HIMALAYA, or original 9DW <em>Lancet</em> medians.';
+}
+
+function cm9dw4yHtml() {
+  return `<div class="funnel-wrap" id="sec-9dw4y">
+    <h3>CheckMate 9DW 4-year follow-up — MODELLED/GAP</h3>
+    <p class="funnel-lead">${cm9dw4yLine()}</p>
+  </div>`;
+}
+
 function taceIoGapHtml() {
   return `<div class="funnel-wrap" id="sec-tace">
     <h3>TACE + IO ± VEGF — GAP</h3>
@@ -6776,6 +6787,7 @@ function showRec(partial = false) {
     <a href="#sec-hima-asia">HIMALAYA Asia/HK</a>
     <a href="#sec-loprinzi">TriNetX RWE</a>
     <a href="#sec-alalwan">Older-adult TriNetX</a>
+    <a href="#sec-9dw4y">9DW 4-year</a>
     <a href="#sec-match">Trial match</a>
     <a href="#sec-design">Study design</a>
     <a href="#sec-efficacy">Efficacy</a>
@@ -6816,7 +6828,7 @@ function showRec(partial = false) {
     : '';
   const nivoOk = A.ioContra !== 'yes' && A.liver === 'A' && A.ecog === '01' && recKey !== 'nivo' && recKey !== 'tki' && recKey !== 'bsc' && recKey !== 'incomplete';
   const rec9dwHtml = (recAlt && nivoOk)
-    ? `<p class="rec-alt rec-9dw">VEGF-free, also eligible: nivolumab + ipilimumab (CheckMate 9DW; Yau T et al., Lancet 8 May 2025, DOI 10.1016/S0140-6736(25)00403-9). GAP: no head-to-head vs A+B or STRIDE; OS curves cross with more early deaths vs TKI.</p>`
+    ? `<p class="rec-alt rec-9dw">${cm9dw4yLine()}</p>`
     : '';
 
   let detailInner = toc + summary;
@@ -6850,6 +6862,7 @@ function showRec(partial = false) {
   detailInner += (function(){ try { return himalayaAsiaHtml(); } catch(e) { return ''; } })();
   detailInner += (function(){ try { return loPrinziRweHtml(); } catch(e) { return ''; } })();
   detailInner += (function(){ try { return alAlwanRweHtml(); } catch(e) { return ''; } })();
+  detailInner += (function(){ try { return cm9dw4yHtml(); } catch(e) { return ''; } })();
   detailInner += criteriaHtml();
 
   const matchKey = topMatchKey();
