@@ -5958,6 +5958,17 @@ function kimLenva2lHtml() {
   </div>`;
 }
 
+function apolloLine() {
+  return '<strong>MODELLED/GAP:</strong> not first-line A+B versus STRIDE. China 1L versus sorafenib, Asia-enriched like CARES-310 / ORIENT-32. Do not rank as global standard of care versus IMbrave150, HIMALAYA, or CheckMate-9DW. Dual-eligibility A+B vs STRIDE unchanged. Zhou J, Bai L, Luo J, et al; APOLLO Study Group. <em>Lancet Oncol</em> 2025;26(6):719–731. DOI 10.1016/s1470-2045(25)00190-1. PMID 40349716. NCT04344158. Phase 3, 79 centres in China; ECOG 0 or 1; 2:1; anlotinib 10 mg PO days 1–14 plus penpulimab 200 mg IV day 1 vs sorafenib 400 mg PO twice daily. Randomised 649 (433 combo / 216 sorafenib). All Chinese. Median age 57. PFS ITT n=636: median PFS 6.9 mo (5.8–8.0) vs 2.8 mo (2.7–4.1); HR 0.52 (0.41–0.66); p<0.0001. OS ITT n=649: median OS 16.5 mo (14.7–19.0) vs 13.2 mo (9.7–16.9); HR 0.69 (0.55–0.87); p=0.0014. Grade ≥3 TRAE hypertension 17% vs 10%; decreased platelets 9% vs 6%; TRAE SAEs 21% vs 9%; treatment-related deaths 1 vs 2. ORR, DCR, DoR, and etiology/BCLC/Child-Pugh subgroup HRs are not shown.';
+}
+
+function apolloHtml() {
+  return `<div class="funnel-wrap" id="sec-apollo">
+    <h3>APOLLO (anlotinib + penpulimab vs sorafenib) — MODELLED/GAP</h3>
+    <p class="funnel-lead">${apolloLine()}</p>
+  </div>`;
+}
+
 function taceIoGapHtml() {
   return `<div class="funnel-wrap" id="sec-tace">
     <h3>TACE + IO ± VEGF — GAP</h3>
@@ -6874,6 +6885,7 @@ function showRec(partial = false) {
     <a href="#sec-cares005">CARES-005</a>
     <a href="#sec-abchcc">ABC-HCC</a>
     <a href="#sec-kim2l">2L lenvatinib</a>
+    <a href="#sec-apollo">APOLLO</a>
     <a href="#sec-match">Trial match</a>
     <a href="#sec-design">Study design</a>
     <a href="#sec-efficacy">Efficacy</a>
@@ -6972,6 +6984,7 @@ function showRec(partial = false) {
   detailInner += (function(){ try { return cares005Html(); } catch(e) { return ''; } })();
   detailInner += (function(){ try { return abcHccHtml(); } catch(e) { return ''; } })();
   detailInner += (function(){ try { return kimLenva2lHtml(); } catch(e) { return ''; } })();
+  detailInner += (function(){ try { return apolloHtml(); } catch(e) { return ''; } })();
   detailInner += criteriaHtml();
 
   const matchKey = topMatchKey();
