@@ -5980,6 +5980,17 @@ function replacementHtml() {
   </div>`;
 }
 
+function bansalVaLine() {
+  return '<strong>MODELLED/GAP:</strong> not first-line A+B versus STRIDE. US Veterans Administration RWE, all male, complementary to SIERRA / LOR-HCC. Do not rank as a head-to-head versus A+B or versus HIMALAYA ITT. Dual-eligibility A+B vs STRIDE unchanged. Bansal S, Amin P, Williamson C, Valerio SJ, Kaplan DE. <em>Cancers (Basel)</em> 2026;18(7):1085. DOI 10.3390/cancers18071085. PMID 41976308. Retrospective VA RWE; no NCT for this paper (protocol #01802). n=107 (100% male). Median age 72.2 (IQR 68.0–76.1). Median OS 9.6 mo (7.3–12.6). CP-A n=81 mOS 12.4 mo (9.1–22.1); CP-B n=26 mOS 5.2 mo (1.5–9.3); p<0.001. Viral n=64 mOS 10.5; non-viral n=43 mOS 9.0; p=0.075. HIMALAYA-like n=70 mOS 12.6 vs not n=37 mOS 7.3; HR 1.98 (1.26–3.14). Grade 3–4 AEs 22 (3 in CP-B); no grade 5 AEs. Fatigue 14.6%, rash 14.6%, diarrhea 12.5%. NCT, ORR, and PFS are not shown.';
+}
+
+function bansalVaHtml() {
+  return `<div class="funnel-wrap" id="sec-bansal">
+    <h3>VA STRIDE RWE (Bansal) — MODELLED/GAP</h3>
+    <p class="funnel-lead">${bansalVaLine()}</p>
+  </div>`;
+}
+
 function taceIoGapHtml() {
   return `<div class="funnel-wrap" id="sec-tace">
     <h3>TACE + IO ± VEGF — GAP</h3>
@@ -6898,6 +6909,7 @@ function showRec(partial = false) {
     <a href="#sec-kim2l">2L lenvatinib</a>
     <a href="#sec-apollo">APOLLO</a>
     <a href="#sec-replacement">REPLACEMENT</a>
+    <a href="#sec-bansal">VA STRIDE RWE</a>
     <a href="#sec-match">Trial match</a>
     <a href="#sec-design">Study design</a>
     <a href="#sec-efficacy">Efficacy</a>
@@ -6998,6 +7010,7 @@ function showRec(partial = false) {
   detailInner += (function(){ try { return kimLenva2lHtml(); } catch(e) { return ''; } })();
   detailInner += (function(){ try { return apolloHtml(); } catch(e) { return ''; } })();
   detailInner += (function(){ try { return replacementHtml(); } catch(e) { return ''; } })();
+  detailInner += (function(){ try { return bansalVaHtml(); } catch(e) { return ''; } })();
   detailInner += criteriaHtml();
 
   const matchKey = topMatchKey();
