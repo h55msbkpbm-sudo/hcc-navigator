@@ -5969,6 +5969,17 @@ function apolloHtml() {
   </div>`;
 }
 
+function replacementLine() {
+  return '<strong>MODELLED/GAP:</strong> not first-line A+B versus STRIDE. Single-arm A+B in TACE-unsuitable intermediate HCC plus historical TACE IPW, Japan. Do not rank as a head-to-head versus STRIDE or versus TACE RCTs (LEAP-012 / EMERALD-1 / ABC-HCC). Dual-eligibility A+B vs STRIDE unchanged. Kudo M, Ueshima K, Tsuchiya K, et al. REPLACEMENT study. <em>Liver Cancer</em> 2025;15(1):104–116. DOI 10.1159/000546899. PMID 41063737. Trial ID jRCTs071200051. NCT not printed. Prospective multicenter open-label single-arm phase II, 35 sites in Japan. TACE-naive unresectable intermediate HCC beyond up-to-seven, Child-Pugh A, ECOG 0–1. Atezolizumab 1,200 mg plus bevacizumab 15 mg/kg every 3 weeks. Enrolled 74. Median follow-up 15.1 months. Primary: 6-month PFS investigator mRECIST 66.8% (90% CI 56.8–75.0); lower 90% CI exceeded pre-specified 55% bar. Median PFS mRECIST 9.1 mo (7.1–10.2). ORR mRECIST 40.5%; CR mRECIST 12.2%. ORR RECIST v1.1 23.0%; CR RECIST v1.1 0.0%. OS events 15 of 74 (20.3%); median OS NR; 12-month OS 84.6% (74.0–91.2). Conversion to curative-intent 10 of 74. IPW vs historical TACE: PFS mRECIST 9.2 vs 5.7 mo; HR 0.67; p=0.029 (HR CI not printed). Safety n=74: grade ≥3 AE 31 (41.9%); treatment-related grade ≥3 AE 24 (32.4%); hypertension grade ≥3 13 (17.6%). NCT, HR confidence interval, median OS months, grade 4/5 AE counts, and GI-bleed n are not shown.';
+}
+
+function replacementHtml() {
+  return `<div class="funnel-wrap" id="sec-replacement">
+    <h3>REPLACEMENT (A+B in TACE-unsuitable intermediate HCC) — MODELLED/GAP</h3>
+    <p class="funnel-lead">${replacementLine()}</p>
+  </div>`;
+}
+
 function taceIoGapHtml() {
   return `<div class="funnel-wrap" id="sec-tace">
     <h3>TACE + IO ± VEGF — GAP</h3>
@@ -6886,6 +6897,7 @@ function showRec(partial = false) {
     <a href="#sec-abchcc">ABC-HCC</a>
     <a href="#sec-kim2l">2L lenvatinib</a>
     <a href="#sec-apollo">APOLLO</a>
+    <a href="#sec-replacement">REPLACEMENT</a>
     <a href="#sec-match">Trial match</a>
     <a href="#sec-design">Study design</a>
     <a href="#sec-efficacy">Efficacy</a>
@@ -6985,6 +6997,7 @@ function showRec(partial = false) {
   detailInner += (function(){ try { return abcHccHtml(); } catch(e) { return ''; } })();
   detailInner += (function(){ try { return kimLenva2lHtml(); } catch(e) { return ''; } })();
   detailInner += (function(){ try { return apolloHtml(); } catch(e) { return ''; } })();
+  detailInner += (function(){ try { return replacementHtml(); } catch(e) { return ''; } })();
   detailInner += criteriaHtml();
 
   const matchKey = topMatchKey();
