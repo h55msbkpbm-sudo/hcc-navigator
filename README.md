@@ -1,1 +1,6 @@
-# HCC Simulator\n\nEducational unresectable HCC trial-alignment tool.\n\nLive: https://hcc-simulator.vercel.app/ and https://hcc-navigator-oncologist-refined-20.vercel.app/\n
+# HCC Simulator
+
+Educational unresectable HCC trial-alignment tool.
+
+https://hcc-simulator.vercel.app/
+https://hcc-navigator-oncologist-refined-20.vercel.app/
