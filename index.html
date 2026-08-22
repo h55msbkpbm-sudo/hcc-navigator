@@ -5793,6 +5793,17 @@ function strideTteHtml() {
   </div>`;
 }
 
+function hiraokaRweLine() {
+  return '<strong>MODELLED/GAP:</strong> contemporaneous Japanese 1L A+B vs STRIDE RWE. Hiraoka A, Tada T, Hirooka M, et al. RELPEC/HCC 48. <em>Liver Cancer</em> 2026 Apr 2. DOI 10.1159/000550924. PMID 42232791. CP-A BCLC-B/C; n=302 vs 129; mPFS 9.1 vs 5.0 mo, p=0.002; mOS 25.6 vs 22.1 mo, p=0.172. <strong>GAP:</strong> no RCT head-to-head; longer PFS with A+B is not OS superiority; do not overwrite IMbrave150 or HIMALAYA.';
+}
+
+function hiraokaRweHtml() {
+  return `<div class="funnel-wrap" id="sec-hiraoka">
+    <h3>Japanese 1L A+B vs STRIDE RWE — MODELLED/GAP</h3>
+    <p class="funnel-lead">${hiraokaRweLine()}</p>
+  </div>`;
+}
+
 function taceIoGapHtml() {
   return `<div class="funnel-wrap" id="sec-tace">
     <h3>TACE + IO ± VEGF — GAP</h3>
@@ -6704,6 +6715,7 @@ function showRec(partial = false) {
     <a href="#sec-eti">Etiology NMA</a>
     <a href="#sec-ab3y">A+B 3-year RWE</a>
     <a href="#sec-tte">A+B vs STRIDE RWE</a>
+    <a href="#sec-hiraoka">Hiraoka RWE</a>
     <a href="#sec-match">Trial match</a>
     <a href="#sec-design">Study design</a>
     <a href="#sec-efficacy">Efficacy</a>
@@ -6723,6 +6735,9 @@ function showRec(partial = false) {
     : '';
   const recTteHtml = recAlt
     ? `<p class="rec-alt rec-5y">${strideTteLine()}</p>`
+    : '';
+  const recHiraokaHtml = recAlt
+    ? `<p class="rec-alt rec-5y">${hiraokaRweLine()}</p>`
     : '';
   const nivoOk = A.ioContra !== 'yes' && A.liver === 'A' && A.ecog === '01' && recKey !== 'nivo' && recKey !== 'tki' && recKey !== 'bsc' && recKey !== 'incomplete';
   const rec9dwHtml = (recAlt && nivoOk)
@@ -6754,6 +6769,7 @@ function showRec(partial = false) {
   detailInner += (function(){ try { return etiologyNmaHtml(); } catch(e) { return ''; } })();
   detailInner += (function(){ try { return ab3yRweHtml(); } catch(e) { return ''; } })();
   detailInner += (function(){ try { return strideTteHtml(); } catch(e) { return ''; } })();
+  detailInner += (function(){ try { return hiraokaRweHtml(); } catch(e) { return ''; } })();
   detailInner += criteriaHtml();
 
   const matchKey = topMatchKey();
@@ -6767,7 +6783,7 @@ function showRec(partial = false) {
   detailInner += mdtFold('fold-resources', 'Sources', evidenceResourcesHtml(), false);
   detailInner += mdtFold('fold-discuss', 'Discussion prompts', discussionPromptsHtml(), false);
 
-  const htmlOut = recAltHtml + rec5yHtml + recEtiHtml + recAb3yHtml + recTteHtml + rec9dwHtml +
+  const htmlOut = recAltHtml + rec5yHtml + recEtiHtml + recAb3yHtml + recTteHtml + recHiraokaHtml + rec9dwHtml +
     `<details class="mdt-fold" id="res-details"><summary>Details</summary><div class="fold-body">${detailInner}</div></details>`;
 
   const _rb = document.getElementById('resBody');
