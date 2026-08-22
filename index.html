@@ -3,11 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-<meta name="theme-color" content="#f6f4f0">
-<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#003da5">
 <title>HCC Simulator</title>
 <style>
-html,body{margin:0;height:100%;font-family:"Source Sans 3",system-ui,sans-serif;background:#f6f4f0;color:#1a365d}
+html,body{margin:0;height:100%;font-family:"Source Sans 3",system-ui,sans-serif;background:#f4f1ea;color:#003da5}
 .boot{display:flex;align-items:center;justify-content:center;min-height:100%;text-align:center;padding:24px}
 .boot p{opacity:.7;font-size:14px;margin:0}
 </style>
@@ -28,7 +27,7 @@ html,body{margin:0;height:100%;font-family:"Source Sans 3",system-ui,sans-serif;
     var html = await new Response(stream).text();
     document.open(); document.write(html); document.close();
   } catch (e) {
-    document.getElementById('boot').innerHTML = '<p>Could not load.</p><p style="font-size:12px;opacity:.5">' + e + '</p>';
+    document.getElementById('boot').innerHTML = '<p>Could not load.</p>';
   }
 })();
 </script>
