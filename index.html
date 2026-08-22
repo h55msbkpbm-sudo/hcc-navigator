@@ -5892,6 +5892,17 @@ function ohamaCpbHtml() {
   </div>`;
 }
 
+function challengeLine() {
+  return '<strong>MODELLED/GAP:</strong> CP-B 7/8, outside typical dual-eligibility (usually CP-A). Complements Ohama <em>Hepatol Res</em> 2026 (DOI 10.1111/hepr.70115) RWE head-to-head. Not a head-to-head vs STRIDE. Dual-eligibility for compensated dual-eligible A+B vs STRIDE unchanged. Do not convert days to months. Terashima T, Ikeda M, Yamashita T, et al. CHALLENGE Trial. <em>Liver Cancer</em>. DOI 10.1159/000551476. jRCTs031210355. 31 enrolled, 30 eligible. SAE 23.3% (9.9–42.3) vs 68.5% threshold, p<0.0001. ORR RECIST 40.0%; mRECIST 46.7%. mPFS 240 days (176–526); mOS 470 days (256–576). Conference SAE 30% is not used.';
+}
+
+function challengeHtml() {
+  return `<div class="funnel-wrap" id="sec-challenge">
+    <h3>CHALLENGE phase II A+B in CP-B 7/8 — MODELLED/GAP</h3>
+    <p class="funnel-lead">${challengeLine()}</p>
+  </div>`;
+}
+
 function taceIoGapHtml() {
   return `<div class="funnel-wrap" id="sec-tace">
     <h3>TACE + IO ± VEGF — GAP</h3>
@@ -6812,6 +6823,7 @@ function showRec(partial = false) {
     <a href="#sec-9dw4y">9DW 4-year</a>
     <a href="#sec-chen">Decompensated RWE</a>
     <a href="#sec-ohama-cpb">CP-B RWE</a>
+    <a href="#sec-challenge">CHALLENGE</a>
     <a href="#sec-match">Trial match</a>
     <a href="#sec-design">Study design</a>
     <a href="#sec-efficacy">Efficacy</a>
@@ -6856,6 +6868,9 @@ function showRec(partial = false) {
   const recCpbHtml = recAlt
     ? `<p class="rec-alt rec-5y">${ohamaCpbLine()}</p>`
     : '';
+  const recChalHtml = recAlt
+    ? `<p class="rec-alt rec-5y">${challengeLine()}</p>`
+    : '';
   const nivoOk = A.ioContra !== 'yes' && A.liver === 'A' && A.ecog === '01' && recKey !== 'nivo' && recKey !== 'tki' && recKey !== 'bsc' && recKey !== 'incomplete';
   const rec9dwHtml = (recAlt && nivoOk)
     ? `<p class="rec-alt rec-9dw">${cm9dw4yLine()}</p>`
@@ -6895,6 +6910,7 @@ function showRec(partial = false) {
   detailInner += (function(){ try { return cm9dw4yHtml(); } catch(e) { return ''; } })();
   detailInner += (function(){ try { return chenDecompHtml(); } catch(e) { return ''; } })();
   detailInner += (function(){ try { return ohamaCpbHtml(); } catch(e) { return ''; } })();
+  detailInner += (function(){ try { return challengeHtml(); } catch(e) { return ''; } })();
   detailInner += criteriaHtml();
 
   const matchKey = topMatchKey();
@@ -6908,7 +6924,7 @@ function showRec(partial = false) {
   detailInner += mdtFold('fold-resources', 'Sources', evidenceResourcesHtml(), false);
   detailInner += mdtFold('fold-discuss', 'Discussion prompts', discussionPromptsHtml(), false);
 
-  const htmlOut = recAltHtml + rec5yHtml + recEtiHtml + recAb3yHtml + recTteHtml + recHiraokaHtml + recKournHtml + recE3Html + recAsiaHtml + recLoHtml + recAlHtml + recChenHtml + recCpbHtml + rec9dwHtml +
+  const htmlOut = recAltHtml + rec5yHtml + recEtiHtml + recAb3yHtml + recTteHtml + recHiraokaHtml + recKournHtml + recE3Html + recAsiaHtml + recLoHtml + recAlHtml + recChenHtml + recCpbHtml + recChalHtml + rec9dwHtml +
     `<details class="mdt-fold" id="res-details"><summary>Details</summary><div class="fold-body">${detailInner}</div></details>`;
 
   const _rb = document.getElementById('resBody');
