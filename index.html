@@ -5737,19 +5737,24 @@ const HK_ACCESS = {
 
 function hklcNoteHtml() {
   return `<div class="funnel-wrap" id="sec-hklc">
-    <h3>HKLC</h3>
-    <p class="funnel-lead">Hong Kong Liver Cancer (HKLC) is a separate Hong Kong staging system — not AJCC and not BCLC. HKCaR 2023 does not publish HKLC counts. No HKLC numbers are shown or modelled here.</p>
+    <h3>HKLC staging</h3>
+    <p class="funnel-lead">Hong Kong Liver Cancer (HKLC) is a separate Hong Kong staging system — not AJCC and not BCLC. HKCaR 2023 reports AJCC, not HKLC, and does not publish HKLC counts. This navigator does not assign an HKLC stage and does not model HKLC numbers.</p>
   </div>`;
 }
 
 function cuseHtml() {
+  let stageBit = 'BCLC is derived from disease + fitness on this profile. Not AJCC. Not HKLC.';
+  try {
+    const b = deriveBCLC();
+    if (b && b.label) stageBit = b.label + '. Not AJCC. Not HKLC.';
+  } catch (e) {}
   return `<div class="funnel-wrap cuse-mdt" id="sec-cuse">
     <h3>CUSE for MDT — BCLC 2026</h3>
     <p class="funnel-lead">Discussion frame only. Not a score and not a drug table.</p>
     <ul>
       <li><strong>Complexity</strong> — liver function, comorbidity, anti-VEGF / IO safety</li>
       <li><strong>Urgency</strong> — tumour pace, symptoms, need for rapid control</li>
-      <li><strong>Stage</strong> — BCLC on this profile. Not AJCC. Not HKLC.</li>
+      <li><strong>Stage</strong> — ${stageBit}</li>
       <li><strong>Extent</strong> — intrahepatic burden, macrovascular invasion, extrahepatic spread</li>
     </ul>
   </div>`;
@@ -6648,6 +6653,7 @@ function showRec(partial = false) {
     <a href="#sec-mc-mix">MODELLED mix</a>
     <a href="#sec-funnel">HKCaR 2023</a>
     <a href="#sec-access">HK access</a>
+    <a href="#sec-hklc">HKLC</a>
     <a href="#sec-cuse">CUSE</a>
     <a href="#sec-match">Trial match</a>
     <a href="#sec-design">Study design</a>
