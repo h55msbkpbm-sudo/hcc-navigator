@@ -5760,6 +5760,18 @@ function cuseHtml() {
   </div>`;
 }
 
+function taceIoGapHtml() {
+  return `<div class="funnel-wrap" id="sec-tace">
+    <h3>TACE + IO ± VEGF — GAP</h3>
+    <p class="funnel-lead"><strong>GAP:</strong> TACE plus IO±VEGF is not interchangeable with first-line systemic atezolizumab + bevacizumab or STRIDE overall survival.</p>
+    <ul>
+      <li><strong>LEAP-012</strong> (Kudo M et al., <em>Lancet</em> 8 Jan 2025, DOI 10.1016/S0140-6736(24)02575-3) — TACE + pembrolizumab + lenvatinib PFS 14.6 vs 10.0 months, HR 0.66; OS miss HR 0.80, p=0.087.</li>
+      <li><strong>EMERALD-1</strong> (Sangro B et al., <em>Lancet</em> 8 Jan 2025, DOI 10.1016/S0140-6736(24)02551-0) — TACE + durvalumab + bevacizumab PFS 15.0 vs 8.2 months, HR 0.77; TACE + durvalumab alone missed PFS; OS not in that paper.</li>
+    </ul>
+    <p class="funnel-note"><strong>GAP:</strong> TACE+IO combination PFS is not 1L A+B / STRIDE OS. Locoregional trial endpoints are not a substitute for unresectable first-line systemic OS.</p>
+  </div>`;
+}
+
 function hkMcResultsHtml() {
   return `<div class="funnel-wrap" id="sec-mc-mix">
     <h3>Navigator mix — 100,000 draws</h3>
@@ -6655,6 +6667,7 @@ function showRec(partial = false) {
     <a href="#sec-access">HK access</a>
     <a href="#sec-hklc">HKLC</a>
     <a href="#sec-cuse">CUSE</a>
+    <a href="#sec-tace">TACE+IO GAP</a>
     <a href="#sec-match">Trial match</a>
     <a href="#sec-design">Study design</a>
     <a href="#sec-efficacy">Efficacy</a>
@@ -6692,6 +6705,7 @@ function showRec(partial = false) {
   detailInner += (function(){ try { return hkAccessHtml(false); } catch(e) { return ''; } })();
   detailInner += (function(){ try { return hklcNoteHtml(); } catch(e) { return ''; } })();
   detailInner += (function(){ try { return cuseHtml(); } catch(e) { return ''; } })();
+  detailInner += (function(){ try { return taceIoGapHtml(); } catch(e) { return ''; } })();
   detailInner += criteriaHtml();
 
   const matchKey = topMatchKey();
