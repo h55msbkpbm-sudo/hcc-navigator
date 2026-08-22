@@ -1,9 +1,7 @@
 # HCC Simulator
 
-Interactive unresectable HCC trial-alignment tool (educational only).
+Educational unresectable HCC trial-alignment tool.
 
-Live: https://hcc-simulator.vercel.app/
+Live: https://hcc-simulator.vercel.app/ and https://hcc-navigator-oncologist-refined-20.vercel.app/
 
-Maps typical uHCC profiles to IMbrave150, HIMALAYA + SIERRA, and CheckMate 9DW.
-
-Updated 2026-08-22: tighter dual eligibility (equal ≤5 pp, lean ≤8 pp; caution VEGF only if gap ≤10 pp) and HK caseload funnel (incident → early/advanced → HBV → IO-discussable → VEGF split).
+HKCaR 2023 cited figures only (HCC 1416, AJCC I–II/III–IV, HBV 1057, HCV 110). AJCC-advanced is not BCLC-C. Downstream IO/VEGF layers labelled GAP/MODELLED.
