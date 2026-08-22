@@ -5837,6 +5837,17 @@ function himalayaAsiaHtml() {
   </div>`;
 }
 
+function loPrinziRweLine() {
+  return '<strong>MODELLED/GAP:</strong> no head-to-head OS difference in this matched TriNetX RWE cohort; dual-eligibility A+B vs STRIDE unchanged. Do not overwrite IMbrave150, HIMALAYA, or CheckMate-9DW trial medians. Lo Prinzi F et al. <em>Targeted Oncology</em> 2025;20(4):707–713. DOI 10.1007/s11523-025-01161-5. PMID 40549049. Matched n=618 (309 vs 309): mOS 15.4 (14.7–51.6) vs 15.5 (15.0–47.0); HR 0.94 (0.73–1.22), p=0.67. PFS, ORR, DCR, safety, Child-Pugh, and etiology are not reported.';
+}
+
+function loPrinziRweHtml() {
+  return `<div class="funnel-wrap" id="sec-loprinzi">
+    <h3>TriNetX 1L A+B vs STRIDE RWE — MODELLED/GAP</h3>
+    <p class="funnel-lead">${loPrinziRweLine()}</p>
+  </div>`;
+}
+
 function taceIoGapHtml() {
   return `<div class="funnel-wrap" id="sec-tace">
     <h3>TACE + IO ± VEGF — GAP</h3>
@@ -6752,6 +6763,7 @@ function showRec(partial = false) {
     <a href="#sec-kournoutas">US mixed-CP RWE</a>
     <a href="#sec-emerald3">EMERALD-3</a>
     <a href="#sec-hima-asia">HIMALAYA Asia/HK</a>
+    <a href="#sec-loprinzi">TriNetX RWE</a>
     <a href="#sec-match">Trial match</a>
     <a href="#sec-design">Study design</a>
     <a href="#sec-efficacy">Efficacy</a>
@@ -6783,6 +6795,9 @@ function showRec(partial = false) {
     : '';
   const recAsiaHtml = recAlt
     ? `<p class="rec-alt rec-5y">${himalayaAsiaLine()}</p>`
+    : '';
+  const recLoHtml = recAlt
+    ? `<p class="rec-alt rec-5y">${loPrinziRweLine()}</p>`
     : '';
   const nivoOk = A.ioContra !== 'yes' && A.liver === 'A' && A.ecog === '01' && recKey !== 'nivo' && recKey !== 'tki' && recKey !== 'bsc' && recKey !== 'incomplete';
   const rec9dwHtml = (recAlt && nivoOk)
@@ -6818,6 +6833,7 @@ function showRec(partial = false) {
   detailInner += (function(){ try { return kournoutasRweHtml(); } catch(e) { return ''; } })();
   detailInner += (function(){ try { return emerald3Html(); } catch(e) { return ''; } })();
   detailInner += (function(){ try { return himalayaAsiaHtml(); } catch(e) { return ''; } })();
+  detailInner += (function(){ try { return loPrinziRweHtml(); } catch(e) { return ''; } })();
   detailInner += criteriaHtml();
 
   const matchKey = topMatchKey();
@@ -6831,7 +6847,7 @@ function showRec(partial = false) {
   detailInner += mdtFold('fold-resources', 'Sources', evidenceResourcesHtml(), false);
   detailInner += mdtFold('fold-discuss', 'Discussion prompts', discussionPromptsHtml(), false);
 
-  const htmlOut = recAltHtml + rec5yHtml + recEtiHtml + recAb3yHtml + recTteHtml + recHiraokaHtml + recKournHtml + recE3Html + recAsiaHtml + rec9dwHtml +
+  const htmlOut = recAltHtml + rec5yHtml + recEtiHtml + recAb3yHtml + recTteHtml + recHiraokaHtml + recKournHtml + recE3Html + recAsiaHtml + recLoHtml + rec9dwHtml +
     `<details class="mdt-fold" id="res-details"><summary>Details</summary><div class="fold-body">${detailInner}</div></details>`;
 
   const _rb = document.getElementById('resBody');
