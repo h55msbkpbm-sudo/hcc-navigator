@@ -8,7 +8,7 @@
 <script>
 (async function () {
   try {
-    var parts = await Promise.all([fetch('s0.b64'), fetch('s1.b64'), fetch('s2.b64'), fetch('s3.b64'), fetch('s4.b64'), fetch('s5.b64'), fetch('s6.b64'), fetch('s7.b64'), fetch('s8.b64'), fetch('s9.b64'), fetch('s10.b64'), fetch('s11.b64'), fetch('s12.b64'), fetch('s13.b64'), fetch('s14.b64'), fetch('s15.b64'), fetch('s16.b64'), fetch('s17.b64'), fetch('s18.b64'), fetch('s19.b64'), fetch('s20.b64'), fetch('s21.b64'), fetch('s22.b64'), fetch('s23.b64'), fetch('s24.b64'), fetch('s25.b64'), fetch('s26.b64'), fetch('s27.b64')]);
+    var parts = await Promise.all([fetch('t0.b64'), fetch('t1.b64'), fetch('t2.b64'), fetch('t3.b64'), fetch('t4.b64'), fetch('t5.b64'), fetch('t6.b64'), fetch('t7.b64'), fetch('t8.b64'), fetch('t9.b64'), fetch('t10.b64'), fetch('t11.b64'), fetch('t12.b64'), fetch('t13.b64'), fetch('t14.b64'), fetch('t15.b64'), fetch('t16.b64'), fetch('t17.b64'), fetch('t18.b64'), fetch('t19.b64'), fetch('t20.b64'), fetch('t21.b64'), fetch('t22.b64'), fetch('t23.b64'), fetch('t24.b64'), fetch('t25.b64'), fetch('t26.b64'), fetch('t27.b64')]);
     var texts = await Promise.all(parts.map(function (r) { if (!r.ok) throw new Error(r.status); return r.text(); }));
     var bin = atob(texts.map(function (t) { return t.trim(); }).join(''));
     var bytes = new Uint8Array(bin.length);
