@@ -6024,6 +6024,17 @@ function wangTaceAbHtml() {
   </div>`;
 }
 
+function wangLMetaLine() {
+  return '<strong>MODELLED/GAP:</strong> liver-limited TACE-eligible triplet versus TACE, not advanced first-line unresectable HCC A+B versus STRIDE. Do not rank as global standard of care versus IMbrave150, HIMALAYA, or CheckMate-9DW. Dual-eligibility A+B vs STRIDE unchanged. Wang L, Luo B, Zhao M, Shen J. <em>Ther Adv Gastroenterol</em> 2025;18:17562848251396424. DOI 10.1177/17562848251396424. PMID 41268044. PROSPERO CRD420250652613. <a href="https://www.ebi.ac.uk/europepmc/webservices/rest/PMC12627371/fullTextXML" target="_blank" rel="noopener">Europe PMC JATS</a>. Pooled ITT n=1,231 (combo 612 vs TACE 619). Three trials: EMERALD-1 NCT03778957 n=409 PFS 15.0 vs 8.2, HR 0.77, ORR 44% vs 30%; LEAP-012 NCT04246177 n=480 PFS 14.6 vs 10.0, HR 0.66, ORR 47% vs 33%; TALENTACE NCT04712643 n=342 PFS 10.32 vs 6.37, HR 0.64, ORR 42% vs 34%. Pooled PFS HR 0.69 (0.60–0.79), I<sup>2</sup>=0%. Pooled OS n=822 HR 0.87 (0.69–1.11), I<sup>2</sup>=0%, immature, NS. Pooled ORR n=885 OR 1.83 (1.45–2.31). Grade 3–5 AEs 64.8% vs 33.6%, RR 1.88 (1.48–2.40). Pooled median PFS/OS, individual-trial OS medians, TALENTACE TACE-PFS 11.30 vs 7.03, grade 5 deaths, bleeding rates, and A+B vs STRIDE head-to-head are not shown.';
+}
+
+function wangLMetaHtml() {
+  return `<div class="funnel-wrap" id="sec-wangmeta">
+    <h3>TACE+IO phase III meta-analysis (Wang L) — MODELLED/GAP</h3>
+    <p class="funnel-lead">${wangLMetaLine()}</p>
+  </div>`;
+}
+
 function taceIoGapHtml() {
   return `<div class="funnel-wrap" id="sec-tace">
     <h3>TACE + IO ± VEGF — GAP</h3>
@@ -6034,6 +6045,7 @@ function taceIoGapHtml() {
       <li><strong>CARES-005 / CHANCE2005</strong> (Zhu HD et al., <em>J Clin Oncol</em> 2026;44(11):959, DOI 10.1200/JCO-25-01796) — TACE + camrelizumab + rivoceranib vs TACE; PFS 10.8 vs 3.2 months, HR 0.34; OS immature. Not interchangeable with LEAP-012, EMERALD-1, or EMERALD-3, and not 1L A+B vs STRIDE.</li>
       <li><strong>ABC-HCC</strong> (Galle PR et al., <em>J Clin Oncol</em> 2026;44(2_suppl):478, DOI 10.1200/JCO.2026.44.2_suppl.478) — A+B vs TACE, intermediate HCC. Interim TTFS 14.6 vs 9.5 mo, HR 0.55. Complementary to CARES-005; not 1L A+B vs STRIDE. OS/PFS/ORR not shown.</li>
       <li><strong>Wang</strong> (Wang K et al., <em>Signal Transduct Target Ther</em> 2025;10:328, DOI 10.1038/s41392-025-02427-0) — single-arm TACE then A+B, BCLC-B CP-A, n=45. Not 1L A+B vs STRIDE. No HR vs TACE or vs A+B alone.</li>
+      <li><strong>Wang L meta-analysis</strong> (Wang L et al., <em>Ther Adv Gastroenterol</em> 2025, DOI 10.1177/17562848251396424) — EMERALD-1, LEAP-012, TALENTACE pooled ITT n=1,231. Pooled PFS HR 0.69; pooled OS HR 0.87 immature NS. TACE-eligible triplet vs TACE, not 1L A+B vs STRIDE.</li>
     </ul>
     <p class="funnel-note"><strong>GAP:</strong> TACE+IO combination PFS is not 1L A+B / STRIDE OS. Locoregional trial endpoints are not a substitute for unresectable first-line systemic OS.</p>
   </div>`;
@@ -6947,6 +6959,7 @@ function showRec(partial = false) {
     <a href="#sec-lee2l">APAC 2L after A+B</a>
     <a href="#sec-cosgrove">US community A+B</a>
     <a href="#sec-wang">TACE then A+B</a>
+    <a href="#sec-wangmeta">TACE+IO meta</a>
     <a href="#sec-match">Trial match</a>
     <a href="#sec-design">Study design</a>
     <a href="#sec-efficacy">Efficacy</a>
@@ -7051,6 +7064,7 @@ function showRec(partial = false) {
   detailInner += (function(){ try { return leeApac2lHtml(); } catch(e) { return ''; } })();
   detailInner += (function(){ try { return cosgroveAbHtml(); } catch(e) { return ''; } })();
   detailInner += (function(){ try { return wangTaceAbHtml(); } catch(e) { return ''; } })();
+  detailInner += (function(){ try { return wangLMetaHtml(); } catch(e) { return ''; } })();
   detailInner += criteriaHtml();
 
   const matchKey = topMatchKey();
