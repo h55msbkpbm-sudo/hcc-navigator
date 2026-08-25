@@ -66,30 +66,19 @@
 html { height: 100%; scroll-behavior: smooth; }
 body {
   font-family: var(--font);
-  background-color: #f4f1ea;
+  background-color: #ffffff;
   background-image: none;
-  color: var(--gray-800);
-  line-height: 1.55;
-  font-size: 16px;
+  color: #1d1d1d;
+  line-height: 1.6;
+  font-size: 17px;
   min-height: 100%;
   min-height: -webkit-fill-available;
   overscroll-behavior-y: none;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
-/* subtle atlas grid */
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
-  opacity: .22;
-  background-image:
-    linear-gradient(rgba(12, 21, 32, .045) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(12, 21, 32, .045) 1px, transparent 1px);
-  background-size: 56px 56px;
-}
+/* no atlas grid — Mayo pages are plain white */
+body::before { display: none !important; }
 .topbar, .app, .fab, .toast, .mobile-steps, .progress-bar, #iosHint {
   position: relative;
   z-index: 1;
@@ -2588,179 +2577,370 @@ body { font-family: "Source Sans 3", ui-sans-serif, system-ui, sans-serif !impor
   -webkit-tap-highlight-color: rgba(0, 61, 165, .18);
 }
 
-/* Mayo Clinic public-site chrome */
+/* Mayo Clinic public-site chrome — layout, not a navy/cream theme */
+.mayo-util {
+  background: #fff;
+  border-bottom: 1px solid #e6e6e6;
+  font-size: 13px;
+  color: #4b4b4b;
+}
+.mayo-util-inner {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 8px 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+.mayo-util a {
+  color: #003da5;
+  text-decoration: none;
+  font-weight: 600;
+  margin-left: 18px;
+}
+.mayo-util a:hover { text-decoration: underline; }
 .topbar {
   display: flex !important;
   align-items: center !important;
-  justify-content: flex-start !important;
-  min-height: 76px !important;
-  padding: 18px 40px !important;
-  padding-top: calc(18px + env(safe-area-inset-top, 0px)) !important;
-  background: #003da5 !important;
+  justify-content: space-between !important;
+  gap: 24px;
+  min-height: 88px !important;
+  padding: 16px 28px !important;
+  padding-top: calc(16px + env(safe-area-inset-top, 0px)) !important;
+  background: #ffffff !important;
+  color: #003da5 !important;
+  box-shadow: none !important;
+  border-bottom: 1px solid #e6e6e6 !important;
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
-.wordmark { display: flex; flex-direction: column; gap: 2px; }
+.mayo-lockup {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: inherit;
+  min-width: 0;
+}
+.mayo-shields {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  background:
+    radial-gradient(circle at 50% 28%, #003da5 0 7px, transparent 7.5px),
+    radial-gradient(circle at 28% 68%, #003da5 0 7px, transparent 7.5px),
+    radial-gradient(circle at 72% 68%, #003da5 0 7px, transparent 7.5px);
+}
+.wordmark { display: flex; flex-direction: column; gap: 0; }
 .wm-kicker {
   font-family: "Source Sans 3", ui-sans-serif, sans-serif !important;
-  font-size: 10px !important;
+  font-size: 11px !important;
   font-weight: 600 !important;
-  letter-spacing: .2em !important;
-  text-transform: uppercase !important;
-  color: rgba(255,255,255,.72) !important;
+  letter-spacing: .04em !important;
+  text-transform: none !important;
+  color: #4b4b4b !important;
 }
 .topbar h1 {
   font-family: "Source Serif 4", Georgia, "Times New Roman", serif !important;
-  font-size: 28px !important;
+  font-size: 26px !important;
   font-weight: 600 !important;
   letter-spacing: -0.02em !important;
-  color: #fff !important;
-  line-height: 1.1 !important;
+  color: #003da5 !important;
+  line-height: 1.15 !important;
   margin: 0 !important;
 }
+.mayo-appt {
+  display: inline-flex;
+  align-items: center;
+  background: #003da5 !important;
+  color: #fff !important;
+  font-family: "Source Sans 3", sans-serif !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  padding: 10px 16px !important;
+  border-radius: 2px !important;
+  text-decoration: none !important;
+  border: 0 !important;
+  white-space: nowrap;
+}
+.mayo-appt:hover { background: #002f7a !important; }
+.mayo-crumb {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 14px 28px 0;
+  font-size: 13px;
+  color: #6b6b6b;
+}
+.mayo-crumb a { color: #003da5; text-decoration: none; }
+.mayo-crumb a:hover { text-decoration: underline; }
 .trust-bar {
   background: #fff !important;
-  color: #524f4a !important;
+  color: #4b4b4b !important;
   font-family: "Source Sans 3", ui-sans-serif, sans-serif !important;
-  font-size: 13px !important;
+  font-size: 15px !important;
   font-weight: 400 !important;
-  letter-spacing: .01em;
-  text-align: center;
-  padding: 10px 24px;
-  border-bottom: 1px solid #d8d2c8;
+  letter-spacing: 0;
+  text-align: left !important;
+  padding: 8px 28px 18px !important;
+  border-bottom: none !important;
+  max-width: 1180px;
+  margin: 0 auto;
 }
 .mobile-steps {
   background: #fff !important;
-  justify-content: center !important;
-  padding: 0 16px !important;
+  justify-content: flex-start !important;
+  padding: 0 28px !important;
+  border-bottom: 1px solid #e6e6e6 !important;
+  gap: 0 !important;
+  max-width: 1180px;
+  margin: 0 auto;
 }
 .m-step {
   font-family: "Source Sans 3", ui-sans-serif, sans-serif !important;
-  font-size: 14px !important;
-  font-weight: 500 !important;
-  color: #6b6760 !important;
-  padding: 14px 22px !important;
+  font-size: 15px !important;
+  font-weight: 600 !important;
+  color: #1d1d1d !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-bottom: 3px solid transparent !important;
+  border-radius: 0 !important;
+  padding: 12px 18px 14px !important;
+  letter-spacing: 0 !important;
+  text-transform: none !important;
 }
+.m-step .n { display: none !important; }
 .m-step.active {
   color: #003da5 !important;
-  font-weight: 600 !important;
-  box-shadow: inset 0 -3px 0 #003da5 !important;
+  border-bottom-color: #003da5 !important;
+  background: transparent !important;
 }
-.main { padding: 48px 32px 72px !important; max-width: 720px !important; }
+.m-step:hover { color: #003da5 !important; }
+.main { padding: 28px 28px 96px !important; max-width: 760px !important; margin: 0 auto; }
 .step-label {
-  font-family: "Source Sans 3", sans-serif !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0 !important;
+  text-transform: none !important;
   color: #003da5 !important;
-  letter-spacing: .2em !important;
-  margin-bottom: 14px !important;
+  margin-bottom: 8px !important;
 }
 .step h1 {
   font-family: "Source Serif 4", Georgia, serif !important;
-  font-size: 36px !important;
+  font-size: 42px !important;
   font-weight: 600 !important;
-  line-height: 1.22 !important;
-  color: #1a365d !important;
-  margin: 0 0 22px !important;
+  color: #1d1d1d !important;
+  letter-spacing: -0.03em !important;
+  line-height: 1.15 !important;
+  margin: 0 0 12px !important;
 }
-.lead { font-size: 18px !important; color: #524f4a !important; margin-bottom: 22px !important; }
+.lead { font-size: 18px !important; color: #4b4b4b !important; line-height: 1.55 !important; }
 .step.active .card.q-on {
-  background: #fff !important;
-  border: 1px solid #d8d2c8 !important;
-  padding: 32px 34px !important;
-  margin-bottom: 28px !important;
+  padding: 0 !important;
+  border: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
 }
-.opt { padding: 16px 18px !important; min-height: 56px !important; }
-.btn {
-  font-family: "Source Sans 3", sans-serif !important;
-  font-size: 16px !important;
-  min-height: 48px !important;
-  padding: 12px 28px !important;
+.opt {
+  border: 1px solid #d6d6d6 !important;
   border-radius: 2px !important;
+  background: #fff !important;
+}
+.opt.sel {
+  border-color: #003da5 !important;
+  background: #f5f8fc !important;
 }
 .btn-primary, #next0, #next1, #next2 {
   background: #002f7a !important;
   color: #fff !important;
-  border: none !important;
-  letter-spacing: .02em;
+  border-radius: 2px !important;
+  font-weight: 700 !important;
+  min-width: 180px;
+  min-height: 44px;
 }
 .btn-primary:hover:not(:disabled),
 #next0:hover:not(:disabled),
 #next1:hover:not(:disabled),
 #next2:hover:not(:disabled) { background: #00245e !important; }
-.btn-secondary {
-  background: #fff !important;
-  color: #003da5 !important;
-  border: 1px solid #003da5 !important;
-}
-.res-banner .lbl {
-  font-family: "Source Sans 3", sans-serif !important;
-  color: #003da5 !important;
-  letter-spacing: .18em !important;
-  text-transform: uppercase;
-  font-size: 11px !important;
-  font-weight: 700 !important;
-}
 .res-banner h2 {
   font-family: "Source Serif 4", Georgia, serif !important;
-  font-size: 40px !important;
+  font-size: 42px !important;
   font-weight: 600 !important;
-  color: #1a365d !important;
-  letter-spacing: -0.02em;
-  margin: 8px 0 12px !important;
+  color: #1d1d1d !important;
 }
 .sidebar, .panel, .progress-bar, #iosHint, .brand-mark { display: none !important; }
-
-/* Closer to mayoclinic.org */
-.topbar {
-  min-height: 84px !important;
-  padding: 20px 48px !important;
-  padding-top: calc(20px + env(safe-area-inset-top, 0px)) !important;
+.mayo-site-foot {
+  background: #003da5;
+  color: #fff;
+  padding: 40px 28px calc(36px + env(safe-area-inset-bottom, 0px));
 }
-.topbar h1 {
-  font-size: 32px !important;
-  font-weight: 600 !important;
-  letter-spacing: -0.03em !important;
+.mayo-site-foot-inner {
+  max-width: 1180px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr;
+  gap: 32px;
 }
-.trust-bar {
-  text-align: left !important;
-  padding: 11px 48px !important;
-  background: #fff !important;
+.mayo-site-foot h3 {
+  font-family: "Source Serif 4", Georgia, serif;
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 0 10px;
 }
-.mobile-steps {
-  justify-content: flex-start !important;
-  padding: 0 36px !important;
-  background: #fff !important;
+.mayo-site-foot p, .mayo-site-foot a {
+  font-size: 13px;
+  line-height: 1.55;
+  color: rgba(255,255,255,.86);
+  text-decoration: none;
 }
-.m-step { padding: 16px 20px !important; font-size: 15px !important; }
-.main { padding: 56px 48px 88px !important; max-width: 760px !important; }
-.step h1 { font-size: 40px !important; margin: 0 0 16px !important; }
-.lead { font-size: 18px !important; line-height: 1.55 !important; max-width: 36em; }
-.step.active .card.q-on { padding: 36px 38px !important; }
-.opt { gap: 14px; }
-.opt + .opt { margin-top: 8px; }
-.btn-primary, #next0, #next1, #next2 { min-width: 168px; }
-.res-banner h2 { font-size: 42px !important; }
+.mayo-site-foot a:hover { text-decoration: underline; color: #fff; }
+.mayo-site-foot .legal {
+  grid-column: 1 / -1;
+  border-top: 1px solid rgba(255,255,255,.2);
+  padding-top: 16px;
+  margin-top: 8px;
+  font-size: 12px;
+  color: rgba(255,255,255,.78);
+}
 @media (max-width: 720px) {
-  .topbar, .trust-bar { padding-left: 20px !important; padding-right: 20px !important; }
-  .mobile-steps { padding: 0 8px !important; }
-  .main { padding: 32px 20px 64px !important; }
-  .step h1 { font-size: 30px !important; }
-  .res-banner h2 { font-size: 32px !important; }
+  .mayo-util-inner, .topbar, .mayo-crumb, .trust-bar, .mobile-steps, .main { padding-left: 16px !important; padding-right: 16px !important; }
+  .topbar { flex-wrap: wrap; min-height: 72px !important; }
+  .mayo-appt { display: none !important; }
+  .step h1, .res-banner h2 { font-size: 30px !important; }
+  .mayo-site-foot-inner { grid-template-columns: 1fr; gap: 20px; }
+  .m-step { padding: 12px 10px 14px !important; font-size: 13px !important; }
 }
+html, body, .app, .main {
+  background: #ffffff !important;
+}
+body.view-results #advFold,
+body.view-results .trust-bar,
+body.view-results .mayo-crumb { display: none !important; }
+body.view-results #sec-design .tier-head,
+body.view-results #sec-efficacy .tier-head,
+body.view-results #sec-design .match-callout { display: none !important; }
+body.view-results .tier {
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  margin-bottom: 8px !important;
+}
+body.view-results .regimen { padding: 0 !important; }
+body.view-results .compare-table {
+  border: 1px solid #e6e6e6 !important;
+  width: 100%;
+}
+body.view-results .compare-table th,
+body.view-results .compare-table td {
+  padding: 14px 12px !important;
+  font-size: 14px !important;
+  line-height: 1.45 !important;
+  vertical-align: top;
+}
+body.view-results .mdt-fold {
+  border: 1px solid #e6e6e6 !important;
+  border-radius: 2px !important;
+  margin: 20px 0 0 !important;
+  background: #fff !important;
+}
+body.view-results .mdt-fold > summary {
+  padding: 16px 18px !important;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  color: #003da5 !important;
+  list-style: none;
+}
+body.view-results .mdt-fold .fold-body { padding: 0 18px 18px !important; }
+body.view-results .res-banner { margin-bottom: 28px !important; padding-bottom: 20px !important; }
+body.view-results .disclaimer { margin-top: 36px !important; }
+.pt-pic {
+  margin: 36px auto 8px;
+  max-width: 320px;
+  text-align: center;
+}
+.pt-pic img {
+  width: 100%;
+  height: auto;
+  border: 1px solid #e6e6e6;
+  border-radius: 2px;
+  display: block;
+  background: #f4f1ea;
+  object-fit: cover;
+}
+.pt-pic figcaption {
+  margin-top: 10px;
+  font-size: 13px;
+  color: #4b4b4b;
+  line-height: 1.45;
+}
+.pt-pic figcaption strong { display: block; color: #1d1d1d; font-size: 14px; font-weight: 600; }
+.pt-pic figcaption span { display: block; margin-top: 2px; color: #6b6b6b; font-size: 12px; }
+body.view-results .match-callout {
+  background: #f5f8fc !important;
+  border: 1px solid #d6e0ee !important;
+  border-radius: 2px !important;
+  color: #1d1d1d !important;
+  box-shadow: none !important;
+}
+body.view-results .match-callout strong { color: #003da5 !important; }
+body.view-results .match-callout .mc-badge {
+  background: #003da5 !important;
+  color: #fff !important;
+  border-radius: 2px !important;
+}
+body.view-results .compare-table th.hl-col {
+  background: #003da5 !important;
+  color: #fff !important;
+}
+body.view-results .compare-table td.hl-col {
+  background: #f5f8fc !important;
+  color: #003da5 !important;
+  box-shadow: inset 0 0 0 1px #d6e0ee !important;
+}
+body.view-results .regimen a { color: #003da5 !important; border-bottom-color: #003da5 !important; }
+body.view-results .res-banner { margin-bottom: 16px !important; padding-bottom: 16px !important; }
+body.view-results #res-details > summary {
+  font-family: "Source Sans 3", sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  color: #003da5;
+  cursor: pointer;
+}
+
+
 
 </style>
 
 
-<header class="topbar">
-  <div class="wordmark">
-    <span class="wm-kicker">Educational</span>
-    <h1>HCC Simulator</h1>
+
+<div class="mayo-util">
+  <div class="mayo-util-inner">
+    <span>Educational only · not a prescription</span>
+    <span class="mayo-util-links">
+      <a href="/guidelines">Guidelines</a>
+      <a href="/evidence">Evidence</a>
+    </span>
   </div>
+</div>
+<header class="topbar">
+  <a class="mayo-lockup" href="/hcc-simulator.html">
+    <span class="mayo-shields" aria-hidden="true"></span>
+    <span class="wordmark">
+      <span class="wm-kicker">Unresectable HCC</span>
+      <h1>HCC Simulator</h1>
+    </span>
+  </a>
+  <a class="mayo-appt" href="#content" data-action="goto" data-n="0">Open simulator</a>
 </header>
+<div class="mayo-crumb"><a href="/hcc-simulator.html">Home</a> / Unresectable HCC / First-line treatment</div>
 <div class="trust-bar">Based on NCCN 2026 and BCLC 2026</div>
 <div id="iosHint">
   <strong>iPad / iPhone:</strong> If buttons do not respond, open this page in Safari. In-app OneDrive or Files preview blocks JavaScript.
 </div>
 
-<!-- Horizontal step bar for iPad / phone (sidebar hidden) -->
-<nav class="mobile-steps" id="mobileSteps" aria-label="Decision steps">
+<nav class="mobile-steps" id="mobileSteps" aria-label="Care sections">
   <div class="m-step active" data-step="0" data-action="goto" data-n="0"><span class="n">1</span> Disease</div>
   <div class="m-step" data-step="1" data-action="goto" data-n="1"><span class="n">2</span> Fitness</div>
   <div class="m-step" data-step="2" data-action="goto" data-n="2"><span class="n">3</span> Safety</div>
@@ -3389,7 +3569,7 @@ body { font-family: "Source Sans 3", ui-sans-serif, system-ui, sans-serif !impor
           </div>
           <div id="cvRiskLive" class="cv-risk-live low">CV risk: Low (no factors selected)</div>
           <p style="font-size:12px;color:var(--gray-500);margin-top:8px;line-height:1.4">
-            Rule: none → low · 1 factor → moderate · 2 or more → high. Used for anti-VEGF safety alignment only.
+            Rule: none → low · 1 factor → moderate · 2 or more → high. Used for anti-VEGF safety only.
           </p>
         </div>
 
@@ -3440,7 +3620,7 @@ body { font-family: "Source Sans 3", ui-sans-serif, system-ui, sans-serif !impor
         </div>
       </details>
 
-      <!-- CHECKPOINT: profile review before alignment -->
+      <!-- CHECKPOINT: profile review -->
       <div class="checkpoint" id="checkpoint">
         <div class="checkpoint-card">
           <div class="step-label">Checkpoint</div>
@@ -3463,9 +3643,9 @@ body { font-family: "Source Sans 3", ui-sans-serif, system-ui, sans-serif !impor
       <!-- RESULTS: similarity + tables only -->
       <div class="results" id="results">
         <div class="res-banner" id="resJump">
-          <div class="lbl">Recommendation</div>
-          <h2 id="resTitle">Profile vs trial populations</h2>
-          <p class="sub" id="resSub">Illustrative — not eligibility and not a prescription.</p>
+          <div class="lbl">Study design</div>
+          <h2 id="resTitle">Closest design on this profile</h2>
+          <p class="sub" id="resSub">The highlighted column is the nearest match. Not eligibility and not a prescription.</p>
         </div>
         <div id="resBody"></div>
         <div class="disclaimer">
@@ -4437,14 +4617,14 @@ function studyDesignTable(preferred) {
     const c = dualCopy(ds) || { badge: 'Both eligible', sub: 'Near-tie.' };
     callout = `<div class="match-callout dual"><span class="mc-badge">${c.badge}</span><div><strong>IMbrave150 (A+B)</strong> and <strong>HIMALAYA + SIERRA (STRIDE)</strong> — ${c.sub}</div></div>`;
   } else if (prefs.length === 1 && names[prefs[0]]) {
-    callout = `<div class="match-callout"><span class="mc-badge">Closest design</span><div><strong>${names[prefs[0]]}</strong> — ${reasons[prefs[0]] || 'Best alignment with the profile captured above.'}</div></div>`;
+    callout = `<div class="match-callout"><span class="mc-badge">Closest design</span><div><strong>${names[prefs[0]]}</strong> — ${reasons[prefs[0]] || 'Best match with the profile captured above.'}</div></div>`;
   } else {
     callout = `<p style="font-size:12.5px;color:var(--gray-600);margin-bottom:10px;line-height:1.45">Design differences explain <em>why</em> safety answers shift pathway fit. HIMALAYA + SIERRA cover STRIDE from fit to poorer-prognosis uHCC. Not a comparative efficacy table.</p>`;
   }
 
   return `
   <div class="tier${prefs.length ? ' preferred' : ''}" id="sec-design">
-    <div class="tier-head"><span class="badge t3">Study design</span><span>IMbrave150 · HIMALAYA + SIERRA · CheckMate 9DW</span></div>
+    <div class="tier-head"><span class="badge t3">Study design</span><span>Highlighted = closest match</span></div>
     <div class="regimen" style="padding-top:8px;overflow-x:auto;-webkit-overflow-scrolling:touch">
       ${callout}
       <table class="compare-table design-table">
@@ -5604,6 +5784,35 @@ function dualCopy(ds) {
   };
 }
 
+function hashProfile() {
+  const s = [A.age, A.sex, A.lesions, A.largest, A.mvi, A.ehs, A.liver, A.ecog, A.varices, A.egd, A.cardio, A.ioContra, A.viral].join('|');
+  let h = 2166136261;
+  for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619); }
+  return h >>> 0;
+}
+
+function patientPictureHtml() {
+  const female = A.sex === 'F';
+  const young = A.age === 'under50';
+  let band = 'well';
+  if (A.ecog === '3' || A.liver === 'B8C') band = 'ecog3';
+  else if (A.ecog === '2' || A.liver === 'B7') band = 'ecog2';
+  const sex = female ? 'f' : 'm';
+  const file = (band === 'well')
+    ? (sex + '_' + (young ? 'young' : 'older') + '_well.jpg')
+    : (sex + '_older_' + band + '.jpg');
+  const tags = [];
+  if (A.sex) tags.push(A.sex === 'F' ? 'Woman' : 'Man');
+  if (A.age) tags.push(A.age === 'under50' ? '≤50 y' : '>50 y');
+  if (A.liver) tags.push(LABELS.liver[A.liver] || A.liver);
+  if (A.ecog) tags.push(LABELS.ecog[A.ecog] || A.ecog);
+  const label = tags.join(' · ') || 'Profile illustration';
+  return `<figure class="pt-pic" aria-label="Educational illustration of this profile">
+    <img src="/patients/${file}" width="320" height="427" alt="Fictional Chinese adult illustration for this profile">
+    <figcaption><strong>${label}</strong><span>Matched to this submission · fictional Chinese adult · educational only, not a photograph of a real patient</span></figcaption>
+  </figure>`;
+}
+
 /** HKCaR 2023 primary counts only. Downstream uHCC / IO / VEGF layers are GAP — not epidemiology. */
 const HK_FUNNEL = {
   year: 2023,
@@ -6608,7 +6817,7 @@ function evidenceResourcesHtml() {
 
       <h4 style="font-size:13px;margin:0 0 8px;color:var(--gray-700)">HEPATORCH — MODELLED/GAP</h4>
       <ul style="margin:0 0 14px 18px;font-size:12.5px;line-height:1.55;color:var(--gray-700)">
-        <li><a href="https://doi.org/10.1016/S2468-1253(25)00059-7" target="_blank" rel="noopener">Shi Y et al., HEPATORCH</a> — <em>Lancet Gastroenterol Hepatol</em> 2025;10(7):658–670. DOI 10.1016/S2468-1253(25)00059-7. PMID 40409323. NCT04723004. Not ORIENT-32, not CARES-310, not IMbrave150. Phase 3 toripalimab + bevacizumab vs sorafenib. 57 sites mainland China/Taiwan/Singapore. n=326 (162 vs 164). mPFS 5.8 vs 4.0 mo HR 0.69 (0.53–0.91) p=0.0086. mOS 20.0 vs 14.5 mo HR 0.76 (0.58–0.99) p=0.039. Grade ≥3 AE 63% vs 61%. Discontinuation 13% vs 12%. G3–4 HTN 16% vs 12%; thrombocytopenia 10% vs 2%; UGIB 6% vs 1%. ORR not shown. <strong>MODELLED/GAP:</strong> Asia-enriched vs sorafenib, not an A+B vs STRIDE RCT. Same Asia-enriched caution as ORIENT-32/CARES-310. Do not rank as global SoC against IMbrave150, HIMALAYA, or CheckMate-9DW.</li>
+        <li><a href="https://doi.org/10.1016/S2468-1253(25)00059-7" target="_blank" rel="noopener">Shi Y et al., HEPATORCH</a> — <em>Lancet Gastroenterol Hepatol</em> 2025;10(7):658–670. DOI 10.1016/S2468-1253(25)00059-7. PMID 40409323. NCT04723004. Not ORIENT-32, not CARES-310, not IMbrave150. Phase 3 toripalimab + bevacizumab vs sorafenib. 57 sites mainland China/Taiwan/Singapore. ITT n=326 (162 vs 164). mPFS 5.8 vs 4.0 mo HR 0.69 (0.53–0.91) p=0.0086. mOS 20.0 vs 14.5 mo HR 0.76 (0.58–0.99) p=0.039. Grade ≥3 AE 63% vs 61%. Discontinuation 13% vs 12%. G3–4 HTN 16% vs 12%; thrombocytopenia 10% vs 2%; UGIB 6% vs 1%. ORR not shown. NMPA China approved. <strong>MODELLED/GAP:</strong> Asia-enriched vs sorafenib, not an A+B vs STRIDE RCT. Same Asia-enriched caution as ORIENT-32/CARES-310. Do not rank as global SoC against IMbrave150, HIMALAYA, or CheckMate-9DW. Dual-eligibility unchanged.</li>
       </ul>
 
       <h4 style="font-size:13px;margin:0 0 8px;color:var(--gray-700)">Non-proportional hazards methods — MODELLED/GAP</h4>
@@ -6621,9 +6830,493 @@ function evidenceResourcesHtml() {
         <li><a href="https://doi.org/10.1200/OP.2025.21.10_suppl.6" target="_blank" rel="noopener">Zafar M et al., STRIDE vs A+B cost/safety</a> — <em>JCO Oncol Pract</em> 2025;21(10_suppl):6. DOI 10.1200/OP.2025.21.10_suppl.6. Literature + institutional US payer analysis. No head-to-head RCT. HIMALAYA STRIDE mOS 16.4 vs sorafenib 13.8 mo HR 0.78 (0.66–0.92). 4-year OS 25.2%. IMbrave150 A+B OS 19.2 vs sorafenib 13.4 mo HR 0.66 (0.52–0.85). mPFS 3.8 mo STRIDE vs 6.8 mo A+B. Grade ≥3 TRAE 46.9% STRIDE vs 56.5% A+B. STRIDE grade 3/4 immune-mediated AE 12.6% vs sorafenib 2.4%. IMbrave150 updated: grade 3/4 immune-related AE 27%; grade 3/4 bleeding 18%; hypertension 26%. ICER vs sorafenib: STRIDE $19,239/QALY; A+B $169,223/QALY. 1-year drug cost (80 kg, excluding infusion): STRIDE about $192,152 vs IMbrave150 $305,269. No STRIDE vs A+B OS HR or ORR. ICERs are not HK costs. <strong>MODELLED/GAP:</strong> ASCO meeting abstract; no H2H RCT; US payer; ICERs vs sorafenib, not a 1L A+B vs STRIDE RCT.</li>
       </ul>
 
+      <h4 style="font-size:13px;margin:0 0 8px;color:var(--gray-700)">TriNetX 1L safety/OS abstract — MODELLED/GAP</h4>
+      <ul style="margin:0 0 14px 18px;font-size:12.5px;line-height:1.55;color:var(--gray-700)">
+        <li><a href="https://doi.org/10.1200/JCO.2026.44.16_suppl.4163" target="_blank" rel="noopener">Ailawadi S et al., A+B vs D+T (TriNetX)</a> — <em>J Clin Oncol</em> 2026;44(16_suppl):4163. DOI 10.1200/JCO.2026.44.16_suppl.4163. TriNetX US RWE. No head-to-head RCT. Identified n=2,762 first-line (A+B 2,030 vs D+T 723). After PSM, 723 patients in survival analyses. 90-day: D+T immune-mediated colitis 5.3% vs 2.6% OR 2.1 (1.2–3.7); hospitalization 35.4% vs 27.9% OR 1.4 (1.1–1.8). 6-month hypertension and proteinuria higher with A+B 21.9% vs 13.7% OR 0.57 (0.34–0.95); 1-year 28.1% vs 16.5% OR 0.51 (0.32–0.81). mOS 18.3 vs 22.8 mo HR 0.94 (0.79–1.1), not significant. Abstract lists A+B then D+T. No 1L A+B vs STRIDE RCT HR or ORR. Distinct from Al-Alwan JCO 2026 e16232 and from Shiraishi Front Oncol 2026 TTE. <strong>MODELLED/GAP:</strong> ASCO meeting abstract; TriNetX RWE; no H2H RCT.</li>
+      </ul>
+
+      <h4 style="font-size:13px;margin:0 0 8px;color:var(--gray-700)">Post-A+B second-line RWE — MODELLED/GAP</h4>
+      <ul style="margin:0 0 14px 18px;font-size:12.5px;line-height:1.55;color:var(--gray-700)">
+        <li><a href="https://doi.org/10.1371/journal.pone.0341395" target="_blank" rel="noopener">Nishioka C et al., 2L Dur/Tre vs lenvatinib after A+B</a> — <em>PLoS One</em> 2026;21(5):e0341395. DOI 10.1371/journal.pone.0341395. Published 7 May 2026. Retrospective RWE after 1L A+B. Dur/Tre n=14 vs lenvatinib n=67. Not a randomized trial. Not a 1L A+B vs STRIDE head-to-head. ORR 7.7% vs 23.3%; DCR 15.4% vs 76.7% (Dur/Tre vs lenvatinib). mPFS 1.7 vs 4.2 mo (p<0.001). mOS 5.3 vs 14.0 mo (p=0.047), both favoring lenvatinib. Grade ≥3 AE 21.4% vs 70.1%. Week-4 ALBI maintained with Dur/Tre, worsened with lenvatinib. <strong>MODELLED/GAP:</strong> small Dur/Tre n=14; retrospective; no H2H RCT. Distinct from Kim <em>J Hepatol</em> 2026 n=50 post-A+B lenvatinib and from Ailawadi JCO 2026 TriNetX.</li>
+      </ul>
+
+      <h4 style="font-size:13px;margin:0 0 8px;color:var(--gray-700)">SINOVA IBI310 + sintilimab — MODELLED/GAP</h4>
+      <ul style="margin:0 0 14px 18px;font-size:12.5px;line-height:1.55;color:var(--gray-700)">
+        <li><a href="https://doi.org/10.1200/JCO.2026.44.16_suppl.4148" target="_blank" rel="noopener">Fan J et al., SINOVA (IBI310 + sintilimab vs sorafenib)</a> — <em>J Clin Oncol</em> 2026;44(16_suppl):4148. DOI 10.1200/JCO.2026.44.16_suppl.4148. NCT04720716. China phase 3. Randomized 2:1 IBI310 plus sintilimab vs sorafenib. n=344: G1 IBI310 3 mg/kg plus sintilimab n=84; G2 modified-dose IBI310 1 mg/kg plus sintilimab n=145; G3 sorafenib n=115. mOS 44.0 vs 36.1 vs 22.9 mo. Confirmed ORR 41.7% vs 22.1% vs 2.6%. mPFS 13.5 vs 6.1 vs 2.8 mo. Grade ≥3 TRAE 60.7% vs 34.7% vs 35.1%. Vs sorafenib, not vs A+B or STRIDE. <strong>MODELLED/GAP:</strong> ASCO meeting abstract; China-only; dose modified mid-study; not H2H vs A+B or STRIDE. Distinct from CheckMate 9DW nivo+ipi, Nishioka <em>PLoS One</em> 2026, and Ailawadi JCO 2026.</li>
+      </ul>
+
+      <h4 style="font-size:13px;margin:0 0 8px;color:var(--gray-700)">TALENTACE TACE+A+B — MODELLED/GAP</h4>
+      <ul style="margin:0 0 14px 18px;font-size:12.5px;line-height:1.55;color:var(--gray-700)">
+        <li><a href="https://doi.org/10.1016/j.annonc.2025.05.542" target="_blank" rel="noopener">Dong J et al., TALENTACE (TACE+A+B vs TACE)</a> — <em>Ann Oncol</em> 2025;36:S62. DOI 10.1016/j.annonc.2025.05.542. LBA2. NCT04712643. China and Japan. n=342 randomized 1:1 (171 vs 171). Median follow-up 26.3 months. TACE-PFS 11.30 vs 7.03 mo HR 0.71 (0.55–0.92), p=0.009. RECIST v1.1 PFS 10.32 vs 6.37 mo HR 0.64 (0.50–0.82). OS immature: 34.53 vs 35.38 mo HR 0.96 (0.68–1.34). ORR RECIST 49.1% vs 33.9%. Grade 3–5 TRAE 63.8% vs 42.2%. Not a 1L A+B vs STRIDE head-to-head. <strong>MODELLED/GAP:</strong> ESMO meeting abstract; OS immature; China/Japan. Distinct from EMERALD-1, LEAP-012, CARES-005, ABC-HCC, CHANCE2202.</li>
+      </ul>
+
+      <h4 style="font-size:13px;margin:0 0 8px;color:var(--gray-700)">ICB resistance mechanism — MODELLED/GAP</h4>
+      <ul style="margin:0 0 14px 18px;font-size:12.5px;line-height:1.55;color:var(--gray-700)">
+        <li><a href="https://doi.org/10.1016/j.ccell.2026.05.005" target="_blank" rel="noopener">Liang Z et al., TREM2 fatty-acid recycling (CUHK)</a> — <em>Cancer Cell</em> 2026;44(6):1235–1254. DOI 10.1016/j.ccell.2026.05.005. Corresponding: Stephen Lam Chan, Alfred Sze-Lok Cheng (CUHK). Serial biopsies from ICB-resistant HCC: heightened tumor-cell fatty acid uptake with TREM2-positive lipid-associated macrophages. Myeloid Trem2 loss or anti-TREM2 resensitizes ICB-resistant tumors via epigenetic TME remodeling. TREM2 LAMs recycle fatty acids to tumor cells via efferocytosis-derived extracellular vesicles, activating MYC and TGF-β. HK-relevant CUHK work. Not a treatment-algorithm RCT. <strong>MODELLED/GAP:</strong> preclinical/mechanistic; not H2H vs A+B or STRIDE. Distinct from TALENTACE, SINOVA, Nishioka, Ailawadi, Shiraishi, Hirooka, Zafar, Mauro, HEPATORCH.</li>
+      </ul>
+
+      <h4 style="font-size:13px;margin:0 0 8px;color:var(--gray-700)">Camrelizumab + rivoceranib + TACE — MODELLED/GAP</h4>
+      <ul style="margin:0 0 14px 18px;font-size:12.5px;line-height:1.55;color:var(--gray-700)">
+        <li><a href="https://doi.org/10.1200/JCO.2026.44.16_suppl.4001" target="_blank" rel="noopener">Jia WD et al., JCO 2026 4001 (camrelizumab + rivoceranib + TACE vs TACE)</a> — <em>J Clin Oncol</em> 2026;44(16_suppl):4001. DOI 10.1200/JCO.2026.44.16_suppl.4001. NCT05320692. China phase 3. Presenting author Tao Peng. n=423 (214 vs 209). Median follow-up 16.4 mo. No extrahepatic spread. BICR mRECIST PFS 11.1 vs 8.3 mo HR 0.73 (0.56–0.96), 1-sided p=0.0127. BICR RECIST v1.1 PFS 13.9 vs 9.5 HR 0.67 (0.50–0.91). OS immature HR 0.76 (0.46–1.24). 12-mo OS 91.4% vs 85.5%; 24-mo 82.0% vs 73.3%. G3+ TRAE 73.7% vs 28.7%. Distinct from CARES-005 (phase 2 n=200, Zhu et al.), CARES-310, TALENTACE, EMERALD-1, LEAP-012, CHANCE2202. <strong>MODELLED/GAP:</strong> ASCO abstract; China-only phase 3; TACE combo not 1L systemic A+B vs STRIDE; OS immature. Dual-eligibility unchanged.</li>
+      </ul>
+
+      <h4 style="font-size:13px;margin:0 0 8px;color:var(--gray-700)">Italian ARTE A+B RWE — MODELLED/GAP</h4>
+      <ul style="margin:0 0 14px 18px;font-size:12.5px;line-height:1.55;color:var(--gray-700)">
+        <li><a href="https://doi.org/10.1097/hep.0000000000001725" target="_blank" rel="noopener">Tovoli F et al., ARTE (1L A+B Italy)</a> — <em>Hepatology</em> 2026. DOI 10.1097/hep.0000000000001725. PMID 41746328. Italian ARTE prospective RWE n=538 first-line A+B. Median follow-up 24.2 mo. Median OS 19.7 mo (95% CI 17.2–22.2). 36-month OS 30.0%. Grade 3+ AE 36.8%. Five late-onset severe toxicities beyond 24 months. Liver decompensation unrelated to tumor progression 14.1%. 80 patients (14.9%) had surgical or locoregional procedures after A+B start; 24 (4.4%) achieved drug-free disease-free status. Independent OS factors: ECOG-PS >0, ALBI grade >1, AFP >400 ng/mL, multinodularity, macrovascular invasion, on-treatment response/progression/decompensation. Distinct from IMbrave150, HIMALAYA 5-year, Cosgrove JHC 2025, Bansal VA STRIDE, Shiraishi, Hirooka, Jia JCO 4001. <strong>MODELLED/GAP:</strong> Italy RWE, not an RCT, not head-to-head A+B vs STRIDE. Dual-eligibility unchanged.</li>
+      </ul>
+
+      <h4 style="font-size:13px;margin:0 0 8px;color:var(--gray-700)">A+B five-year clinical integration — MODELLED/GAP</h4>
+      <ul style="margin:0 0 14px 18px;font-size:12.5px;line-height:1.55;color:var(--gray-700)">
+        <li><a href="https://doi.org/10.1016/j.aohep.2026.102237" target="_blank" rel="noopener">Lai KC, Chen SC, Ann Hepatol 2026 (five years after IMbrave150)</a> — DOI 10.1016/j.aohep.2026.102237. PMID 42155867. Narrative clinical-integration review (Taipei Veterans). A+B remains a first-line standard for unresectable HCC five years after IMbrave150. High response rates can allow downstaging and curative conversion; drug-free remission reported in some patients but de-escalation criteria need validation. In HBV-related HCC, A+B appears safe across baseline viral loads with concomitant antiviral therapy. Bleeding risk (especially esophagogastric variceal hemorrhage) warrants baseline endoscopy and proactive management. Hypertension and proteinuria need close surveillance to maintain bevacizumab. Late bevacizumab interruption is more acceptable than early discontinuation. After A+B progression, cohorts favor TKI strategies such as lenvatinib over sorafenib; cabozantinib and ramucirumab (AFP ≥400 ng/mL) are options. Combining A+B with TACE has phase III PFS signals; adjuvant A+B has not shown durable benefit. Distinct from IMbrave150 primary/update, Tovoli ARTE Hepatology 2026, Rimassa HIMALAYA 5-year, Cosgrove, Jia JCO 4001, Casadei-Gardini EJC 116750. <strong>MODELLED/GAP:</strong> narrative review, not an RCT, not head-to-head A+B vs STRIDE. Dual-eligibility unchanged.</li>
+      </ul>
+
+      <h4 style="font-size:13px;margin:0 0 8px;color:var(--gray-700)">ARTE Score decompensation on A+B — MODELLED/GAP</h4>
+      <ul style="margin:0 0 14px 18px;font-size:12.5px;line-height:1.55;color:var(--gray-700)">
+        <li><a href="https://doi.org/10.1016/j.cgh.2026.04.033" target="_blank" rel="noopener">Tovoli F et al., ARTE Score (CGH 2026)</a> — <em>Clin Gastroenterol Hepatol</em> 2026. DOI 10.1016/j.cgh.2026.04.033. PMID 42190980. Distinct from Tovoli Hepatology 2026 ARTE long-term OS RWE. Derivation: 453 patients from ARTE (first-line A+B, Child-Pugh A); 74 (16.3%) developed hepatic decompensation (median follow-up 14 mo). Independent predictors: neoplastic portal vein thrombosis HR 1.97 (1.20–3.23), elevated bilirubin HR 2.61 (1.52–4.47), low platelets HR 1.82 (1.07–3.10). Point score: low 0–1 (n=360), intermediate 2 (n=49), high 3–4 (n=44). Intermediate decompensation risk 1.96-fold; high 4.28-fold vs low. Decompensation-free survival at 12 and 24 months: 87% and 83% low, 79% and 64% intermediate, 57% and 56% high. Harrell C 0.7022. External validation AB-real n=292, HR 1.78 p=0.009. Use for A+B safety/fitness gating (decompensation risk), not to pick STRIDE over A+B. Distinct from Tovoli Hepatology 2026 OS paper, Lai Chen Ann Hepatol 2026, IMbrave150, Mauro NPH. <strong>MODELLED/GAP:</strong> RWE score, not an RCT, not head-to-head A+B vs STRIDE. Dual-eligibility unchanged.</li>
+      </ul>
+
+      <h4 style="font-size:13px;margin:0 0 8px;color:var(--gray-700)">Ipi/Nivo vs Dur/Tre TriNetX RWE — MODELLED/GAP</h4>
+      <ul style="margin:0 0 14px 18px;font-size:12.5px;line-height:1.55;color:var(--gray-700)">
+        <li><a href="https://doi.org/10.1200/JCO.2026.44.16_suppl.e16221" target="_blank" rel="noopener">Velazquez V et al., JCO 2026 e16221 (Ipi/Nivo vs Dur/Tre)</a> — <em>J Clin Oncol</em> 2026;44(16_suppl):e16221. DOI 10.1200/JCO.2026.44.16_suppl.e16221. TriNetX Global Federated Database. 1L Ipi/Nivo vs Dur/Tre, propensity-matched 580 per cohort. Median follow-up 3 years. All-cause mortality Ipi/Nivo vs Dur/Tre: 1 year 114/574 (19.9%) vs 124/566 (21.9%) HR 0.807 (0.625–1.041); 2 years 188/574 (32.7%) vs 164/566 (28.9%) HR 0.937 (0.760–1.156); 3 years 235/574 (40.9%) vs 181/566 (31.9%) HR 1.025 (0.844–1.245). At 3 years GI outcomes favoring Ipi/Nivo: HE HR 0.321 (0.222–0.465), PVT HR 0.661 (0.496–0.880), ascites HR 0.678 (0.550–0.835). No significant difference for GI bleed, SBP, colitis, jaundice. Distinct from Al-Alwan JCO 2026 e16232, CheckMate 9DW, Ailawadi JCO 2026 4163, Nishioka 2L Dur/Tre, SINOVA. <strong>MODELLED/GAP:</strong> ASCO abstract RWE, not an RCT, not A+B vs STRIDE. Dual-eligibility unchanged.</li>
+      </ul>
+
+      <h4 style="font-size:13px;margin:0 0 8px;color:var(--gray-700)">Later-line nivo+ipi RWE — MODELLED/GAP</h4>
+      <ul style="margin:0 0 14px 18px;font-size:12.5px;line-height:1.55;color:var(--gray-700)">
+        <li><a href="https://doi.org/10.1200/JCO.2026.44.16_suppl.e16167" target="_blank" rel="noopener">Qiu J et al., JCO 2026 e16167 (nivo+ipi 2L+)</a> — <em>J Clin Oncol</em> 2026;44(16_suppl):e16167. DOI 10.1200/JCO.2026.44.16_suppl.e16167. Sun Yat-sen University RWE n=49 (BCLC B/C 15/34). NIVO 1 mg/kg plus IPI 3 mg/kg q3w as later line Oct 2020–Jun 2025. Line: 2L n=24, 3L n=14, 4L n=11. Prior: PD-1/PD-L1 plus anti-VEGF 38.8%, PD-1 plus TKI 42.9%, TKI alone 10.2%, PD-1 alone 6.1%, dual IO 2.0%. All had prior local treatment. Among 32 evaluable: ORR 12.5% (4/32) including CR 6.3% (2/32); DCR 56.3% (18/32). Median follow-up 12 mo. Median PFS 2.1 mo (95% CI 2.0–4.2). Median DOR 3.4 mo. Median OS not reached. 6-mo OS 96.4% (89.8–100); 12-mo OS 84.4% (64.3–100). Any-grade TRAE 36.8% (18/49); grade 3–4 TRAE 20.4%. Distinct from Velazquez JCO 2026 e16221, CheckMate 9DW, Al-Alwan e16232, Ailawadi. <strong>MODELLED/GAP:</strong> single-center retrospective ASCO abstract, not an RCT, not 1L A+B vs STRIDE. Dual-eligibility unchanged.</li>
+      </ul>
+
+      <h4 style="font-size:13px;margin:0 0 8px;color:var(--gray-700)">IMbrave251 post-A+B 2L — MODELLED/GAP</h4>
+      <ul style="margin:0 0 14px 18px;font-size:12.5px;line-height:1.55;color:var(--gray-700)">
+        <li><a href="https://doi.org/10.1200/JCO.2026.44.16_suppl.4002" target="_blank" rel="noopener">Vogel A et al., IMbrave251 (JCO 2026 4002)</a> — <em>J Clin Oncol</em> 2026;44(16_suppl):4002. DOI 10.1200/JCO.2026.44.16_suppl.4002. NCT04770896. Global phase 3 after A+B progression (A+B for ≥4 cycles with prior SD or CR/PR then PD). n=557 (atezo+TKI 279 vs TKI 278). Lenvatinib 92.1%, sorafenib 7.9%. Median follow-up 12 mo. Clinical cutoff 10 Oct 2025. mOS 14.6 vs 12.5 mo, stratified HR 0.88 (0.72–1.08), P=0.2115 (did not meet primary OS). mPFS 4.3 vs 4.8 mo, HR 1.05 (0.88–1.25). Confirmed ORR 7.5% vs 5.8%. mDOR 10.2 vs 6.9 mo, HR 0.47 (0.18–1.23). mTTP 4.4 vs 5.4 mo. Safety n=554: grade 3/4 AE 74.2% vs 66.2%; grade 5 AE 5.4% in atezo+TKI arm. Distinct from IMbrave150, IMbrave050, Lee Liver Cancer 2025 post-A+B 2L, Nishioka 2L Dur/Tre, Jia JCO 4001. <strong>MODELLED/GAP:</strong> ASCO abstract; negative OS; post-A+B 2L sequencing, not 1L A+B vs STRIDE. Dual-eligibility unchanged.</li>
+      </ul>
+
+      <h4 style="font-size:13px;margin:0 0 8px;color:var(--gray-700)">Post-A+B lenvatinib phase 2 — MODELLED/GAP</h4>
+      <ul style="margin:0 0 14px 18px;font-size:12.5px;line-height:1.55;color:var(--gray-700)">
+        <li><a href="https://doi.org/10.1016/j.jhep.2025.08.020" target="_blank" rel="noopener">Kim HD et al., J Hepatol 2026 (KCSG HB23-04)</a> — <em>J Hepatol</em> 2026;84(2):308–315. DOI 10.1016/j.jhep.2025.08.020. NCT06138769. Multicenter single-arm phase 2 lenvatinib after 1L atezolizumab plus bevacizumab. n=50, 13 sites, Aug 2023–May 2024. Median age 66. Viral etiology 72%. Median TTP on prior A+B 6.5 mo. Lenvatinib 12 mg or 8 mg by weight. Median f/u 12.6 mo. Primary met: mPFS 5.4 mo (4.2–7.1). mOS 9.8 mo (8.1–NR). ORR 14.0%. DCR 82.0%. mDOR 9.4 mo. AEs: diarrhea 42%, hypothyroidism 32%, anorexia 30%. Grade ≥3 AE 46%. Distinct from IMbrave251 Vogel JCO 2026 4002, Lee Liver Cancer 2025 KCSG HB22-21, Nishioka 2L Dur/Tre vs lenvatinib, Lai Chen Ann Hepatol 2026. <strong>MODELLED/GAP:</strong> single-arm phase 2 Korea RWE-adjacent; not RCT; not 1L A+B vs STRIDE; not a head-to-head vs Dur/Tre after A+B. Dual-eligibility unchanged.</li>
+      </ul>
+
+      <h4 style="font-size:13px;margin:0 0 8px;color:var(--gray-700)">Thai 1L A+B vs lenvatinib RWE — MODELLED/GAP</h4>
+      <ul style="margin:0 0 14px 18px;font-size:12.5px;line-height:1.55;color:var(--gray-700)">
+        <li><a href="https://doi.org/10.1371/journal.pone.0337351" target="_blank" rel="noopener">Boonkaya S et al., PLoS One 2025 (A+B vs LEN)</a> — <em>PLoS One</em> 2025;20(12):e0337351. DOI 10.1371/journal.pone.0337351. Published 18 Dec 2025. King Chulalongkorn Memorial Hospital, Bangkok. 1L A+B vs lenvatinib RWE. Single-center retrospective, Jan 2020–Dec 2023. n=163 (LEN 85, ATEZO/BEV 78). Child-Pugh A 63.8%, BCLC C 73%, viral 66.9%. Median f/u 9.98 mo. Cutoff 30 Jun 2024. PSM 1:1, 76 pairs (n=152). After PSM: mOS ATEZO/BEV vs LEN 12.7 vs 7.5 mo, p=0.016, HR 0.618 (0.417–0.916). mPFS 10.8 vs 7.8 mo, p=0.26, HR 0.73 (0.431–1.255). mRECIST ORR 23.7% vs 19.7%, p=0.555. DCR 36.8% vs 38.2%, p=0.867. Any-grade AE 43.7% vs 56.3%. After PSM LEN more anorexia 21.1% vs 6.6%, diarrhea 13.2% vs 0%, fatigue 32.9% vs 10.5%. GI bleeding 10.5% ATEZO/BEV vs 3.9% LEN. Distinct from Nishioka PLoS One 2026 e0341395, Kim HD J Hepatol 2026 KCSG HB23-04, IMbrave251 Vogel JCO 2026 4002, Shiraishi, Hirooka, Casadei-Gardini EJC. <strong>MODELLED/GAP:</strong> Thailand single-center RWE with PSM, not RCT, not 1L A+B vs STRIDE. Short f/u; access/socioeconomics may confound OS. Dual-eligibility unchanged.</li>
+      </ul>
+
+      <h4 style="font-size:13px;margin:0 0 8px;color:var(--gray-700)">Japan A+B 3-year OS RWE — MODELLED/GAP</h4>
+      <ul style="margin:0 0 14px 18px;font-size:12.5px;line-height:1.55;color:var(--gray-700)">
+        <li><a href="https://doi.org/10.1007/s12072-025-10875-7" target="_blank" rel="noopener">Ohara M et al., Hepatol Int 2025 (A+B 3-year OS)</a> — <em>Hepatol Int.</em> 2025;19:1371–1381. DOI 10.1007/s12072-025-10875-7. Published 28 Aug 2025. Japan multicenter retrospective. 257 patients analyzed (from 506 treated; initiated Oct 2020–Jan 2022; followed to Mar 2025). Median f/u 48.23 mo (range 36.23–53.60). 2-year OS 39.2%. 3-year OS 25.3%. Among patients meeting IMbrave150 criteria, 3-year OS 31.6%. Multivariate: baseline AFP >116 ng/mL OR 0.41 (0.20–0.84), p=0.015; modified ALBI grade 1–2a OR 2.50 (1.18–5.32), p=0.017 associated with 3-year OS. Distinct from Hiraoka Liver Cancer 2026 3-year A+B, Tovoli Hepatology 2026 ARTE 36-mo OS 30.0%, Lai Chen Ann Hepatol 2026, Rimassa HIMALAYA 5-year, Boonkaya PLoS One 2025 e0337351, Kim HD HB23-04, IMbrave251. <strong>MODELLED/GAP:</strong> Japan RWE, not RCT, not 1L A+B vs STRIDE. Do not treat 3-year OS vs HIMALAYA ~30.7% as a head-to-head HR. Dual-eligibility unchanged.</li>
+      </ul>
+
+      <h4 style="font-size:13px;margin:0 0 8px;color:var(--gray-700)">CRAFITY-stratified A+B vs LEN — MODELLED/GAP</h4>
+      <ul style="margin:0 0 14px 18px;font-size:12.5px;line-height:1.55;color:var(--gray-700)">
+        <li><a href="https://doi.org/10.1159/000552808" target="_blank" rel="noopener">Ueno M et al., Liver Cancer 2026 (CRAFITY)</a> — DOI 10.1159/000552808. International RWE, Japan + Taiwan hospitals. n=994 first-line Atezo+Bev or lenvatinib, Sep 2017–Mar 2024. Median age 71. Male 770 (77.5%). CRAFITY 0 n=375 (37.7%); 1 n=402 (40.4%); 2 n=217 (21.8%). CRAFITY 2 = CRP ≥1 mg/dL and AFP ≥100 ng/mL. CRAFITY-0: mPFS 10.8 vs 9.4 mo, p=0.548; mOS 21.1 vs 29.3 mo, p=0.074 (Atezo+Bev vs lenvatinib). CRAFITY-1: mPFS 6.0 vs 6.1 mo, p=0.943; mOS 12.7 vs 15.1 mo, p=0.168. CRAFITY-2: mPFS 2.3 vs 4.4 mo, HR 0.66, p=0.017 favoring lenvatinib; mOS 5.7 vs 9.1 mo, HR 0.90, p=0.586. Interaction CRAFITY 0/1 vs 2 × regimen for PFS p=0.002. Distinct from Boonkaya PLoS One 2025 e0337351, Hirooka DOI 10.1159/000550924, Ohara Hepatol Int 2025, Kim HD HB23-04, IMbrave251, Shiraishi. <strong>MODELLED/GAP:</strong> RWE not RCT, not 1L A+B vs STRIDE. Do not use CRAFITY-2 PFS as an A+B vs STRIDE HR. Dual-eligibility unchanged.</li>
+      </ul>
+
+      <h4 style="font-size:13px;margin:0 0 8px;color:var(--gray-700)">AB-Real global A+B LTS — MODELLED/GAP</h4>
+      <ul style="margin:0 0 14px 18px;font-size:12.5px;line-height:1.55;color:var(--gray-700)">
+        <li><a href="https://doi.org/10.1016/j.ejca.2026.116749" target="_blank" rel="noopener">Lee PC et al., Eur J Cancer 2026 (AB-Real)</a> — <em>Eur J Cancer</em> 2026;240:116749. DOI 10.1016/j.ejca.2026.116749. PMID 42030777. AB-Real global multicenter registry (Europe, Asia, USA). First-line atezolizumab plus bevacizumab in unresectable HCC. n=1,346 enrolled; 1,085 Child-Pugh A ECOG 0–1 received 1L A+B. mOS 19.2 mo (95% CI 17.6–20.9). 2-year OS 41.4%. 3-year OS 29.3%. Among 695 with adequate follow-up, 190 long-term survivors (LTS = alive at 24 mo). ORR 24.7%. LTS among radiologic responders 52.2% vs 8.8% in non-responders, p<0.001. LTS vs non-LTS: ALBI grade 1 64.6% vs 38.5%; PVI 17.9% vs 36.4%; max tumor 3.8 vs 7.0 cm; median AFP 23.0 vs 240.8 ng/mL (all p<0.001). 48.8% of radiologic responders who were not LTS had ≥2 adverse baseline features. Distinct from Tovoli Hepatology 2026 ARTE, Ohara Hepatol Int 2025, Hiraoka Liver Cancer 2026 3-year A+B, Casadei-Gardini EJC 2026 116750, Ueno Liver Cancer 2026 CRAFITY, Boonkaya e0337351, Kim HD HB23-04, IMbrave251 4002. <strong>MODELLED/GAP:</strong> global RWE registry, not RCT, not 1L A+B vs STRIDE. Do not treat 3-year OS 29.3% vs HIMALAYA ~30.7% as a head-to-head HR. Dual-eligibility unchanged.</li>
+      </ul>
+
+      <h4 style="font-size:13px;margin:0 0 8px;color:var(--gray-700)">Bayesian 1L IO NMA etiology-stratified — MODELLED/GAP</h4>
+      <ul style="margin:0 0 14px 18px;font-size:12.5px;line-height:1.55;color:var(--gray-700)">
+        <li><a href="https://doi.org/10.3389/fimmu.2026.1693251" target="_blank" rel="noopener">Chen W et al., Front Immunol 2026 (Bayesian NMA)</a> — <em>Front Immunol</em> 2026;17:1693251. DOI 10.3389/fimmu.2026.1693251. Published 14 May 2026. PROSPERO CRD420251131167. Bayesian NMA of first-line immunotherapy for advanced HCC, overall and HBV/HCV/NBNC-stratified. 10 RCTs, n=7,301, 14 first-line regimens. IO vs TKI: OS HR 0.79 (0.74–0.84); PFS HR 0.70 (0.58–0.85); ORR OR 3.20 (2.49–4.12); grade ≥3 TRAEs OR 1.16 (0.75–1.80) NS. HBV: OS HR 0.73 (0.67–0.79), PFS HR 0.54 (0.48–0.61). HCV: OS HR 0.82 (0.72–0.93). NBNC PFS HR 0.74 (0.52–1.06) NS. Vs sorafenib OS: Sinti-Bev HR 0.57 (0.43–0.75); Camre-Rivo HR 0.62 (0.49–0.80); Atezo-Bev HR 0.66 (0.52–0.85). PFS: Anlo-Penpu and Camre-Rivo both HR 0.52 (0.41–0.66). HBV Atezo-Bev OS HR 0.58 (0.40–0.84), PFS HR 0.51 (0.37–0.70). HCV Atezo-Bev OS HR 0.43 (0.25–0.73); no regimen had significant PFS in HCV. Distinct from Kim YR Liver Cancer 2026 1L NMA, Casadei-Gardini EJC 2026 116750, Lee PC AB-Real EJC 116749, Ueno CRAFITY, Ohara Hepatol Int 2025. <strong>MODELLED/GAP:</strong> Bayesian NMA, not a head-to-head 1L A+B vs STRIDE RCT. Do not invent a direct A+B vs STRIDE HR from this network. ORIENT-32 and CARES-310 stay Asia-enriched, not global SOC vs IMbrave150/HIMALAYA/9DW. Dual-eligibility unchanged.</li>
+      </ul>
+
+      <h4 style="font-size:13px;margin:0 0 8px;color:var(--gray-700)">A+B primary refractoriness / myeloid TME — MODELLED/GAP</h4>
+      <ul style="margin:0 0 14px 18px;font-size:12.5px;line-height:1.55;color:var(--gray-700)">
+        <li><a href="https://doi.org/10.1016/j.jhep.2026.05.018" target="_blank" rel="noopener">Lombardi P et al., J Hepatol 2026 (PRef A+B)</a> — DOI 10.1016/j.jhep.2026.05.018. PMID 42297215. Myeloid immunosuppressive phenotype defines primary refractoriness (PRef) to first-line atezolizumab plus bevacizumab in HCC. PRef defined by SITC criteria. n=1,296 AB-real frontline A+B; validated in 645 IMbrave150 plus GO30140 participants. SITC-evaluable: 677 AB-real and 378 trial. PRef associated with inferior mOS vs response: AB-real 7.3 vs 31.5 mo, p<0.001; trials 10.8 vs NR, p<0.001. Approximately 40% exhibit PRef by SITC. PRef: higher baseline NLR ≥3, CD163+ TAM-enriched immunosuppressive TME, higher Treg/Teff, lower IFN-γ signature. Conditional inference tree: IFN-γ downregulation plus NLR ≥3 strongest PRef contributor. Extra TME cohorts: scRNAseq n=20, IMC n=16. Distinct from Lee PC AB-Real EJC 2026 116749, Chen W Front Immunol 2026 1693251 NMA, Mauro NPH J Hepatol 2026, TREM2 Cancer Cell 2026, Ueno CRAFITY, Ohara, Ohama Cancer Medicine 71640. <strong>MODELLED/GAP:</strong> translational plus RWE, not RCT, not 1L A+B vs STRIDE. Do not invent a PRef-stratified A+B vs STRIDE HR. Dual-eligibility unchanged.</li>
+      </ul>
+
+      <h4 style="font-size:13px;margin:0 0 8px;color:var(--gray-700)">Bayesian 1L IO NMA 24-RCT etiology — MODELLED/GAP</h4>
+      <ul style="margin:0 0 14px 18px;font-size:12.5px;line-height:1.55;color:var(--gray-700)">
+        <li><a href="https://doi.org/10.3389/fimmu.2026.1706446" target="_blank" rel="noopener">Li Q et al., Front Immunol 2026 (24-RCT NMA)</a> — <em>Front Immunol</em> 2026;17:1706446. DOI 10.3389/fimmu.2026.1706446. Published 29 Jan 2026. PROSPERO CRD420251074687. Bayesian NMA of first-line IO and targeted therapy in advanced HCC, HBV/HCV/non-viral-stratified. 24 RCTs, n=13,572, 26 first-line regimens. Vs sorafenib OS: Sinti-Bev HR 0.57 (0.43–0.75); Camre-Rivo HR 0.62 (0.48–0.79); Atezo-Bev HR 0.66 (0.51–0.84). PFS: Camre-Rivo HR 0.52 (0.41–0.66); Anlo-Penpu HR 0.53 (0.41–0.68). ORR highest Lenva-Pembro RR 8.00 (4.98–12.86). Grade ≥3 AE lowest: tislelizumab RR 0.42 (0.33–0.52); nivolumab RR 0.45 (0.36–0.56). HBV OS: Sinti-Bev HR 0.58 (0.44–0.77); Atezo-Bev HR 0.58 (0.40–0.84). HCV: only Atezo-Bev significant OS HR 0.43 (0.25–0.73); only Cabo-Atezo significant PFS HR 0.73 (0.54–0.99). Non-viral: STRIDE was the only regimen with significant OS HR 0.75 (0.59–0.96). Distinct from Chen W Front Immunol 2026 1693251 (10 RCTs n=7,301), Kim YR Liver Cancer 2026 1L NMA, Casadei-Gardini EJC 116750, Lombardi J Hepatol 2026 PRef, Lee PC AB-Real 116749. <strong>MODELLED/GAP:</strong> Bayesian NMA, not a head-to-head 1L A+B vs STRIDE RCT. Do not invent a direct A+B vs STRIDE HR from this network. Use the non-viral STRIDE OS finding as dual-eligibility context only. ORIENT-32 and CARES-310 stay Asia-enriched, not global SOC vs IMbrave150/HIMALAYA/9DW. Dual-eligibility unchanged.</li>
+      </ul>
+
+      <h4 style="font-size:13px;margin:0 0 8px;color:var(--gray-700)">1L ICI NMA plus China vs US CEA — MODELLED/GAP</h4>
+      <ul style="margin:0 0 14px 18px;font-size:12.5px;line-height:1.55;color:var(--gray-700)">
+        <li><a href="https://doi.org/10.1177/17588359261417630" target="_blank" rel="noopener">Qi H et al., Ther Adv Med Oncol (NMA + CEA)</a> — DOI 10.1177/17588359261417630. Network meta-analysis plus cost-effectiveness of 12 first-line ICI-based therapies for advanced or unresectable HCC, China vs United States. NMA: 11 RCTs, n=7,289. Four ICI-based regimens associated with significantly improved OS and PFS vs sorafenib: atezolizumab plus bevacizumab, camrelizumab plus rivoceranib, sintilimab plus bevacizumab biosimilar, and penpulimab plus anlotinib. CEA (partitioned survival, QALYs and ICER): In China, camrelizumab plus rivoceranib and tislelizumab were cost-effective vs sorafenib (ICERs $17,624.64 and $1,971.14 per QALY). In the United States, no ICI-based therapy was cost-effective at WTP $150,000 per QALY; sorafenib remained the most cost-effective option. ICERs most sensitive to drug costs, utility values, and discount rates. Distinct from Chen W Front Immunol 2026 1693251, Li Q Front Immunol 2026 1706446, Kim YR Liver Cancer 2026 NMA, Casadei-Gardini EJC 116750, Lombardi J Hepatol 2026 PRef, Lee PC AB-Real 116749. <strong>MODELLED/GAP:</strong> NMA plus modelled CEA, not a head-to-head 1L A+B vs STRIDE RCT. Do not invent a direct A+B vs STRIDE HR or a Hong Kong ICER from this paper. ORIENT-32 and CARES-310 stay Asia-enriched, not global SOC vs IMbrave150/HIMALAYA/9DW. Dual-eligibility unchanged.</li>
+      </ul>
+
+      <h4 style="font-size:13px;margin:0 0 8px;color:var(--gray-700)">UK Midlands A+B RWE — MODELLED/GAP</h4>
+      <ul style="margin:0 0 14px 18px;font-size:12.5px;line-height:1.55;color:var(--gray-700)">
+        <li><a href="https://doi.org/10.1186/s12885-026-16387-3" target="_blank" rel="noopener">Phillips R et al., BMC Cancer 2026 (UK Midlands A+B)</a> — DOI 10.1186/s12885-026-16387-3. Published 20 July 2026. No PMID on the publisher page. Retrospective multicentre service evaluation / audit across 3 UK Midlands oncology centres (University Hospitals Birmingham, Nottingham University Hospitals, University Hospitals Leicester). n=233 ATE/BEV for unresectable HCC as of August 2025. Median follow-up 17.4 months (95% CI 12.6–23.2). mOS 16.5 months (14.2–20.7); 6-month OS 76.8%. mPFS 12.3 months (10.0–16.3); 6-month PFS 70.8%. ORR 42.9%. Discontinuation 81.5% (progression 47.4%, toxicity 22.6%, liver decompensation 17.9%). Second-line therapy 39.1%. Any-grade AE 41.2%; grade 3+ 23.2%. Distinct from Lee PC Eur J Cancer 2026;240:116749 AB-Real, Tovoli Hepatology 2026 ARTE, Boonkaya PLoS One 2025, Ohara Hepatol Int 2025 3-year A+B, Cosgrove JHC 2025, Lombardi J Hepatol 2026 PRef. <strong>MODELLED/GAP:</strong> UK non-trial A+B effectiveness vs IMbrave150, not a head-to-head vs STRIDE. Dual-eligibility unchanged.</li>
+      </ul>
+
+      <h4 style="font-size:13px;margin:0 0 8px;color:var(--gray-700)">Sorafenib-anchor Bayesian NMA — MODELLED/GAP</h4>
+      <ul style="margin:0 0 14px 18px;font-size:12.5px;line-height:1.55;color:var(--gray-700)">
+        <li><a href="https://doi.org/10.3389/fimmu.2026.1846603" target="_blank" rel="noopener">Su Y et al., Front Immunol 2026 (sorafenib-star NMA)</a> — <em>Front Immunol</em> 2026;17:1846603. Published 05 June 2026. DOI 10.3389/fimmu.2026.1846603. PROSPERO CRD420251124082. Bayesian NMA of phase III RCTs with a sorafenib comparator. Search to 11 August 2025. 16 trials, n=8,753 for OS; 15 trials n=8,033 for PFS. SoraHAIC vs sorafenib: OS HR 0.35 (0.26–0.48), PFS HR 0.33 (0.25–0.43). HAIC_FO vs sorafenib: OS HR 0.41 (0.30–0.55), PFS HR 0.45 (0.34–0.60). STRIDE vs sorafenib: OS HR 0.78 (0.65–0.93); PFS HR 0.90 (0.77–1.05) not significant. SUCRA: SoraHAIC PFS 99.42% OS 98.54%; HAIC_FO PFS 87.17% OS 95.13%. CheckMate 9DW excluded because sorafenib and lenvatinib control subgroups could not be extracted separately. IMbrave150 A+B is not in this sorafenib-star league table. Distinct from Chen W Front Immunol 2026;17:1693251, Li Q Front Immunol 2026;17:1706446, Qi H Ther Adv Med Oncol CEA. <strong>MODELLED/GAP:</strong> Bayesian NMA, not a head-to-head 1L A+B vs STRIDE RCT. Do not invent an A+B vs STRIDE HR from this NMA. Dual-eligibility unchanged.</li>
+      </ul>
+
+      <h4 style="font-size:13px;margin:0 0 8px;color:var(--gray-700)">French CHIEF 1L A+B RWE — MODELLED/GAP</h4>
+      <ul style="margin:0 0 14px 18px;font-size:12.5px;line-height:1.55;color:var(--gray-700)">
+        <li><a href="https://doi.org/10.1111/liv.70337" target="_blank" rel="noopener">Allaire M et al., Liver Int 2025 (CHIEF)</a> — <em>Liver Int.</em> 2025;45(10):e70337. DOI 10.1111/liv.70337. No PMID invented. Prospective multicentre 1L AtezoBev across 32 French centres, July 2020 to January 2023. n=545. Median age 69. CP-A 81%, CP-B 19%. Alcohol 30%, viral 16%, mixed aetiology with at least alcohol 58%. Treatment-naive 72%. BCLC-B 31%, BCLC-C 64%. mOS 23.1 months; 12-month OS 66%. BCLC-B mOS 27.8 vs BCLC-C 17.2 (p=0.0043). CP-A mOS 26.4 vs CP-B 10.6 (p<0.001). CP-B mortality HR 1.93 (1.38–2.70). mPFS 5.2 months; BCLC-B 6.7 vs BCLC-C 3.7 (p=0.05). Distinct from Phillips R BMC Cancer 2026 UK Midlands n=233, Lee PC Eur J Cancer 2026;240:116749 AB-Real, Tovoli Hepatology 2026 ARTE, Boonkaya PLoS One 2025, Ohara Hepatol Int 2025. <strong>MODELLED/GAP:</strong> predominantly non-viral French RWE vs IMbrave150, not a head-to-head vs STRIDE. Dual-eligibility unchanged.</li>
+      </ul>
+
+      <h4 style="font-size:13px;margin:0 0 8px;color:var(--gray-700)">Finotonlimab + bev biosimilar vs sorafenib — RCT not GAP</h4>
+      <ul style="margin:0 0 14px 18px;font-size:12.5px;line-height:1.55;color:var(--gray-700)">
+        <li><a href="https://doi.org/10.1038/s41392-025-02333-5" target="_blank" rel="noopener">Zhao C et al., STTT 2025 (finotonlimab + SCT510)</a> — <em>Signal Transduct Target Ther.</em> 2025;10:249. DOI 10.1038/s41392-025-02333-5. PMID 40769977. NCT04560894. China 67 hospitals. Total n=398 included. Phase 3: 346 patients randomized 2:1 finotonlimab 200 mg q3w plus SCT510 15 mg/kg q3w vs sorafenib. Median follow-up 19.9 vs 19.0 months. BICR RECIST 1.1 mPFS 7.1 (6.1–8.4) vs 2.9 (2.8–4.1); stratified HR 0.50 (0.38–0.65). mOS 22.1 (18.6–NA) vs 14.2 (10.2–15.8); HR 0.60 (0.44–0.81). 1-year OS 66.8% vs 55.2%; 2-year OS 49.9% vs 36.8%. ORR not printed in the PubMed abstract. Distinct from HEPATORCH (Shi Y toripalimab plus bev), APOLLO (anlotinib plus penpulimab), Su Y Front Immunol 2026;17:1846603 NMA. <strong>RCT (not GAP)</strong> vs sorafenib. MODELLED: Asia-enriched, not global SoC vs IMbrave150, HIMALAYA, or CheckMate-9DW. Dual-eligibility unchanged.</li>
+      </ul>
+
+      <h4 style="font-size:13px;margin:0 0 8px;color:var(--gray-700)">SBRT plus sorafenib vs sorafenib — MODELLED/GAP</h4>
+      <ul style="margin:0 0 14px 18px;font-size:12.5px;line-height:1.55;color:var(--gray-700)">
+        <li><a href="https://doi.org/10.1001/jamaoncol.2024.5403" target="_blank" rel="noopener">Dawson LA et al., JAMA Oncol 2025 (NRG/RTOG 1112)</a> — <em>JAMA Oncol.</em> 2025;11(2):136–144. Published online 19 Dec 2024. DOI 10.1001/jamaoncol.2024.5403. PMID 39699905. NCT01730937. Phase 3, 23 sites. 193 randomized, 177 eligible (accrual stopped early after SOC change to IO). MVI in 131/177 (74.0%). Personalized SBRT 27.5–50 Gy in 5 fractions then sorafenib vs sorafenib alone. mOS 15.8 months (90% CI 11.4–19.2) SBRT+sorafenib vs 12.3 (10.6–14.3) sorafenib; unadjusted HR 0.77 (90% CI 0.59–1.01), 1-sided P=0.06. Adjusted OS HR 0.72 (0.52–0.99), 2-sided P=0.04. mPFS 9.2 (7.5–11.9) vs 5.5 (3.4–6.3); HR 0.55 (0.40–0.75). Grade 3+ treatment-related AE 47% vs 42% (P=0.52). Primary unadjusted OS not statistically significant. Distinct from Su Y Front Immunol 2026;17:1846603 (SBRTSora in the NMA) and from TALENTACE / CHANCE2202 TACE+IO. <strong>MODELLED/GAP:</strong> SBRT plus TKI vs TKI, not a 1L A+B vs STRIDE RCT. Dual-eligibility unchanged.</li>
+      </ul>
+
+      <h4 style="font-size:13px;margin:0 0 8px;color:var(--gray-700)">China 1L ICI CEA (star NMA) — MODELLED/GAP</h4>
+      <ul style="margin:0 0 14px 18px;font-size:12.5px;line-height:1.55;color:var(--gray-700)">
+        <li><a href="https://doi.org/10.1080/1750743X.2026.2647585" target="_blank" rel="noopener">Li W et al., Immunotherapy 2026 (China CEA)</a> — <em>Immunotherapy</em> 2026:169–179. DOI 10.1080/1750743X.2026.2647585. Epub 20 Mar 2026. No PMID on the publisher record used here. China healthcare-system CEA. Efficacy from 6 phase III trials, star-shaped Bayesian NMA with sorafenib as common comparator, Royston-Parmar models (non-proportional hazards). 10-year 3-state partitioned survival, 5% annual discount. After discounting, camrelizumab-rivoceranib provided more QALYs at lower cost than anlotinib-penpulimab, sintilimab-bevacizumab biosimilar, and toripalimab-bevacizumab (strict dominance). ICER $10,715 tislelizumab vs sorafenib; $56,796 camrelizumab-rivoceranib vs tislelizumab; $294,795 atezolizumab-bevacizumab vs camrelizumab-rivoceranib. Tislelizumab cost-effective at WTP $40,344/QALY (3× GDP per capita). Distinct from Qi H Ther Adv Med Oncol DOI 10.1177/17588359261417630 (11 RCTs n=7,289 China/US CEA). <strong>MODELLED/GAP:</strong> NMA plus modelled CEA, not a head-to-head 1L A+B vs STRIDE RCT. China-modelled ICERs only; do not invent a Hong Kong ICER. ORIENT-32 / CARES-310 stay Asia-enriched; do not rank them as global SOC vs IMbrave150, HIMALAYA, or CheckMate-9DW. Dual-eligibility unchanged.</li>
+      </ul>
+
+      <h4 style="font-size:13px;margin:0 0 8px;color:var(--gray-700)">Tislelizumab plus lenvatinib 1L RWE — MODELLED/GAP</h4>
+      <ul style="margin:0 0 14px 18px;font-size:12.5px;line-height:1.55;color:var(--gray-700)">
+        <li><a href="https://doi.org/10.7717/peerj.20591" target="_blank" rel="noopener">Lin J et al., PeerJ 2026 (tisle + LEN)</a> — <em>PeerJ</em> 2026;14:e20591. Published 19 Jan 2026. DOI 10.7717/peerj.20591. PMC12826038. No PMID used here. China single-centre RWE. n=163 first-line tislelizumab plus lenvatinib, Jan 2021–Feb 2025, data cutoff June 2025, median follow-up 9.9 months. 84.7% HBV-related. mRECIST: CR 2/163 (1.2%), PR 40 (24.5%), SD 68 (41.7%), PD 53 (32.5%). ORR 25.8%, DCR 67.5%. mPFS 13.87 months. mOS not reached; 90% alive at cutoff. Conversion to resection 16.6%. TRAEs 86%; grade 3 or higher 5%. Tumor ≥5 cm associated with shorter PFS, not OS. Distinct from Li W Immunotherapy 2026 China CEA, RATIONALE-301 tislelizumab vs sorafenib, Zhao C STTT 2025 finotonlimab+SCT510, HEPATORCH. <strong>MODELLED/GAP:</strong> Asia-enriched HBV RWE, not a 1L A+B vs STRIDE RCT and not global SOC vs IMbrave150, HIMALAYA, or CheckMate-9DW. Dual-eligibility unchanged.</li>
+      </ul>
+
+      <h4 style="font-size:13px;margin:0 0 8px;color:var(--gray-700)">TriNetX 1L A+B vs D+T vs LEN — MODELLED/GAP</h4>
+      <ul style="margin:0 0 14px 18px;font-size:12.5px;line-height:1.55;color:var(--gray-700)">
+        <li><a href="https://doi.org/10.1200/jco.2026.44.2_suppl.516" target="_blank" rel="noopener">Rodriguez-Pascual J et al., JCO 2026 516</a> — <em>J Clin Oncol.</em> 2026;44(2_suppl):516. DOI 10.1200/jco.2026.44.2_suppl.516. TriNetX Global Collaborative Network RWE. 3,306 aHCC patients from 66 healthcare organizations: A+B n=1,173, D+T n=309, lenvatinib n=1,824. A+B median OS 16.6 months vs lenvatinib 13.01 months; median follow-up 13.91 vs 14.10 months. After propensity-score matching, A+B vs lenvatinib OS HR 0.873 (95% CI 0.75–0.935), p=0.0016. A+B vs D+T and D+T vs lenvatinib did not show significant OS differences. Distinct from Lo Prinzi Targeted Oncol 2025, Casadei-Gardini Eur J Cancer 2026;116750, Shiraishi C Front Oncol 2026;16:1776032, Hirooka M Liver Cancer 2026 DOI 10.1159/000550924. <strong>MODELLED/GAP:</strong> RWE, not a 1L A+B vs STRIDE RCT. Dual-eligibility unchanged.</li>
+      </ul>
+
+      <h4 style="font-size:13px;margin:0 0 8px;color:var(--gray-700)">A+B frontline RWE meta-analysis — MODELLED/GAP</h4>
+      <ul style="margin:0 0 14px 18px;font-size:12.5px;line-height:1.55;color:var(--gray-700)">
+        <li><a href="https://doi.org/10.1016/j.jhepr.2025.101431" target="_blank" rel="noopener">Manfredi GF et al., JHEP Reports 2025 (A+B RWE MA)</a> — <em>JHEP Reports</em> 2025;7(8):101431. Published 22 Apr 2025. DOI 10.1016/j.jhepr.2025.101431. PMID 40677696. Systematic review and meta-analysis of frontline A+B for uHCC outside trials. 12 cohorts, n=2,179. 80.5% male, median age 66 (IQR 61.6–73.0), 61.6% advanced-stage, 83.6% Child-Pugh A. Pooled 6-month OS 82% (95% CI 76–86), 12-month OS 65% (60–70). Among longer follow-up, 24-month OS 39% (31–49) in n=1,556. Child-Pugh A median OS 20.9 months (15.7–20.9), consistent with IMbrave150 19.2 (17.0–23.7). RECIST v1.1 pooled ORR 30% (28–33) n=1,009, DCR 78% (75–81). mRECIST pooled ORR 36% (31–42) n=1,337, DCR 77% (71–82). Distinct from Lee PC Eur J Cancer 2026;240:116749 AB-Real, Phillips R BMC Cancer 2026, Allaire M Liver Int 2025 CHIEF, Cosgrove JHC 2025, Ohara M Hepatol Int 2025, Tovoli Hepatology 2026 ARTE, Rodriguez-Pascual JCO 2026 516. <strong>MODELLED/GAP:</strong> RWE meta-analysis, not a 1L A+B vs STRIDE RCT. Dual-eligibility unchanged.</li>
+      </ul>
+
+      <h4 style="font-size:13px;margin:0 0 8px;color:var(--gray-700)">STRIDE HIMALAYA-eligible vs not RWE — MODELLED/GAP</h4>
+      <ul style="margin:0 0 14px 18px;font-size:12.5px;line-height:1.55;color:var(--gray-700)">
+        <li><a href="https://doi.org/10.1111/jgh.70422" target="_blank" rel="noopener">Matono T et al., JGH 2026 (STRIDE eligibility)</a> — <em>J Gastroenterol Hepatol</em>. Published online 22 May 2026. DOI 10.1111/jgh.70422. Japan 30-centre RWE. n=412 unresectable HCC treated with STRIDE (tremelimumab 300 mg once, then durvalumab 1,500 mg every 4 weeks). Median age 73.0 years; 15.8% women. 92 met HIMALAYA eligibility (HIMALAYA group) and 320 did not (non-HIMALAYA group). Median PFS 5.4 vs 3.0 months (p=0.012). Median OS 19.4 vs 15.4 months (p=0.014). Independent OS predictors: ECOG ≥1 HR 1.878 (1.253–2.814), ALBI grade ≥2 HR 2.032 (1.319–3.318). Any-grade endocrine dysfunction 14.1% vs 6.6%; grade 3 or higher 5.4% vs 0.6%. Non-HIMALAYA patients with ALBI grade 1 may have OS comparable to the HIMALAYA group. Distinct from LOR-HCC Casadei-Gardini Liver Int 2026 DOI 10.1111/liv.70640, Hiraoka Liver Cancer 2026, Hirooka M Liver Cancer 2026 DOI 10.1159/000550924, Ohara M Hepatol Int 2025, Rimassa HIMALAYA 5-year, Manfredi GF JHEP Reports 2025;7(8):101431. <strong>MODELLED/GAP:</strong> Japan STRIDE RWE, not a 1L A+B vs STRIDE RCT. Dual-eligibility unchanged.</li>
+      </ul>
+
+      <h4 style="font-size:13px;margin:0 0 8px;color:var(--gray-700)">DT-real STRIDE/durva HIMALAYA-IN vs OUT — MODELLED/GAP</h4>
+      <ul style="margin:0 0 14px 18px;font-size:12.5px;line-height:1.55;color:var(--gray-700)">
+        <li><a href="https://doi.org/10.1016/j.jhepr.2025.101685" target="_blank" rel="noopener">Celsa C et al., JHEP Reports 2026 (DT-real)</a> — <em>JHEP Reports</em> 2026;8(3):101685. DOI 10.1016/j.jhepr.2025.101685. International multicentre RWE from a 1,423-patient IO database, 35 centres. n=233 receiving STRIDE or durvalumab monotherapy. 123 (53%) HIMALAYA-IN and 110 (47%) HIMALAYA-OUT (IN = no prior systemic therapy, ECOG 0–1, Child-Pugh A, no Vp4). STRIDE in 95% of IN patients. Median follow-up 6.0 months. Median OS overall 20.4 months (11.7–NR). HIMALAYA-IN vs OUT: 23.0 vs 12.2 months, HR 0.61 (0.39–0.96), p=0.03. Median PFS overall 6.0 (4.6–7.4); IN 6.6 (6.0–11.2); OUT 3.9 (3.1–5.2). ORR/DCR overall 21.4%/59.4%; IN 23.7%/64.9%; OUT 17.8%/50.7%. Grade 3–4 TRAE 16.3% overall (IN 20.3%, OUT 11.8%). Hepatic decompensation 10.5% within 12 months. First-line Child-Pugh A vs B OS 23.0 vs 11.1 months, HR 2.03 (1.15–3.59). Distinct from Matono T JGH 2026 DOI 10.1111/jgh.70422, LOR-HCC Casadei-Gardini Liver Int 2026 DOI 10.1111/liv.70640, Manfredi GF JHEP Reports 2025;7(8):101431, Rimassa HIMALAYA 5-year, Hiraoka Liver Cancer 2026, Hirooka M Liver Cancer 2026 DOI 10.1159/000550924. <strong>MODELLED/GAP:</strong> RWE of STRIDE/durva, not a 1L A+B vs STRIDE RCT. Dual-eligibility unchanged.</li>
+      </ul>
+
+      <h4 style="font-size:13px;margin:0 0 8px;color:var(--gray-700)">Phase III IO NMA + TOPSIS — MODELLED/GAP</h4>
+      <ul style="margin:0 0 14px 18px;font-size:12.5px;line-height:1.55;color:var(--gray-700)">
+        <li><a href="https://doi.org/10.1016/j.critrevonc.2026.105412" target="_blank" rel="noopener">Nie G et al., Crit Rev Oncol Hematol 2026 (NMA)</a> — <em>Crit Rev Oncol Hematol</em> 2026;226:105412. DOI 10.1016/j.critrevonc.2026.105412. Published online 5 Jun 2026. NMA of 12 phase III RCTs, n=7,908. Sintilimab plus IBI305 had the highest OS SUCRA (0.91). Finotonlimab plus bevacizumab ranked highest for OS in younger patients (SUCRA 0.95) and HBV-related HCC (0.84), and for PFS in the overall population (0.86). Entropy-weighted TOPSIS integrating efficacy, safety, and HRQoL ranked finotonlimab plus bevacizumab and atezolizumab plus bevacizumab as the two best overall regimens. Bevacizumab-based IO combinations had a favorable benefit-risk balance. Distinct from Chen W Front Immunol 2026 1693251, Li Q Front Immunol 2026 1706446, Su Y Front Immunol 2026 1846603, Kim YR Liver Cancer 2026, Zhao C STTT 2025 finotonlimab+SCT510, Celsa DT-real JHEP Reports 2026;8(3):101685. <strong>MODELLED/GAP:</strong> NMA plus TOPSIS, not a head-to-head 1L A+B vs STRIDE RCT. ORIENT-32 (sintilimab+IBI305) and CARES-310 stay Asia-enriched; do not rank them as global SOC vs IMbrave150, HIMALAYA, or CheckMate-9DW. Dual-eligibility unchanged.</li>
+      </ul>
+
+      <h4 style="font-size:13px;margin:0 0 8px;color:var(--gray-700)">Japan PRISM 1L A+B vs LEN RWE — MODELLED/GAP</h4>
+      <ul style="margin:0 0 14px 18px;font-size:12.5px;line-height:1.55;color:var(--gray-700)">
+        <li><a href="https://doi.org/10.1159/000552686" target="_blank" rel="noopener">Ikeda M et al., PRISM Liver Cancer 2026</a> — DOI 10.1159/000552686. UMIN000040488. Japan nationwide prospective 1L RWE. First 1,000 enrolled July 2020–July 2022; 935 evaluable. First-line: atezolizumab plus bevacizumab 82.8%, lenvatinib 15.2%. A+B median OS 21.8 months, median PFS 7.7 months. Lenvatinib median OS 20.8 months, median PFS 6.7 months. ORR A+B 29.6% RECIST / 35.0% mRECIST; lenvatinib 24.6% / 35.2%. Grade 3 or higher TRAE 21.6% (A+B) and 22.9% (lenvatinib). About 50% received second-line, most often lenvatinib after A+B and vice versa, median PFS about 4 months. Distinct from Ueno Liver Cancer 2026 DOI 10.1159/000552808, CHALLENGE, Cosgrove JHC 2025 n=374, Phillips BMC Cancer 2026, Allaire Liver Int 2025 CHIEF, Lee PC EJC 2026 AB-Real, Manfredi JHEP Reports 2025;7(8):101431, Nie Crit Rev Oncol Hematol 2026;226:105412. <strong>MODELLED/GAP:</strong> Japan RWE, not a 1L A+B vs STRIDE RCT. OS is numerically longer than pivotal-trial reports in this Japanese RWE cohort; do not treat that as a head-to-head vs IMbrave150 or REFLECT. Dual-eligibility unchanged.</li>
+      </ul>
+
+      <h4 style="font-size:13px;margin:0 0 8px;color:var(--gray-700)">Japan 1L A+B durable control RWE — MODELLED/GAP</h4>
+      <ul style="margin:0 0 14px 18px;font-size:12.5px;line-height:1.55;color:var(--gray-700)">
+        <li><a href="https://doi.org/10.1002/cam4.71655" target="_blank" rel="noopener">Inoue M et al., Cancer Med 2026 71655</a> — <em>Cancer Med</em> 2026;15(2):e71655. DOI 10.1002/cam4.71655. PMC12914342. Japan multicenter RWE. 1,542 patients received first-line sorafenib, lenvatinib, or atezolizumab plus bevacizumab 2009–2022. Main cohort n=612 after excluding concomitant/inter-line locoregional therapy or post-1L trial entry. Median OS 15.4 months sorafenib, 13.1 lenvatinib, 20.6 A+B (p=0.002). Median PFS 3.5, 5.7, and 7.5 months (p<0.001). Median post-progression survival 10.8, 6.4, and 9.0 months (p=0.049). A+B longest duration of disease control 8.5 months and duration of response 22.1 months. Disease control/objective response OS HRs: sorafenib 0.51/0.42, lenvatinib 0.54/0.62, A+B 0.34/0.35. After progression, median second-line PFS 5.5 sorafenib, 2.5 lenvatinib, 3.0 A+B (p=0.001). Distinct from Ohama Cancer Medicine 2026 e71640, Ikeda PRISM Liver Cancer DOI 10.1159/000552686, Ueno Liver Cancer 2026 DOI 10.1159/000552808, Cosgrove JHC 2025 n=374, Phillips BMC Cancer 2026, Allaire CHIEF, Lee PC EJC 2026 AB-Real, Casadei-Gardini EJC 2026 116750. <strong>MODELLED/GAP:</strong> Japan RWE, not a 1L A+B vs STRIDE RCT. Dual-eligibility unchanged.</li>
+      </ul>
+
+      <h4 style="font-size:13px;margin:0 0 8px;color:var(--gray-700)">A+B conversion by BR classification — MODELLED/GAP</h4>
+      <ul style="margin:0 0 14px 18px;font-size:12.5px;line-height:1.55;color:var(--gray-700)">
+        <li><a href="https://doi.org/10.1111/hepr.70138" target="_blank" rel="noopener">Takeuchi Y et al., Hepatol Res 2026 (BR conversion)</a> — <em>Hepatol Res</em>. Published online 9 Feb 2026. DOI 10.1111/hepr.70138. Japan multicenter RWE. n=532 unresectable HCC treated with atezolizumab plus bevacizumab, categorized by borderline-resectable (BR) classification and BCLC stage. Conversion therapy in 5.9%. In BCLC-C, conversion was 15.2% for BR1 vs 2.0% for BR2 (p<0.01). BR1 independently associated with conversion (odds ratio 7.0). BCLC-C/BR1 had the highest ORR (45.0%) and favorable OS after conversion (p=0.015). BR classification had limited predictive value in BCLC-B. Distinct from Ohama Hepatol Res 2025 DOI 10.1111/hepr.70115, Jia WD JCO 2026 4001, Inoue Cancer Med 2026 e71655, Ikeda PRISM Liver Cancer DOI 10.1159/000552686, Kudo Liver Cancer 2023 DOI 10.1159/000529574. <strong>MODELLED/GAP:</strong> Japan RWE conversion, not a 1L A+B vs STRIDE RCT. Dual-eligibility unchanged.</li>
+      </ul>
+
+      <h4 style="font-size:13px;margin:0 0 8px;color:var(--gray-700)">HIVE-J A+B conversion (BR1/BR2) — MODELLED/GAP</h4>
+      <ul style="margin:0 0 14px 18px;font-size:12.5px;line-height:1.55;color:var(--gray-700)">
+        <li><a href="https://doi.org/10.1007/s12072-025-10781-y" target="_blank" rel="noopener">Shimose S et al., Hepatol Int 2025 (HIVE-J)</a> — <em>Hepatol Int</em> 2025;19(4):846–855. DOI 10.1007/s12072-025-10781-y. Japan multicenter RWE (HIVE-J). n=631 unresectable HCC treated with atezolizumab plus bevacizumab, categorized BR1 n=166 or BR2 n=465. Downstaged in 129 (20.4%): BR1 to resectable 28 (16.8%); BR2 to resectable 49 (10.5%); BR2 to BR1 52 (11.1%). Conversion therapy in 5.4% overall (BR1 8.4% [14/166] vs BR2 4.3% [20/465]). Conversion OS not reached vs partial-response 36.4 months (p=0.001). Median RFS after conversion 15.7 months. Surgery RFS not reached vs RFA 10.0 months (p=0.008). Distinct from Takeuchi Y Hepatol Res 2026 DOI 10.1111/hepr.70138 (n=532), Jia WD JCO 2026 4001, Inoue Cancer Med 2026 e71655, Ikeda PRISM Liver Cancer DOI 10.1159/000552686, Kudo Liver Cancer 2023 DOI 10.1159/000529574. <strong>MODELLED/GAP:</strong> Japan RWE conversion, not a 1L A+B vs STRIDE RCT. Dual-eligibility unchanged.</li>
+      </ul>
+
+      <h4 style="font-size:13px;margin:0 0 8px;color:var(--gray-700)">A+B in Child-Pugh B (mALBI) — MODELLED/GAP</h4>
+      <ul style="margin:0 0 14px 18px;font-size:12.5px;line-height:1.55;color:var(--gray-700)">
+        <li><a href="https://doi.org/10.1111/liv.70466" target="_blank" rel="noopener">Sasaki R et al., Liver Int 2026 (A+B CP-B)</a> — <em>Liver Int</em> 2026;46(1):e70466. DOI 10.1111/liv.70466. Japan 10-institution RWE. n=796 unresectable HCC treated with atezolizumab plus bevacizumab, October 2020 to July 2024. Median observation 14.6 months. CP-B vs CP-A: median PFS 4.6 vs 7.0 months (p=0.009); median survival 10.3 vs 23.2 months (p<0.001). CP-B had more bleeding-related events; AE discontinuation did not differ from CP-A. Within CP-B, mALBI grade ≤2b vs 3 differed for PFS (p=0.004), OS (p=0.024), and response rate (p=0.001). In CP-B, mALBI grade independently associated with OS (HR 2.388, 95% CI 1.186–4.810, p=0.014). Authors conclude A+B can be used in CP-B when hepatic reserve is within mALBI 2b. Distinct from Odent AV JHEP Reports 2026 DOI 10.1016/j.jhepr.2026.101915, Allaire M Liver Int 2025 CHIEF, LOR-HCC Liver Int DOI 10.1111/liv.70640, Shimose S Hepatol Int 2025 DOI 10.1007/s12072-025-10781-y, Takeuchi Y Hepatol Res 2026 DOI 10.1111/hepr.70138. <strong>MODELLED/GAP:</strong> Japan RWE, CP-B outside typical Mayo dual-eligibility (usually CP-A); not a 1L A+B vs STRIDE RCT. Dual-eligibility for compensated dual-eligible A+B vs STRIDE unchanged.</li>
+      </ul>
+
+      <h4 style="font-size:13px;margin:0 0 8px;color:var(--gray-700)">A+B ± TACE conversion RWE — MODELLED/GAP</h4>
+      <ul style="margin:0 0 14px 18px;font-size:12.5px;line-height:1.55;color:var(--gray-700)">
+        <li><a href="https://doi.org/10.1200/jco.2026.44.16_suppl.e16223" target="_blank" rel="noopener">Yang XR et al., JCO 2026 e16223 (A+B ± TACE)</a> — <em>J Clin Oncol</em> 2026;44(16_suppl):e16223. DOI 10.1200/jco.2026.44.16_suppl.e16223. ASCO 2026 abstract. Multicenter RWE. n=121 unresectable HCC treated with atezolizumab plus bevacizumab plus or minus on-demand TACE. First-line vs second-line: ORR 47.3% (53/112) vs 22.2% (2/9); median PFS 19.0 vs 8.8 months; median OS 35.3 vs 13.0 months. In first-line, A+B with TACE vs without TACE: ORR 50.5% (48/95) vs 29.4% (5/17); median PFS 20.9 vs 8.0 months; median OS 35.3 vs 25.6 months. R0 resection 33.7% (32/95) with TACE vs 5.9% (1/17) without TACE. Among resected patients, pCR 34.4% (11/32) and MPR 68.8% (22/32). Grade 3/4 TRAEs 54.7% with TACE vs 52.9% without; no grade 5 events. Distinct from Velazquez JCO 2026 e16221, Al-Alwan ASCO 2026 e16232, Qiu J JCO 2026 e16167, Jia WD JCO 2026 4001, Takeuchi Y Hepatol Res 2026 DOI 10.1111/hepr.70138, Shimose S Hepatol Int 2025 DOI 10.1007/s12072-025-10781-y, TALENTACE, EMERALD-3. <strong>MODELLED/GAP:</strong> ASCO abstract RWE; A+B ± TACE conversion, not a 1L A+B vs STRIDE RCT. Dual-eligibility unchanged.</li>
+      </ul>
+
+      <h4 style="font-size:13px;margin:0 0 8px;color:var(--gray-700)">Post-A+B lenvatinib vs 1L LEN — MODELLED/GAP</h4>
+      <ul style="margin:0 0 14px 18px;font-size:12.5px;line-height:1.55;color:var(--gray-700)">
+        <li><a href="https://doi.org/10.1007/s00535-025-02308-x" target="_blank" rel="noopener">Maesaka K et al., J Gastroenterol 2026 (post-A+B LEN)</a> — <em>J Gastroenterol</em> 2026;61(1):68–77. DOI 10.1007/s00535-025-02308-x. Japan retrospective RWE. Propensity-score matched 63 pairs. Lenvatinib after A+B vs first-line lenvatinib: mRECIST ORR/DCR 41.1%/80.4% vs 49.2%/76.3%; RECIST 1.1 ORR/DCR 25.0%/80.4% vs 28.8%/76.3%. Median PFS 4.5 vs 5.2 months (p=0.233). Median OS 14.3 vs 16.0 months (p=0.769). Grade ≥3 AEs more frequent after A+B (74.9% vs 50.8%, p=0.006), including grade ≥3 proteinuria (31.7% vs 14.3%) and fatigue (12.7% vs 1.6%). Authors conclude post-A+B lenvatinib efficacy is comparable to first-line, with more high-grade AEs. Distinct from Kim HD J Hepatol 2026 post-A+B lenvatinib phase 2, Nishioka C PLoS One 2026;21(5):e0341395, Boonkaya PLoS One 2025, Ueno Liver Cancer 2026 CRAFITY, Yang XR JCO 2026 e16223. <strong>MODELLED/GAP:</strong> post-A+B 2L sequencing RWE, not a 1L A+B vs STRIDE RCT. Dual-eligibility unchanged.</li>
+      </ul>
+
+      <h4 style="font-size:13px;margin:0 0 8px;color:var(--gray-700)">A+B AFP/DCP landmark response — MODELLED/GAP</h4>
+      <ul style="margin:0 0 14px 18px;font-size:12.5px;line-height:1.55;color:var(--gray-700)">
+        <li><a href="https://doi.org/10.3390/cancers17243891" target="_blank" rel="noopener">Kuzuya T et al., Cancers 2025 (AFP/DCP landmark)</a> — <em>Cancers</em> 2025;17(24):3891. DOI 10.3390/cancers17243891. Japan retrospective RWE. n=147 unresectable HCC treated with atezolizumab plus bevacizumab. Week-6 RECIST 1.1: PR 32, SD 81, PD 25. Week-3 landmark: AFP ratio ≥1.4 or DCP ratio ≥1.0 identified primary radiologic progression; landmark PFS 3.4 vs 13.1 months (p<0.001). Among 109 patients with disease control at week 6, 92 maintained control and 17 progressed at the second evaluation. Week-9 landmark: AFP ratio ≥1.1 or DCP ratio ≥1.5 identified early secondary progression; landmark PFS 3.8 vs 14.0 months (p<0.001). Distinct from Tanaka AFP/DCP mTM, Ouchi K Hepatol Res 2026 DOI 10.1111/hepr.70162, Hirooka M Liver Cancer 2026 DOI 10.1159/000550924, Maesaka K J Gastroenterol 2026 DOI 10.1007/s00535-025-02308-x. <strong>MODELLED/GAP:</strong> Japan biomarker RWE, not a 1L A+B vs STRIDE RCT. Dual-eligibility unchanged.</li>
+      </ul>
+
+      <h4 style="font-size:13px;margin:0 0 8px;color:var(--gray-700)">Anti-atezolizumab ADA on A+B — MODELLED/GAP</h4>
+      <ul style="margin:0 0 14px 18px;font-size:12.5px;line-height:1.55;color:var(--gray-700)">
+        <li><a href="https://doi.org/10.1111/hepr.70162" target="_blank" rel="noopener">Ouchi K et al., Hepatol Res 2026 (ATZ-ADA)</a> — <em>Hepatol Res</em> 2026;56(7):1170–1176. DOI 10.1111/hepr.70162. Japan retrospective RWE. n=50 unresectable HCC treated with atezolizumab plus bevacizumab, April 2020 to December 2024. Anti-atezolizumab antibodies (ATZ-ADA) measured by ELISA at baseline and after treatment start (mainly third cycle). Median post-treatment ATZ-ADA higher in progressive disease than disease control (0.46 vs 0.37, p=0.02). ROC cutoff 0.40 (AUC 0.69); 17 of 50 (34%) ADA-positive. PFS shorter if ADA-positive (3.8 vs 9.4 months, HR 2.24, p=0.03). No overall-survival difference. Distinct from Kuzuya T Cancers 2025 DOI 10.3390/cancers17243891, Takeuchi Y Hepatol Res 2026 DOI 10.1111/hepr.70138, Ohama Hepatol Res 2025 DOI 10.1111/hepr.70115, Inoue M Cancer Med 2026 e71655. <strong>MODELLED/GAP:</strong> Japan biomarker RWE, not a 1L A+B vs STRIDE RCT. Dual-eligibility unchanged.</li>
+      </ul>
+
+      <h4 style="font-size:13px;margin:0 0 8px;color:var(--gray-700)">AFP>1000 1L A+B vs D+T RWE — MODELLED/GAP</h4>
+      <ul style="margin:0 0 14px 18px;font-size:12.5px;line-height:1.55;color:var(--gray-700)">
+        <li><a href="https://doi.org/10.1200/jco.2026.44.16_suppl.e16247" target="_blank" rel="noopener">Sangam S et al., JCO 2026 e16247 (AFP>1000)</a> — <em>J Clin Oncol</em> 2026;44(16_suppl):e16247. DOI 10.1200/jco.2026.44.16_suppl.e16247. ASCO 2026 abstract. TriNetX retrospective RWE. Adults with metastatic HCC, first-line atezolizumab plus bevacizumab or durvalumab plus tremelimumab after January 2022, AFP greater than 1,000 ng/ml. Before matching: 712 Atezo/Bev and 296 Durva/Tremi. After propensity-score matching: 269 patients per cohort. Matched overall-survival probability Atezo/Bev vs Durva/Tremi: 1-year 50.38% vs 56.54% (p=0.494); 3-year 22.78% vs 27.29% (p=0.542); 5-year 22.78% vs 27.29% (p=0.542). Trend toward Durva/Tremi, not statistically significant. Hypothesis-generating only. Distinct from Yang XR JCO 2026 e16223, Velazquez JCO 2026 e16221, Al-Alwan JCO 2026 e16232, Chen JCO 2026 e16159, Qiu J JCO 2026 e16167, Rodriguez-Pascual JCO 2026 516, Shiraishi C Front Oncol 2026 1776032, Kuzuya T Cancers 2025 DOI 10.3390/cancers17243891, Ouchi K Hepatol Res 2026 DOI 10.1111/hepr.70162. <strong>MODELLED/GAP:</strong> ASCO abstract RWE, not a 1L A+B vs STRIDE RCT. Dual-eligibility unchanged.</li>
+      </ul>
+
+      <h4 style="font-size:13px;margin:0 0 8px;color:var(--gray-700)">A+B EOB-MRI hyperintensity — MODELLED/GAP</h4>
+      <ul style="margin:0 0 14px 18px;font-size:12.5px;line-height:1.55;color:var(--gray-700)">
+        <li><a href="https://doi.org/10.1111/hepr.70157" target="_blank" rel="noopener">Aoki T et al., Hepatol Res 2026 (EOB-MRI)</a> — <em>Hepatol Res</em> 2026;56(6):998–1006. DOI 10.1111/hepr.70157. Japan prospective multicenter RWE. n=152 unresectable HCC treated with atezolizumab plus bevacizumab across 12 centers. All Child-Pugh A. Gd-EOB-DTPA-MRI before treatment. Hyperintensity defined as relative enhancement ratio of 0.9 or higher (imaging surrogate of Wnt/β-catenin). 82 first-line and 70 later-line. Hyperintense nodules in 57 of 152 (37.5%). Hyperintense vs not: ORR 36.8% vs 22.1%; PFS 8.9 vs 7.9 months; OS 16.7 vs 23.9 months (not statistically significant). Time to partial response shorter if hyperintense (median 26.0 months vs not reached, p=0.033), mainly influenced by prior systemic therapy. Conclusion: hepatobiliary hyperintensity does not indicate resistance to A+B. Distinct from Takeuchi Y Hepatol Res 2026 DOI 10.1111/hepr.70138, Ouchi K Hepatol Res 2026 DOI 10.1111/hepr.70162, Ohama Hepatol Res 2025 DOI 10.1111/hepr.70115, Tanaka K Hepatol Res 2026 DOI 10.1111/hepr.70178, Kuzuya T Cancers 2025 DOI 10.3390/cancers17243891, Sangam S JCO 2026 e16247. <strong>MODELLED/GAP:</strong> Japan imaging RWE, not a 1L A+B vs STRIDE RCT. Dual-eligibility unchanged.</li>
+      </ul>
+
+      <h4 style="font-size:13px;margin:0 0 8px;color:var(--gray-700)">A+B extrahepatic mets intrahepatic burden — MODELLED/GAP</h4>
+      <ul style="margin:0 0 14px 18px;font-size:12.5px;line-height:1.55;color:var(--gray-700)">
+        <li><a href="https://doi.org/10.1111/hepr.70178" target="_blank" rel="noopener">Tanaka K et al., Hepatol Res 2026 (intrahepatic burden)</a> — <em>Hepatol Res</em> 2026;56(8):1246–1253. DOI 10.1111/hepr.70178. Japan multicenter retrospective RWE (RELPEC / HCC 48). n=306 HCC with extrahepatic metastases treated with first-line atezolizumab plus bevacizumab. Median follow-up 13.5 months. Median OS by intrahepatic burden: mild MVI 17.8 months; severe MVI 12.2 months; UT7 in 29.8 months; UT7 out 15.2 months (p<0.001). Intrahepatic tumor burden remained an independent predictor of OS; extent and number of extrahepatic metastatic sites were not significantly associated with prognosis. Distinct from Aoki T Hepatol Res 2026 DOI 10.1111/hepr.70157, Takeuchi Y Hepatol Res 2026 DOI 10.1111/hepr.70138, Ouchi K Hepatol Res 2026 DOI 10.1111/hepr.70162, Ohama Hepatol Res 2025 DOI 10.1111/hepr.70115, Hirooka M Liver Cancer 2026 DOI 10.1159/000550924, Matono T JGH 2026 DOI 10.1111/jgh.70422. <strong>MODELLED/GAP:</strong> Japan RWE, not a 1L A+B vs STRIDE RCT. Dual-eligibility unchanged.</li>
+      </ul>
+
+      <h4 style="font-size:13px;margin:0 0 8px;color:var(--gray-700)">CRAFITY-2 LEN vs A+B Japan RWE — MODELLED/GAP</h4>
+      <ul style="margin:0 0 14px 18px;font-size:12.5px;line-height:1.55;color:var(--gray-700)">
+        <li><a href="https://doi.org/10.1111/hepr.70040" target="_blank" rel="noopener">Ueno M et al., Hepatol Res 2026 (CRAFITY-2)</a> — <em>Hepatol Res</em> 2026;56(1):100–110. DOI 10.1111/hepr.70040. Japan multicenter retrospective RWE. 774 patients treated with first-line lenvatinib or atezolizumab plus bevacizumab, October 2020 to December 2023, 11 hospitals. 90 of 774 (11.6%) had CRAFITY score 2 (CRP 1 mg/dL or higher and AFP 100 ng/mL or higher). Median PFS longer with lenvatinib than A+B (6.0 vs 2.3 months, HR 0.55, 95% CI 0.32–0.95, p=0.032). Median OS 9.8 vs 5.2 months (HR 0.66, 95% CI 0.41–1.08, p=0.101, not significant). DCR 62.0% vs 30.0% (p=0.003). Grade 3 or higher treatment-related AE 46.0% vs 20.0% (p=0.014). Tumor size and AFP higher in the A+B group. Distinct from Ueno Liver Cancer 2026 DOI 10.1159/000552808, Tanaka K Hepatol Res 2026 DOI 10.1111/hepr.70178, Aoki T Hepatol Res 2026 DOI 10.1111/hepr.70157, Kuzuya T Cancers 2025 DOI 10.3390/cancers17243891, Maesaka K J Gastroenterol 2026 DOI 10.1007/s00535-025-02308-x. <strong>MODELLED/GAP:</strong> Japan RWE, not a 1L A+B vs STRIDE RCT. Dual-eligibility unchanged.</li>
+      </ul>
+
+      <h4 style="font-size:13px;margin:0 0 8px;color:var(--gray-700)">A+B platelets and CP at PD — MODELLED/GAP</h4>
+      <ul style="margin:0 0 14px 18px;font-size:12.5px;line-height:1.55;color:var(--gray-700)">
+        <li><a href="https://doi.org/10.1111/hepr.70101" target="_blank" rel="noopener">Sato R et al., Hepatol Res 2026 (platelets at PD)</a> — <em>Hepatol Res</em> 2026;56(4):573–581. DOI 10.1111/hepr.70101. Japan multicenter retrospective RWE (Sakurayama Liver Study Group). n=101 unresectable HCC, Child-Pugh A at baseline, first-line atezolizumab plus bevacizumab, all evaluated for progressive disease. Group A = Child-Pugh A at PD; Group B = Child-Pugh B at PD. Platelet count higher in Group A than Group B (p=0.008). ROC for Child-Pugh A vs B at PD: AUC 0.690, cutoff 12.8 × 10⁴ per µL. Multivariate: only low platelet count associated with Child-Pugh B at PD (less than 12.8 vs 12.8 or higher × 10⁴ per µL: OR 3.780, p=0.022). Distinct from Ueno M Hepatol Res 2026 DOI 10.1111/hepr.70040, Sasaki R Liver Int 2026 DOI 10.1111/liv.70466, Tanaka K Hepatol Res 2026 DOI 10.1111/hepr.70178, Aoki T Hepatol Res 2026 DOI 10.1111/hepr.70157, Ohama Hepatol Res 2025 DOI 10.1111/hepr.70115. <strong>MODELLED/GAP:</strong> Japan RWE, not a 1L A+B vs STRIDE RCT. Dual-eligibility unchanged.</li>
+      </ul>
+
+      <h4 style="font-size:13px;margin:0 0 8px;color:var(--gray-700)">Post-A+B atezo+MKI vs MKI phase II — MODELLED/GAP</h4>
+      <ul style="margin:0 0 14px 18px;font-size:12.5px;line-height:1.55;color:var(--gray-700)">
+        <li><a href="https://doi.org/10.1200/jco.2026.44.2_suppl.554" target="_blank" rel="noopener">Ma WW et al., JCO 2026 554 (atezo+MKI post-A+B)</a> — <em>J Clin Oncol</em> 2026;44(2_suppl):554. DOI 10.1200/jco.2026.44.2_suppl.554. NCT05168163. ASCO GI 2026 abstract. Multicenter randomized phase II, 5 U.S. centers. Unresectable HCC after progression on A+B. Randomized 2:1 to atezolizumab plus MKI (cabozantinib or lenvatinib; Arm A) vs MKI alone (Arm B). Early closure for slow accrual. 20 accrued January 2022 to March 2025; 18 treated (Arm A n=13, Arm B n=5). All Child-Pugh A. Median follow-up 28.0 months. Median OS 13.9 vs 6.2 months; median PFS 4.3 vs 4.1 months. ORR 7.7% (1 of 13) vs 0% (0 of 5). Grade 3 or higher related AE 46.2% vs 60.0%. Distinct from Vogel IMbrave251 JCO 2026 4002, Maesaka K J Gastroenterol 2026 DOI 10.1007/s00535-025-02308-x, Sato R Hepatol Res 2026 DOI 10.1111/hepr.70101. <strong>MODELLED/GAP:</strong> limited cohort; ASCO GI abstract; post-A+B 2L sequencing, not a 1L A+B vs STRIDE RCT. Dual-eligibility unchanged.</li>
+      </ul>
+
+      <h4 style="font-size:13px;margin:0 0 8px;color:var(--gray-700)">SBRT plus A+B phase I — MODELLED/GAP</h4>
+      <ul style="margin:0 0 14px 18px;font-size:12.5px;line-height:1.55;color:var(--gray-700)">
+        <li><a href="https://doi.org/10.1200/jco.2026.44.2_suppl.560" target="_blank" rel="noopener">Brown TJ et al., JCO 2026 560 (SBRT+A+B)</a> — <em>J Clin Oncol</em> 2026;44(2_suppl):560. DOI 10.1200/jco.2026.44.2_suppl.560. NCT05488522. Single-center phase I Rolling 6. Systemic-therapy naive multifocal unresectable or metastatic HCC. Atezo 1,200 mg plus bev 15 mg/kg q21d plus SBRT 17 Gy per fraction × 1–3. n=13. No radiation-related grade 3+ DLT. MTD not reached. ORR 53.9% (7/13). CR 38.5% (5/13). PR 15.4% (2/13). Median DFS 14.1 mo. OS 25.8 mo. Distinct from Dawson RTOG 1112 (SBRT plus sorafenib). <strong>MODELLED/GAP:</strong> phase I SBRT plus A+B, not a 1L A+B vs STRIDE RCT. Dual-eligibility unchanged.</li>
+      </ul>
+
+      <h4 style="font-size:13px;margin:0 0 8px;color:var(--gray-700)">A+B liver function at PD / PPS — MODELLED/GAP</h4>
+      <ul style="margin:0 0 14px 18px;font-size:12.5px;line-height:1.55;color:var(--gray-700)">
+        <li><a href="https://doi.org/10.3390/biomedicines14010232" target="_blank" rel="noopener">Ariga M et al., Biomedicines 2026 (PPS after A+B)</a> — <em>Biomedicines</em> 2026;14(1):232. DOI 10.3390/biomedicines14010232. Retrospective n=132 Child-Pugh A ECOG 0/1 starting A+B. Median PFS 9.2 mo. Median OS 21.2 mo. PD in 97; median post-progression survival 9.2 mo. At PD, 76 of 97 (78.4%) kept Child-Pugh A and ECOG 0/1. Baseline Child-Pugh 5 independently predicted that preservation. Distinct from Kuzuya Cancers 2025 17(24):3891 AFP/DCP. <strong>MODELLED/GAP:</strong> Japan RWE, not a 1L A+B vs STRIDE RCT. Dual-eligibility unchanged.</li>
+      </ul>
+
+      <h4 style="font-size:13px;margin:0 0 8px;color:var(--gray-700)">A+B response-survival by hepatic reserve — MODELLED/GAP</h4>
+      <ul style="margin:0 0 14px 18px;font-size:12.5px;line-height:1.55;color:var(--gray-700)">
+        <li><a href="https://doi.org/10.21873/cdp.10556" target="_blank" rel="noopener">Kuwano A et al., Cancer Diagn Progn 2026</a> — <em>Cancer Diagn Progn</em> 2026;6(3):559–569. DOI 10.21873/cdp.10556. Retrospective n=105 A+B (CP-A 82, CP-B 23). NE 21.7% vs 4.8%. ORR 17.4% vs 45.1% (p=0.015). DCR 52.2% vs 67.1% (ns). Median OS 17.4 mo overall; CP-A 24.5 mo; CP-B 9.7 mo. In CP-A, OR 32.9 vs 17.1 mo (p=0.002). In CP-B, OR 10.7 vs 9.7 mo (ns); SD vs CR/PR 10.6 vs 10.7 mo. NLR less than 2.56: OS 27.9 vs 14.7 mo. Subsequent therapy 64.2% CP-A vs 13.6% CP-B. Distinct from Sasaki Liver Int 2026 e70466. <strong>MODELLED/GAP:</strong> Japan RWE, not a 1L A+B vs STRIDE RCT. Dual-eligibility unchanged.</li>
+      </ul>
+
+      <h4 style="font-size:13px;margin:0 0 8px;color:var(--gray-700)">1L ICPI+bev vs dual ICPI vs TKI IPD MA — MODELLED/GAP</h4>
+      <ul style="margin:0 0 14px 18px;font-size:12.5px;line-height:1.55;color:var(--gray-700)">
+        <li><a href="https://doi.org/10.1200/jco.2026.44.2_suppl.575" target="_blank" rel="noopener">Mustafa NM et al., JCO 2026 575 (IPD MA)</a> — <em>J Clin Oncol</em> 2026;44(2_suppl):575. DOI 10.1200/jco.2026.44.2_suppl.575. IPD meta-analysis n=3,335 (ICPI plus bev 878, dual ICPI 728, TKI 1,729). Median OS 19.09 mo (95% CI 17.09–21.27) ICPI plus bev; 19.58 mo (17.55–23.32) dual ICPI; 15.29 mo (13.96–16.27) TKI (p<0.001). Median PFS 5.76, 5.51, and 5.43 mo. Diarrhea 3.50% TKI vs 2.49% dual ICPI (p=0.0027). Platelet abnormalities 5.45% ICPI plus bev (p=0.0075). Distinct from Nie Crit Rev Oncol Hematol 2026 105412. <strong>MODELLED/GAP:</strong> IPD meta-analysis of classes, not a 1L A+B vs STRIDE RCT. Do not invent a direct A+B vs STRIDE HR from this network. Dual-eligibility unchanged.</li>
+      </ul>
+
+      <h4 style="font-size:13px;margin:0 0 8px;color:var(--gray-700)">Post-CR recurrence after A+B — MODELLED/GAP</h4>
+      <ul style="margin:0 0 14px 18px;font-size:12.5px;line-height:1.55;color:var(--gray-700)">
+        <li><a href="https://doi.org/10.1002/cam4.71552" target="_blank" rel="noopener">Nakabori T et al., Cancer Medicine 2026 e71552</a> — <em>Cancer Medicine</em> 2026;15(2):e71552. DOI 10.1002/cam4.71552. Retrospective n=15 CR after A+B (10 CR with LRT plus A+B, 5 CR with A+B alone). Post-CR recurrence 53.3% (8 vs 7). History of 2 or more prior HCC treatments independently associated with post-CR recurrence, HR 6.744 (95% CI 1.189–38.25, p=0.031). Distinct from Ohama Cancer Medicine 2026 e71640. <strong>MODELLED/GAP:</strong> Japan RWE, small CR cohort, not a 1L A+B vs STRIDE RCT. Dual-eligibility unchanged.</li>
+      </ul>
+
+      <h4 style="font-size:13px;margin:0 0 8px;color:var(--gray-700)">Reconstructed IPD STRIDE / IMbrave150 / 9DW — MODELLED/GAP</h4>
+      <ul style="margin:0 0 14px 18px;font-size:12.5px;line-height:1.55;color:var(--gray-700)">
+        <li><a href="https://doi.org/10.1200/jco.2026.44.2_suppl.578" target="_blank" rel="noopener">Al-Najjar E et al., JCO 2026 578 (reconstructed IPD)</a> — <em>J Clin Oncol</em> 2026;44(2_suppl):578. DOI 10.1200/jco.2026.44.2_suppl.578. Reconstructed IPD from STRIDE, IMbrave150, and CheckMate 9DW, n=1,064 (Durva/Treme 393, Atezo/Bev 336, Nivo/Ipi 335). Median OS 24 mo Nivo/Ipi, 19 mo Atezo/Bev, 16.7 mo Durva/Treme (p=0.046). Median PFS 9.3, 6.8, and 3.8 mo (p<0.001). Grade 3/4 AE 25.5% Durva/Treme vs 42.6% Atezo/Bev vs 40.9% Nivo/Ipi. Distinct from Mustafa JCO 2026 575. <strong>MODELLED/GAP:</strong> reconstructed IPD meta-analysis, not a head-to-head 1L A+B vs STRIDE RCT. Do not invent a direct A+B vs STRIDE HR from this reconstruction. Do not overwrite IMbrave150 / HIMALAYA / CheckMate-9DW trial medians. Dual-eligibility unchanged.</li>
+      </ul>
+
+      <h4 style="font-size:13px;margin:0 0 8px;color:var(--gray-700)">Morpheus-Liver ADG126 plus A+B — MODELLED/GAP</h4>
+      <ul style="margin:0 0 14px 18px;font-size:12.5px;line-height:1.55;color:var(--gray-700)">
+        <li><a href="https://doi.org/10.1158/1538-7445.am2026-ct054" target="_blank" rel="noopener">Li D et al., Cancer Res 2026 CT054 (ADG126+A+B)</a> — <em>Cancer Res</em> 2026;86(8_Suppl):Abstract CT054. DOI 10.1158/1538-7445.am2026-ct054. NCT04524871. Randomized 1L unresectable HCC, data cutoff 11 Jul 2025. n=6 ADG126 plus A+B vs n=40 A+B. Median follow-up 18.8 vs 17.2 mo. Confirmed ORR 50% vs 17.5% RECIST v1.1. DCR 83% vs 53%. Grade 3 or higher TRAE 50% vs 45%. SAE 33% vs 55%. No fatal AEs. Small n=6 triplet arm. Distinct from Finn Lancet Oncol 2025 tiragolumab MORPHEUS-Liver and from Al-Najjar JCO 2026 578. <strong>MODELLED/GAP:</strong> AACR abstract; small triplet arm; not a 1L A+B vs STRIDE RCT. Dual-eligibility unchanged.</li>
+      </ul>
+
+      <h4 style="font-size:13px;margin:0 0 8px;color:var(--gray-700)">I-125 plus A+B recurrent HCC — MODELLED/GAP</h4>
+      <ul style="margin:0 0 14px 18px;font-size:12.5px;line-height:1.55;color:var(--gray-700)">
+        <li><a href="https://doi.org/10.2147/jhc.s619755" target="_blank" rel="noopener">Chen J et al., JHC 2026 (I-125+A+B)</a> — <em>J Hepatocell Carcinoma</em> 2026;13:619755. DOI 10.2147/jhc.s619755. Retrospective recurrent HCC after hepatectomy. n=79 I-125 plus A+B vs n=94 A+B. PSM 62 pairs. Unmatched ORR 63.3% (50/79) vs 46.8% (44/94) p=0.03. DCR 81.0% vs 63.8% p=0.012. Unmatched mPFS 16.0 vs 8.0 mo. Unmatched mOS 31.0 vs 15.0 mo. PSM mPFS 16 vs 8 HR 0.49 (0.35–0.68). PSM mOS 31 vs 16 HR 0.53 (0.38–0.74). Grade 3–4 TRAE 22.8% vs 20.2%. Distinct from Cosgrove JHC 2025, Yang JCO e16223, Brown JCO 560, Dawson RTOG 1112, Li D AACR CT054. <strong>MODELLED/GAP:</strong> locoregional I-125 add-on after hepatectomy, not a 1L A+B vs STRIDE RCT. Dual-eligibility unchanged.</li>
+      </ul>
+
+      <h4 style="font-size:13px;margin:0 0 8px;color:var(--gray-700)">Northern India 1L A+B vs IMbrave150 — MODELLED/GAP</h4>
+      <ul style="margin:0 0 14px 18px;font-size:12.5px;line-height:1.55;color:var(--gray-700)">
+        <li><a href="https://doi.org/10.1016/j.annonc.2026.05.272" target="_blank" rel="noopener">Mittal K, Ann Oncol 2026 230P</a> — <em>Ann Oncol</em> 2026;37(S1):S88. Abstract 230P. DOI 10.1016/j.annonc.2026.05.272. Prospective RWE n=41 1L A+B Northern India Jan 2024–Jun 2025. Child-Pugh A 61% vs IMbrave150 100%. ECOG 0–1 61%. Varices 29%. Portal vein invasion 44%. BCLC-C 61%. ORR 37% vs IMbrave150 27%. DCR 71% vs 73%. mPFS 6.1 vs 6.8 mo. mOS 9.2 vs 19.2 mo. Bleeding 17% vs 7%. Hypertension 29% vs 15%. Distinct from Phillips BMC Cancer 16387-3, Lee PC AB-Real 116749, Allaire CHIEF, Cosgrove JHC, Chen J JHC s619755. <strong>MODELLED/GAP:</strong> small prospective RWE vs trial benchmarks, not a 1L A+B vs STRIDE RCT. Do not overwrite IMbrave150. Dual-eligibility unchanged.</li>
+      </ul>
+
+      <h4 style="font-size:13px;margin:0 0 8px;color:var(--gray-700)">A+B GI/variceal bleeding review — MODELLED/GAP</h4>
+      <ul style="margin:0 0 14px 18px;font-size:12.5px;line-height:1.55;color:var(--gray-700)">
+        <li><a href="https://doi.org/10.3390/cancers18091432" target="_blank" rel="noopener">Lee HJ, Kim HY, Cancers 2026 (GI/variceal bleeding)</a> — <em>Cancers</em> 2026;18(9):1432. DOI 10.3390/cancers18091432. Review. Trial-based high-grade GI and variceal bleeding is low under protocol endoscopic screening. Real-world cohorts report higher GI and variceal hemorrhage, especially with prior bleeding, untreated or high-risk varices, reduced hepatic reserve, and extensive PVTT. Pooled analyses show higher bleeding vs non-antiangiogenic systemic therapy. Severe and fatal hemorrhage is a minority and concentrated in high-risk subgroups. Supports varices as a gating item for A+B vs STRIDE. Distinct from Kuzuya Cancers 2025 3891, Mittal 230P, Chen J JHC s619755. <strong>MODELLED/GAP:</strong> review, not a 1L A+B vs STRIDE RCT. Dual-eligibility unchanged.</li>
+      </ul>
+
+      <h4 style="font-size:13px;margin:0 0 8px;color:var(--gray-700)">MRA and A+B proteinuria — MODELLED/GAP</h4>
+      <ul style="margin:0 0 14px 18px;font-size:12.5px;line-height:1.55;color:var(--gray-700)">
+        <li><a href="https://doi.org/10.1111/hepr.70176" target="_blank" rel="noopener">Hori T et al., Hepatol Res 2026 (MRA proteinuria)</a> — <em>Hepatology Research</em> 2026;56:1225–1234. DOI 10.1111/hepr.70176. Five Japanese centers. A+B Sep 2020–Dec 2023. n=177 (MRA 26 vs no MRA 151). Primary: time to grade 2 or higher proteinuria in first 6 months of bevacizumab. Grade 2+ proteinuria later in MRA group (p=0.018). Multivariate: diabetes HR 1.81 (1.00–3.25) p=0.049; higher average SBP HR 2.08 (1.16–3.73) p=0.014; MRA use HR 0.21 (0.047–0.90) p=0.035. Bevacizumab interruption due to proteinuria within 6 months 0% vs 13.2% (p=0.049). Supports VEGF/proteinuria as a gating safety item for A+B vs STRIDE. Distinct from Ouchi HEPR 70162 ADA, Takeuchi HEPR 70138, Sato HEPR 70101, Tanaka HEPR 70178, Aoki HEPR 70157, Ueno HEPR 70040 CRAFITY-2, Lee HJ Cancers 2026 1432 varices. <strong>MODELLED/GAP:</strong> Japan RWE, not a 1L A+B vs STRIDE RCT. Dual-eligibility unchanged.</li>
+      </ul>
+
+      <h4 style="font-size:13px;margin:0 0 8px;color:var(--gray-700)">HIMALAYA T rechallenge safety — MODELLED/GAP</h4>
+      <ul style="margin:0 0 14px 18px;font-size:12.5px;line-height:1.55;color:var(--gray-700)">
+        <li><a href="https://doi.org/10.1200/jco.2026.44.2_suppl.541" target="_blank" rel="noopener">Kelley RK et al., JCO 2026 541 (T rechallenge)</a> — <em>J Clin Oncol</em> 2026;44(2_suppl):541. DOI 10.1200/jco.2026.44.2_suppl.541. NCT03298451. Post-hoc. Efficacy not assessed due to survivorship bias. 3-yr DCO 30/393 (8%) T-rechallenged; 5-yr DCO Mar 1 2024 34/393 (9%). Median age 64, 85% male, 27% Asian. Median D duration 16.6 (5.5–72.0) mo vs 5.5 (0.3–72.0) all STRIDE. Time to T rechallenge 12.8 (4.9–53.4) mo; 44% at or after 12 mo. Any AE 96.7% vs 97.4%. Grade 3/4 AE 40.0% vs 50.5%. AE death 0 vs 7.7%. imAE 33.3% vs 35.8%. TRAE 73.3% vs 75.8% (70% pre-rechallenge, 30% post). Grade 3/4 TRAE 17% (10% before, 7% after). Serious TRAE 6.7% vs 17.5% at 3-yr; 5.9% (n=34) at 5-yr. No new serious TRAEs between DCOs. T-rechallenge safety in line with overall STRIDE. Distinct from Rimassa HIMALAYA 5-year OS, Lau HIMALAYA Asia/HK, Al-Najjar JCO 578, Hori HEPR 70176, Lee HJ Cancers 1432. <strong>MODELLED/GAP:</strong> post-hoc safety; efficacy not assessed due to survivorship bias; not a 1L A+B vs STRIDE RCT. Dual-eligibility unchanged.</li>
+      </ul>
+
+      <h4 style="font-size:13px;margin:0 0 8px;color:var(--gray-700)">Toripalimab plus FOLFOX-HAIC BCLC-C — MODELLED/GAP</h4>
+      <ul style="margin:0 0 14px 18px;font-size:12.5px;line-height:1.55;color:var(--gray-700)">
+        <li><a href="https://doi.org/10.1200/jco.2026.44.2_suppl.536" target="_blank" rel="noopener">Zhao R et al., JCO 2026 536 (tori+HAIC)</a> — <em>J Clin Oncol</em> 2026;44(2_suppl):536. DOI 10.1200/jco.2026.44.2_suppl.536. NCT03851939. Single-center single-arm phase II. BCLC-C. Toripalimab plus FOLFOX-HAIC. n=21 enrolled May 20 2019 to Apr 26 2021. Primary mPFS 11.93 mo (95% CI 4.57–37.57) RECIST v1.1. mOS 27.57 mo (95% CI 15.63–NA). ORR 61.90% per RECIST v1.1 and 66.67% mRECIST. RECIST: CR 0, PR 13 (61.90%), SD 4 (19.05%), PD 4 (19.05%). mRECIST: CR 4 (19.05%), PR 10 (47.62%). Most common AEs neutropenia and increased ALT. Low LIF associated with benefit. Distinct from Shi Y HEPATORCH Lancet Gastro Hep 2025, Chen J JHC s619755 I-125 plus A+B, Yang JCO e16223 TACE, Kelley JCO 541, Hori HEPR 70176. <strong>MODELLED/GAP:</strong> single-arm phase II HAIC plus PD-1, not a 1L A+B vs STRIDE RCT. Dual-eligibility unchanged.</li>
+      </ul>
+
+      <h4 style="font-size:13px;margin:0 0 8px;color:var(--gray-700)">TRIPLET-HCC A+B plus ipi vs A+B — MODELLED/GAP</h4>
+      <ul style="margin:0 0 14px 18px;font-size:12.5px;line-height:1.55;color:var(--gray-700)">
+        <li><a href="https://doi.org/10.1016/S2468-1253(26)00115-9" target="_blank" rel="noopener">Merle P et al., Lancet Gastro Hep 2026 (TRIPLET-HCC)</a> — <em>Lancet Gastroenterol Hepatol</em> 2026. Published 22 Jun 2026. DOI 10.1016/S2468-1253(26)00115-9. NCT05665348. n=226 randomised 1:1. A+B plus ipilimumab 1 mg/kg up to 4 doses (n=113) vs A+B (n=113). Atezolizumab 1,200 mg plus bevacizumab 15 mg/kg every 3 weeks up to 2 years. Primary: 24-week ORR in the triplet arm, with a 35-response (35%) bar to open phase 3. Objective response in 34 patients (30%) vs 31 (27%). 35-response threshold not met. Trial stopped, no phase 3. Does not support adding low-dose ipilimumab to A+B as 1L. Distinct from Finn IMbrave152/SKYSCRAPER-14 tiragolumab, Li D AACR 2026 CT054 ADG126, CheckMate 9DW nivo plus ipi, HIMALAYA STRIDE, Zhao JCO 536, Kelley JCO 541. <strong>MODELLED/GAP:</strong> negative phase 2 triplet vs A+B, not a 1L A+B vs STRIDE RCT. Dual-eligibility unchanged.</li>
+      </ul>
+
+      <h4 style="font-size:13px;margin:0 0 8px;color:var(--gray-700)">Editorial: myeloid PRef to A+B — MODELLED/GAP</h4>
+      <ul style="margin:0 0 14px 18px;font-size:12.5px;line-height:1.55;color:var(--gray-700)">
+        <li><a href="https://doi.org/10.1016/j.jhep.2026.08.004" target="_blank" rel="noopener">Argemi J, Campani C, J Hepatol 2026 (myeloid PRef editorial)</a> — <em>Journal of Hepatology</em> 2026. DOI 10.1016/j.jhep.2026.08.004. Editorial commenting on Lombardi P et al. J Hepatol. 2026 DOI 10.1016/j.jhep.2026.05.018. No new primary n. Frames myeloid/TAM biology as a reason A+B can fail early. Distinct from Lombardi J Hepatol 2026.05.018, Liang Z Cancer Cell 2026 TREM2, Merle TRIPLET-HCC Lancet Gastro Hep 2026, Li D AACR 2026 CT054. <strong>MODELLED/GAP:</strong> editorial, not a 1L A+B vs STRIDE RCT. Dual-eligibility unchanged.</li>
+      </ul>
+
+      <h4 style="font-size:13px;margin:0 0 8px;color:var(--gray-700)">A+B competing-risk discontinuation — MODELLED/GAP</h4>
+      <ul style="margin:0 0 14px 18px;font-size:12.5px;line-height:1.55;color:var(--gray-700)">
+        <li><a href="https://doi.org/10.1016/j.jhepr.2026.101988" target="_blank" rel="noopener">Suda G et al., JHEP Reports 2026 (competing risks)</a> — DOI 10.1016/j.jhepr.2026.101988. North Japan HCC Study Group. Tumor-progression discontinuation associated with high AFP. Adverse-event or liver-dysfunction discontinuation associated with older age and reduced hepatic reserve. Supports liver-function gating for A+B vs STRIDE. Distinct from Odent JHEPR 2026 101915, Tovoli ARTE Score CGH 2026, Celsa DT-real JHEP Reports 2026 101685, Argemi J Hepatol 2026.08.004. <strong>MODELLED/GAP:</strong> competing-risk RWE, not a 1L A+B vs STRIDE RCT. n not printed here. Dual-eligibility unchanged.</li>
+      </ul>
+
+      <h4 style="font-size:13px;margin:0 0 8px;color:var(--gray-700)">A+B conversion curative Taiwan — MODELLED/GAP</h4>
+      <ul style="margin:0 0 14px 18px;font-size:12.5px;line-height:1.55;color:var(--gray-700)">
+        <li><a href="https://doi.org/10.1007/s00262-026-04476-y" target="_blank" rel="noopener">Chen YH et al., Cancer Immunol Immunother 2026 (conversion)</a> — DOI 10.1007/s00262-026-04476-y. Kaohsiung Chang Gung. Retrospective n=318 consecutive advanced HCC treated with A+B 2020–2024. ORR 34.6%. Conversion curative therapy in 36 (11%): liver transplant 8 (2.5%), hepatectomy 11 (3.5%), local ablation 17 (5.3%). OS and PFS better after conversion (both p<0.001), persisted after propensity-score matching. Multivariate Cox, conversion as time-dependent covariate: OS HR 0.398 (95% CI 0.179–0.885) p=0.024. Median OS months not printed here. Distinct from Aoki HEPR 70157, Yang JCO 2026 e16223, Chen J JHC 2026 s619755, Suda JHEPR 2026 101988. <strong>MODELLED/GAP:</strong> Taiwan RWE conversion, not a 1L A+B vs STRIDE RCT. Dual-eligibility unchanged.</li>
+      </ul>
+
+      <h4 style="font-size:13px;margin:0 0 8px;color:var(--gray-700)">1L A+B PFS prognostic factors — MODELLED/GAP</h4>
+      <ul style="margin:0 0 14px 18px;font-size:12.5px;line-height:1.55;color:var(--gray-700)">
+        <li><a href="https://doi.org/10.1371/journal.pone.0354176" target="_blank" rel="noopener">Gu K et al., PLoS One 2026 e0354176</a> — <em>PLoS One</em> 2026;21(7):e0354176. DOI 10.1371/journal.pone.0354176. n=47 treatment-naive intermediate or advanced HCC, first-line A+B. Follow-up 1.5–24.9 months. 33 (70.2%) progressed. mPFS 4.3 months (95% CI 2.8–8.5). Nine patients received concomitant radiotherapy. Multivariable PFS: age HR 0.95 (0.92–0.99) p=0.013; concomitant RT HR 0.22 (0.07–0.69) p=0.009; tumor extent 10 cm or more HR 2.54 (1.17–5.55) p=0.019; peritumoral arterial-phase hyperenhancement on MRI HR 2.15 (1.00–4.63) p=0.049. OS not printed here. Distinct from Brown JCO 2026 560 SBRT plus A+B, Tanaka HEPR 70178, Chen YH CII 2026 04476-y. <strong>MODELLED/GAP:</strong> small RWE, not a 1L A+B vs STRIDE RCT. Dual-eligibility unchanged.</li>
+      </ul>
+
+      <h4 style="font-size:13px;margin:0 0 8px;color:var(--gray-700)">HK SBRT for oligoprogression on A+B — MODELLED/GAP</h4>
+      <ul style="margin:0 0 14px 18px;font-size:12.5px;line-height:1.55;color:var(--gray-700)">
+        <li><a href="https://doi.org/10.1016/j.annonc.2026.05.255" target="_blank" rel="noopener">Chan LL et al., Ann Oncol 2026 213P (PWH HK)</a> — <em>Ann Oncol</em> 2026;37(S1):S80–S81. Abstract 213P. DOI 10.1016/j.annonc.2026.05.255. Prospective single-arm investigator-initiated study, Prince of Wales Hospital, Hong Kong. n=15 oligoprogression (5 sites or fewer) on first-line A+B; SBRT to oligoprogressive sites with A+B maintained. Enrolled June 2024 to January 2026. 14 (93.3%) male. Median age 65.5 (range 39–79). Macrovascular invasion 1 (6.7%). Extrahepatic spread 3 (20%). Child-Pugh A 11 (73.3%), Child-Pugh B 4 (26.7%) at SBRT start. 25 lesions irradiated (23 intrahepatic, 2 extrahepatic). Median follow-up 7.7 months. 3-month PFS 78.8%. 6-month PFS 57.4%. 12-month PFS 57.4%. OS not printed here. Distinct from Brown JCO 2026 560 concurrent SBRT plus A+B first-line, Ma JCO 2026 554, Dawson RTOG 1112, Gu PLoS One 2026 e0354176. <strong>MODELLED/GAP:</strong> HK prospective single-arm interim; oligoprogression after 1L A+B, not a 1L A+B vs STRIDE RCT. Dual-eligibility unchanged.</li>
+      </ul>
+
+      <h4 style="font-size:13px;margin:0 0 8px;color:var(--gray-700)">HAIC+A+B vs HAIC+LEN PSM — MODELLED/GAP</h4>
+      <ul style="margin:0 0 14px 18px;font-size:12.5px;line-height:1.55;color:var(--gray-700)">
+        <li><a href="https://doi.org/10.3389/fonc.2026.1880527" target="_blank" rel="noopener">Zhao L et al., Front Oncol 2026 (HAIC+A+B vs HAIC+LEN)</a> — <em>Front Oncol</em> 2026;16:1880527. DOI 10.3389/fonc.2026.1880527. Published 24 August 2026. Retrospective multicenter. Before PSM: HAIC plus A+B n=119 vs HAIC plus lenvatinib n=187. After PSM n=106 vs n=106. After PSM mOS 25.8 months (95% CI 23.3–30.8) vs 16.4 months (13.0–26.0), HR 0.62 (0.42–0.91), P=0.012. After PSM mPFS 9.7 months (8.3–12.4) vs 7.6 months (5.3–12.8), HR 0.88 (0.64–1.20), P=0.407. After PSM ORR 56.6% vs 53.8%. DCR 86.8% vs 84.9%. Conversion resection 19/106 (17.9%) vs 8/106 (7.5%), P=0.038. Distinct from Zhao R JCO 2026 536, Chen JJ CHANCE2202, TALENTACE, Qi H, Chan 213P, Gu PLoS One e0354176. <strong>MODELLED/GAP:</strong> HAIC combo RWE, not a 1L A+B vs STRIDE RCT. Dual-eligibility unchanged.</li>
+      </ul>
+
+      <h4 style="font-size:13px;margin:0 0 8px;color:var(--gray-700)">Ontario 1L A+B population RWE — MODELLED/GAP</h4>
+      <ul style="margin:0 0 14px 18px;font-size:12.5px;line-height:1.55;color:var(--gray-700)">
+        <li><a href="https://doi.org/10.1016/j.annonc.2026.05.263" target="_blank" rel="noopener">Moffat GT et al., Ann Oncol 2026 221P (Ontario)</a> — <em>Ann Oncol</em> 2026;37(S1):S84. Abstract 221P. DOI 10.1016/j.annonc.2026.05.263. Population-based Ontario, January 2020 to December 2025. n=437 first-line A+B. Median age 68 years. 82% male. Charlson comorbidity index 2 or more in 48%. Median OS 12.8 months (95% CI 10.8–14.4). Early treatment discontinuation 42%. 90-day mortality 13.7%. Etiology NAFLD 27%, HCV 15%, alcoholic liver disease 13%, HBV 9%. Cirrhosis 40%, including 30% with decompensation. Varices 26%. Portal vein thrombosis 9%. Early discontinuation independently associated with inferior OS, HR 6.65 (95% CI 4.84–9.14). PFS and ORR not printed here. Distinct from Phillips BMC Cancer 2026 UK Midlands n=233, Mittal 230P northern India, Zhao Front Oncol 1880527, Chan 213P, Gu PLoS One e0354176. <strong>MODELLED/GAP:</strong> Ontario population RWE, not a 1L A+B vs STRIDE RCT. Dual-eligibility unchanged.</li>
+      </ul>
+
+      <h4 style="font-size:13px;margin:0 0 8px;color:var(--gray-700)">A+B concomitant antiplatelet/anticoagulant — MODELLED/GAP</h4>
+      <ul style="margin:0 0 14px 18px;font-size:12.5px;line-height:1.55;color:var(--gray-700)">
+        <li><a href="https://doi.org/10.1016/j.annonc.2026.05.274" target="_blank" rel="noopener">Canciello MA et al., Ann Oncol 2026 232P (CAAT)</a> — <em>Ann Oncol</em> 2026;37(S1):S89. Abstract 232P. DOI 10.1016/j.annonc.2026.05.274. First-line A+B n=52. Cohort A concomitant antiplatelet or anticoagulant (CAAT) n=23 (11 ASA, 6 LMWH, 5 DOAC, 1 DAPT). Cohort B no CAAT n=29. Pretreatment endoscopy required; no high-risk varices. Overall bleeding 12/52 (23%). Grade 3–4 bleeding 5/52 (9.6%). Bleeding Cohort A vs B 21.7% vs 24.1%, p=0.99. Age associated with bleeding, aOR 1.13, p=0.014. CAAT not associated, aOR 0.82, p=0.784. mPFS HR 1.06, p=0.85. ORR 42.9% vs 61.5%, p=0.25. DCR 90.5% vs 88.5%, p=0.99. mOS not printed here. Distinct from Moffat 221P Ontario n=437, Lee Cancers 1432, Mittal 230P, Chan 213P. <strong>MODELLED/GAP:</strong> small RWE, not a 1L A+B vs STRIDE RCT. Dual-eligibility unchanged.</li>
+      </ul>
+
+      <h4 style="font-size:13px;margin:0 0 8px;color:var(--gray-700)">A+B plus TACE BCLC-C China RWE — MODELLED/GAP</h4>
+      <ul style="margin:0 0 14px 18px;font-size:12.5px;line-height:1.55;color:var(--gray-700)">
+        <li><a href="https://doi.org/10.3389/fonc.2026.1744076" target="_blank" rel="noopener">Yuan L et al., Front Oncol 2026 (A+B+TACE BCLC-C)</a> — <em>Front Oncol</em> 2026;16:1744076. DOI 10.3389/fonc.2026.1744076. Retrospective, Guangdong Provincial Hospital of Chinese Medicine, January 2022 to October 2024, follow-up to April 2025. Of 33 intermediate/advanced HCC on Ate/Bev plus TACE, n=25 were BCLC-C. RECIST 1.1. 12 died, 13 survived during follow-up. ORR 32%. Mean PFS 7.960 ± 6.624 months. Mean OS 12.880 ± 7.769 months. Do not treat those as medians. NLR 3 or more vs less than 3: PFS HR 2.004 (95% CI 1.86–3.74), OS HR 1.765 (95% CI 1.24–3.06). All-grade AE 100%. Grade 3/4 AE 4%. No treatment-related deaths. DCR and median PFS/OS not printed here. Distinct from Zhao Front Oncol 1880527 HAIC plus A+B vs HAIC plus lenvatinib after PSM n=106 vs n=106, Canciello 232P, Moffat 221P. <strong>MODELLED/GAP:</strong> small TACE plus A+B BCLC-C RWE, not a 1L A+B vs STRIDE RCT. Dual-eligibility unchanged.</li>
+      </ul>
+
+      <h4 style="font-size:13px;margin:0 0 8px;color:var(--gray-700)">A+B ALBI in high-risk RWE — MODELLED/GAP</h4>
+      <ul style="margin:0 0 14px 18px;font-size:12.5px;line-height:1.55;color:var(--gray-700)">
+        <li><a href="https://doi.org/10.2147/jhc.s617103" target="_blank" rel="noopener">Araz F et al., JHC 2026 (ALBI on A+B)</a> — <em>J Hepatocell Carcinoma</em> 2026;13:1–12. DOI 10.2147/jhc.s617103. Multicenter retrospective, January 2022 to June 2025. n=43 BCLC-B/C unresectable HCC on A+B. mRECIST. BCLC-C 72.1%. ALBI grade 2 or more 74.5%. PVTT 41.9%. Median OS 9.5 months (95% CI 6.5–12.4). Median PFS 6 months (95% CI 3.8–8.2). ALBI 1 vs ALBI 2 or more: OS 21 vs 8 months, p=0.018. Higher baseline ALBI independently associated with shorter OS, HR 3.1 (95% CI 1.1–8.3), p=0.027, and shorter PFS, HR 2.8 (95% CI 1.2–6.9), p=0.021. Hepatic decompensation 41.9%. ORR not printed here. Distinct from Yuan Front Oncol 1744076, Ueno HEPR 70040, Kuwano CDP 10556, Moffat 221P, Canciello 232P. <strong>MODELLED/GAP:</strong> small high-risk RWE, not a 1L A+B vs STRIDE RCT. Dual-eligibility unchanged.</li>
+      </ul>
+
+      <h4 style="font-size:13px;margin:0 0 8px;color:var(--gray-700)">A+B gross morphological type — MODELLED/GAP</h4>
+      <ul style="margin:0 0 14px 18px;font-size:12.5px;line-height:1.55;color:var(--gray-700)">
+        <li><a href="https://doi.org/10.3350/cmh.2026.0866" target="_blank" rel="noopener">Woo S et al., Clin Mol Hepatol 2026 (morphology)</a> — DOI 10.3350/cmh.2026.0866. Research letter. CHA Bundang. First-line A+B, June 2020 to June 2025. n=357 advanced HCC, Child-Pugh A or B, ECOG 0–1, RECIST 1.1. Type I n=48, type II n=82, type III n=79, type IV infiltrative n=148. Overall ORR 119/357 (33.3%, 95% CI 28.4–38.5%). DCR 281/357 (78.7%, 95% CI 74.1–82.8%). Type I ORR 27/48 (56.3%, 95% CI 41.2–70.5%). Type II 43/82 (52.4%, 95% CI 41.1–63.6%). Type III 22/79 (27.8%, 95% CI 18.3–39.1%). Type IV 27/148 (18.2%, 95% CI 12.4–25.4%). Type IV DCR 65.5% (95% CI 57.3–73.1%). Among tumors occupying 50–75% of the liver, type II ORR 28.6% vs type IV 10.8%. Among tumors occupying 75% or more of the liver, type IV had no objective responses and 75.0% progressive disease. PET/CT subset n=73. mOS and mPFS for the n=357 cohort not printed here. Distinct from the prior 307-patient analysis (type IV ORR 14.6%, mPFS 2.8 months vs type I 10.4 months) and from Araz JHC s617103. <strong>MODELLED/GAP:</strong> Korea RWE morphology, not a 1L A+B vs STRIDE RCT. Dual-eligibility unchanged.</li>
+      </ul>
+
+      <h4 style="font-size:13px;margin:0 0 8px;color:var(--gray-700)">TriNetX A+B vs D+T PSM paper — MODELLED/GAP</h4>
+      <ul style="margin:0 0 14px 18px;font-size:12.5px;line-height:1.55;color:var(--gray-700)">
+        <li><a href="https://doi.org/10.3390/biomedicines14071638" target="_blank" rel="noopener">Ailawadi S et al., Biomedicines 2026 (A+B vs D+T PSM)</a> — <em>Biomedicines</em> 2026;14(7):1638. Published 21 Jul 2026. DOI 10.3390/biomedicines14071638. PMID 42512110. PMCID PMC13406657. TriNetX EHR, 112 US orgs, data access 7 May 2026. Unmatched n=2,819 (2,031 A+B, 788 D+T). After 1:1 PSM n=1,536 (768 vs 768). Median OS 16.3 vs 22.5 months, HR 0.89 (95% CI 0.76–1.0), not significant. 6-month OS 76.1% vs 75.9%. 1-year OS 58.3% vs 62.2%. 3-year median OS 496 vs 683 days, HR 0.89 (0.76–1.04). 90-day colitis 3.0% A+B vs 5.1% D+T. Authors state no ORR or PFS in this dataset. Distinct from Ailawadi JCO 4163 (PSM n=723, mOS 18.3 vs 22.8). <strong>MODELLED/GAP:</strong> TriNetX RWE paper, not a 1L A+B vs STRIDE RCT. Dual-eligibility unchanged.</li>
+      </ul>
+
+      <h4 style="font-size:13px;margin:0 0 8px;color:var(--gray-700)">HBV TACE plus A+B vs TACE — MODELLED/GAP</h4>
+      <ul style="margin:0 0 14px 18px;font-size:12.5px;line-height:1.55;color:var(--gray-700)">
+        <li><a href="https://doi.org/10.3389/fonc.2026.1840779" target="_blank" rel="noopener">Feng J et al., Front Oncol 2026 (TACE+TA vs TACE HBV)</a> — <em>Front Oncol</em> 2026;16:1840779. Published 29 Jun 2026. DOI 10.3389/fonc.2026.1840779. PMID 42444826. PMCID PMC13357207. Single-center Yichang. Unmatched n=246 (TACE+TA 133, TACE 113). After 1:1 PSM n=95 vs 95. Unmatched ORR 48.1% (64/133) vs 30.0% (34/113). DCR 78.2% vs 58.4%. After PSM mOS 19 months (95% CI 15–33) vs 13 (12–16). After PSM mPFS 8 (7–12) vs 6 (5–8). After PSM OS HR 1.883 (1.320–2.686) for TACE vs TACE+TA. HBV reactivation 8.3% vs 1.8%. Printed dose: atezolizumab 15 mg/kg plus bevacizumab 15 mg/kg; do not correct. After-PSM ORR and ORR CIs not printed here. NCT not printed. Distinct from Zhao Front Oncol 1880527 and Yuan Front Oncol 1744076. <strong>MODELLED/GAP:</strong> TACE add-on HBV RWE, not a 1L A+B vs STRIDE RCT. Dual-eligibility unchanged.</li>
+      </ul>
+
+      <h4 style="font-size:13px;margin:0 0 8px;color:var(--gray-700)">2L HAIC vs TKI after A+B — MODELLED/GAP</h4>
+      <ul style="margin:0 0 14px 18px;font-size:12.5px;line-height:1.55;color:var(--gray-700)">
+        <li><a href="https://doi.org/10.1148/radiol.253280" target="_blank" rel="noopener">Yoo JS et al., Radiology 2026 (2L HAIC vs TKI)</a> — <em>Radiology</em> 2026 Aug;320(2):e253280. DOI 10.1148/radiol.253280. PMID 42550027. Multicenter retrospective after atezolizumab-bevacizumab failure; HAIC cisplatin-fluorouracil vs TKI at standard doses; March 2022–August 2025; IPTW. n=90 (HAIC n=51, TKI n=39); mean age 62 years ± 10.9; 73 men. Unweighted median OS 10.4 vs 6.4 months (P=.62). Unweighted median PFS 5.3 vs 3.6 months (P=.008). ORR 35% (18 of 51) vs 5% (two of 39), P=.002. DCR 67% (34 of 51) vs 26% (10 of 39), P<.001. After IPTW median PFS 7.1 vs 3.4 months (P<.001). After IPTW median OS 10.5 vs 6.3 months (P=.32). Baseline beyond up-to-seven 88% (45 of 51) vs 64% (25 of 39), P=.01. No HR and no 95% CI for OS/PFS/ORR in the abstract. NCT not printed. Distinct from Feng Front Oncol 1840779. <strong>MODELLED/GAP:</strong> 2L HAIC vs TKI after A+B failure, not a 1L A+B vs STRIDE RCT. Dual-eligibility unchanged.</li>
+      </ul>
+
+      <h4 style="font-size:13px;margin:0 0 8px;color:var(--gray-700)">Thai STRIDE EAP RWE — MODELLED/GAP</h4>
+      <ul style="margin:0 0 14px 18px;font-size:12.5px;line-height:1.55;color:var(--gray-700)">
+        <li><a href="https://doi.org/10.32604/or.2026.083206" target="_blank" rel="noopener">Korphaisarn K et al., Oncol Res 2026 (Thai STRIDE EAP)</a> — <em>Oncol Res</em> 2026;34(9):16. Published 13 Aug 2026. DOI 10.32604/or.2026.083206. PMID 42630704. Thai Expanded Access Program STRIDE (durvalumab plus tremelimumab), retrospective multicenter, August 2023–November 2025. n=50; median age 62 years; 80% male. HBV 44%, HCV 30%, nonviral 26%. Child-Pugh A 92%. Macrovascular invasion 24%, including five with Vp4. Overall ORR 12%, DCR 60%. HIMALAYA-eligible n=43: ORR 12%, DCR 56%. Median follow-up 28.9 months. Overall mPFS 4.6 months, mOS 10.5 months. HIMALAYA-eligible mPFS 6.9 months, mOS 14.0 months. Any-grade AE 76%, grade ≥3 AE 24%. Hepatitis 48% overall, 14% grade ≥3. No HR and no 95% CI printed in the abstract. NCT not printed. Distinct from Yoo Radiology e253280 and from Rimassa HIMALAYA 5-year / Lau HIMALAYA Asia / Celsa DT-real 101685. <strong>MODELLED/GAP:</strong> Thai STRIDE EAP RWE, not a 1L A+B vs STRIDE RCT. Dual-eligibility unchanged.</li>
+      </ul>
+
+      <h4 style="font-size:13px;margin:0 0 8px;color:var(--gray-700)">TACE+donafenib+camrelizumab vs TACE+D PVTT — MODELLED/GAP</h4>
+      <ul style="margin:0 0 14px 18px;font-size:12.5px;line-height:1.55;color:var(--gray-700)">
+        <li><a href="https://doi.org/10.3389/fimmu.2026.1882605" target="_blank" rel="noopener">Zhang Q et al., Front Immunol 2026 (TACE+D+C vs TACE+D)</a> — <em>Front Immunol</em> 2026;17:1882605. DOI 10.3389/fimmu.2026.1882605. PMID 42620307. PMCID PMC13485731. Dual-center retrospective PSM of TACE + donafenib + camrelizumab (TACE+D+C) vs TACE + donafenib (TACE+D) in HCC with PVTT. Enrollment Dec 2021–Jul 2025. Printed n before PSM: TACE+D 152, TACE+D+C 133. After 1:1 PSM (caliper 0.2 SD) n=109 vs 109. After PSM mOS 15.90 vs 9.10 months (95% CI 12.30–21.30 vs 6.80–11.40; HR 0.52, 95% CI 0.38–0.71, P<0.001). After PSM mPFS 11.20 vs 7.10 months (95% CI 8.90–15.60 vs 5.40–9.10; HR 0.51, 95% CI 0.37–0.71, P<0.001). After PSM intrahepatic ORR 58.72% vs 36.70% (P=0.001); DCR 89.91% vs 77.06% (P=0.011). After PSM PVTT ORR 42.20% vs 23.85% (P=0.004); DCR 77.06% vs 64.22% (P=0.037). Median follow-up 13.92 months (range 4.64–23.17) vs 10.43 months (range 4.41–18.45). NCT not printed. Not A+B and not STRIDE. <strong>MODELLED/GAP:</strong> TACE plus PD-1 plus donafenib vs TACE plus donafenib PVTT RWE, not a 1L A+B vs STRIDE RCT. Dual-eligibility unchanged.</li>
+      </ul>
+
+      <h4 style="font-size:13px;margin:0 0 8px;color:var(--gray-700)">Houston Methodist 1L/later A+B RWE — MODELLED/GAP</h4>
+      <ul style="margin:0 0 14px 18px;font-size:12.5px;line-height:1.55;color:var(--gray-700)">
+        <li><a href="https://doi.org/10.3390/biomedicines13122844" target="_blank" rel="noopener">Esmail A et al., Biomedicines 2025 (Houston Methodist A+B)</a> — <em>Biomedicines</em> 2025;13(12):2844. DOI 10.3390/biomedicines13122844. PMID 41462859. PMCID PMC12730803. Retrospective single-institution A+B at Houston Methodist, Jan 2020–Jun 2023. Printed n=87 (70 first-line, 17 later-line). Dosing atezolizumab 1,200 mg plus bevacizumab 15 mg/kg every 3 weeks. Median OS 15.1 months (95% CI 10.57–25.97). Median PFS 9.1 months (95% CI 7.4–21.07). ORR 31.3% (CR 7.2%, PR 25%, SD 52%, PD 16%). ORR has no printed CI. Response by clinician-evaluated imaging, not named RECIST. First-line mOS 16.83 months (95% CI 11.97–not reached) vs later-line 11.47 months (8.7–not reached). First-line mPFS 14 months (95% CI 8.6–not reached) vs later-line 6 months (95% CI 3.1–not reached). CP A mOS 21.2 vs CP B 5.2 months. NCT not printed. Distinct from Ailawadi Biomedicines 1638 and Al-Najjar JCO 578. <strong>MODELLED/GAP:</strong> single-institution US A+B RWE, not a 1L A+B vs STRIDE RCT. Dual-eligibility unchanged.</li>
+      </ul>
+
+      <h4 style="font-size:13px;margin:0 0 8px;color:var(--gray-700)">A+B standard vs low-dose bev — MODELLED/GAP</h4>
+      <ul style="margin:0 0 14px 18px;font-size:12.5px;line-height:1.55;color:var(--gray-700)">
+        <li><a href="https://doi.org/10.2147/jhc.s534271" target="_blank" rel="noopener">Zhang S et al., JHC 2025 (SD vs LD bev)</a> — <em>J Hepatocell Carcinoma</em> 2025;12:2007–2015. DOI 10.2147/jhc.s534271. PMID 40918997. PMCID PMC12410375. Single-center retrospective 1L atezolizumab 1,200 mg q3w plus bevacizumab, standard-dose 15 mg/kg vs low-dose 7.5 mg/kg from cycle 1. Printed n=63 (SD 32, LD 31). Enrollment 1 March 2021 to 1 February 2024. Overall mOS 20.0 months, mPFS 7.8 months, ORR 49.2%, DCR 88.9% (mRECIST). SD vs LD mOS 22.0 vs 19.3 months, mPFS 8.0 vs 6.9 months (body OS P=0.275, PFS P=0.297). Table 2 ORR SD 53.1% vs LD 45.2% vs All 49.2%. Median follow-up 13.1 months (95% CI 12.4–14.8). Abstract has no ORR and no CIs or HRs. Body has no OS/PFS/ORR CIs or HRs. Source inconsistency left as printed: prose CR 9 (25.4%) vs Table 2 CR 9 (14.3%). NCT not printed. Distinct from Zhang Q Front Immunol 1882605, Araz JHC s617103, and Chen J JHC s619755. <strong>MODELLED/GAP:</strong> single-center dose-split A+B RWE, not a 1L A+B vs STRIDE RCT. Dual-eligibility unchanged.</li>
+      </ul>
+
+      <h4 style="font-size:13px;margin:0 0 8px;color:var(--gray-700)">Vietnam HBsAg+ 1L A+B RWE — MODELLED/GAP</h4>
+      <ul style="margin:0 0 14px 18px;font-size:12.5px;line-height:1.55;color:var(--gray-700)">
+        <li><a href="https://doi.org/10.1177/10732748251405547" target="_blank" rel="noopener">Dung NT et al., Cancer Control 2025 (Vietnam A+B)</a> — <em>Cancer Control</em> 2025;32:10732748251405547. DOI 10.1177/10732748251405547. PMID 41388811. PMCID PMC12701926. Hospital-based 1L atezolizumab 1,200 mg plus bevacizumab 15 mg/kg q3w in HBsAg-positive unresectable HCC, 3 Northern Vietnam hospitals, June 2020–August 2024. Printed n=97 (176 screened). RECIST 1.1 ORR 24.7% (CR 3/97 3.1%, PR 21/97 21.6%), DCR 64.9%. mPFS 4.3 months (95% CI 3.4–5.2). mOS 20.0 months (95% CI 11.1–28.9). Median follow-up 11.1 months (95% CI 9.8–13.2). Abstract has no ORR. NCT not printed. Distinct from Zhang S JHC s534271 and Zhang Q Front Immunol 1882605. <strong>MODELLED/GAP:</strong> Vietnam HBsAg+ 1L A+B RWE, not a 1L A+B vs STRIDE RCT. Dual-eligibility unchanged.</li>
+      </ul>
+
+      <h4 style="font-size:13px;margin:0 0 8px;color:var(--gray-700)">South Indian A±B RWE — MODELLED/GAP</h4>
+      <ul style="margin:0 0 14px 18px;font-size:12.5px;line-height:1.55;color:var(--gray-700)">
+        <li><a href="https://doi.org/10.1186/s12885-025-14400-9" target="_blank" rel="noopener">Babu M et al., BMC Cancer 2025 (South Indian A±B)</a> — <em>BMC Cancer</em> 2025;25:1026. DOI 10.1186/s12885-025-14400-9. PMID 40596943. PMCID PMC12210818. Retrospective two-centre South Indian real-world atezolizumab plus or minus bevacizumab for unresectable HCC, Sep 2020–May 2024. Printed n=104 (75 combination, 29 atezolizumab monotherapy). mOS 14.8 months (95% CI 6.8–22.9). mPFS 6.2 months (95% CI 2.5–9.9). Among 68 imaged, mRECIST ORR 33.8% (CR 7/68 10.2%, PR 16/68 23.5%), DCR 63.2%. Discussion prints ORR 34%; conclusion prints ORR 33.1% / DCR 63.7% (leave as printed). Abstract has no ORR. NCT not printed. No OS/PFS HR vs comparator. Distinct from Dung NT Cancer Control 10732748251405547 and Phillips BMC Cancer 16387-3. <strong>MODELLED/GAP:</strong> South Indian mixed A+B/atezo-mono RWE, not a 1L A+B vs STRIDE RCT. Dual-eligibility unchanged.</li>
+      </ul>
+
+      <h4 style="font-size:13px;margin:0 0 8px;color:var(--gray-700)">Japan A+B 3-year OS RWE — MODELLED/GAP</h4>
+      <ul style="margin:0 0 14px 18px;font-size:12.5px;line-height:1.55;color:var(--gray-700)">
+        <li><a href="https://doi.org/10.1002/cam4.71640" target="_blank" rel="noopener">Ohama H et al., Cancer Med 2026 e71640 (RELPEC/HCC 48)</a> — <em>Cancer Med</em> 2026 Feb;15(2):e71640. DOI 10.1002/cam4.71640. PMID 41692425. PMCID PMC12906954. Multicenter retrospective Japanese real-world atezolizumab 1,200 mg plus bevacizumab 15 mg/kg q3w for unresectable HCC, Child-Pugh A, BCLC B/C, started 2020–2021, no prior ICI. Printed analysis n=555 (first-line 307, later-line 248; response-evaluable 499). RECIST v1.1 ORR 41.3% (CR 31, PR 175), DCR 79.4%. Median PFS 6.2 months (95% CI 5.6–7.1). Median OS 21.6 months (95% CI 19.0–25.0), 3-year OS 29.7% (95% CI 25.5–34.0). First-line mOS 25.1 months (95% CI 20.5–30.3), 3-year 35.9%. NCT not printed. No OS/PFS HR vs comparator. Distinct from Babu BMC Cancer 1026 and Dung Cancer Control 10732748251405547. <strong>MODELLED/GAP:</strong> Japan A+B RWE, not a 1L A+B vs STRIDE RCT. Dual-eligibility unchanged.</li>
+      </ul>
+
+      <h4 style="font-size:13px;margin:0 0 8px;color:var(--gray-700)">US VA 1L STRIDE RWE — MODELLED/GAP</h4>
+      <ul style="margin:0 0 14px 18px;font-size:12.5px;line-height:1.55;color:var(--gray-700)">
+        <li><a href="https://doi.org/10.3390/cancers18071085" target="_blank" rel="noopener">Bansal S et al., Cancers 2026 (VA STRIDE)</a> — <em>Cancers (Basel)</em> 2026;18(7):1085. DOI 10.3390/cancers18071085. PMID 41976308. PMCID PMC13072021. Retrospective US VA first-line STRIDE for unresectable HCC. Printed n=107. Median OS 9.6 months (95% CI 7.3–12.6). Child-Pugh A n=81 mOS 12.4 months (95% CI 9.1–22.1). Child-Pugh B n=26 mOS 5.2 months (95% CI 1.5–9.3). HIMALAYA-criteria met n=70 mOS 12.6 months (95% CI 9.1–22.1). ORR and PFS not printed. NCT not printed. Distinct from Ohama Cancer Med e71640, Korphaisarn Oncol Res 083206, and Rimassa 5-yr HIMALAYA. <strong>MODELLED/GAP:</strong> US VA STRIDE RWE, not a 1L A+B vs STRIDE RCT. Dual-eligibility unchanged.</li>
+      </ul>
+
+      <h4 style="font-size:13px;margin:0 0 8px;color:var(--gray-700)">China 5-center A+B RWE n=48 — MODELLED/GAP</h4>
+      <ul style="margin:0 0 14px 18px;font-size:12.5px;line-height:1.55;color:var(--gray-700)">
+        <li><a href="https://doi.org/10.1177/11795549251414656" target="_blank" rel="noopener">Shao M et al., Clin Med Insights Oncol 2026 (China A+B)</a> — <em>Clin Med Insights Oncol</em> 2026;20:11795549251414656. Published 2026 Jan 20. DOI 10.1177/11795549251414656. PMID 41574052. PMCID PMC12820020. 5-center China retrospective uHCC atezolizumab 1,200 mg plus bevacizumab 15 mg/kg q3w Jan 2021–Jan 2023, RECIST 1.1 and mRECIST. Printed n=48 (first-line 35, second-line 13). RECIST 1.1 all-comers ORR 19/48 (39.6%), DCR 34/48 (70.8%); first-line ORR 15/35 (42.9%). mRECIST all-comers ORR 29/48 (60.4%). Median follow-up 14.5 months. All-comers median PFS 7.6 months (95% CI 4.4–9.6); first-line 8.5 months (4.4–11.2); second-line 5.1 months (2.1–7.9), log-rank P=0.059. Median OS not reached. NCT not printed. GAP: n=48 single-arm RWE, OS not reached, no control HR, mostly CP-A 46/48. <strong>MODELLED/GAP:</strong> not a 1L A+B vs STRIDE RCT. Do not overwrite IMbrave150 or HIMALAYA. Dual-eligibility unchanged.</li>
+      </ul>
+
+      <h4 style="font-size:13px;margin:0 0 8px;color:var(--gray-700)">Japan 1L A+B vs Dur/Tre DCP RWE — MODELLED/GAP</h4>
+      <ul style="margin:0 0 14px 18px;font-size:12.5px;line-height:1.55;color:var(--gray-700)">
+        <li><a href="https://doi.org/10.1111/liv.70803" target="_blank" rel="noopener">Tanaka K et al., Liver Int 2026 e70803 (DCP A+B vs Dur/Tre)</a> — <em>Liver Int</em> 2026 Aug;46(8):e70803. Published online 2026 Jul 20. DOI 10.1111/liv.70803. PMID 42477505. PMCID PMC13385463. Japan multicenter retrospective first-line Atez/Bev vs Dur/Tre, BCLC B/C, Sep 2020–Dec 2025, local RECIST v1.1. Printed analyzed n=1,464 (training 722, validation 742). Table 1 regimen n: Atez/Bev 1,258; Dur/Tre 206. Results 3.1: Atez/Bev ORR 30.5%, DCR 77.1%, median PFS 6.9 months (95% CI 6.2–7.7), median OS 19.7 months (17.8–21.4). Dur/Tre ORR 26.3%, DCR 62.4%, median PFS 4.3 months (3.3–5.8) p<0.001, median OS 18.7 months (17.0–24.4) p=0.359. NCT not printed. Distinct from Tanaka Hepatol Res hepr.70178. GAP: retrospective Japan RWE, unbalanced n, no OS/PFS HR printed in Results 3.1, not RCT. <strong>MODELLED/GAP:</strong> not a 1L A+B vs STRIDE RCT. Do not overwrite IMbrave150 or HIMALAYA. Dual-eligibility unchanged.</li>
+      </ul>
+
+      <h4 style="font-size:13px;margin:0 0 8px;color:var(--gray-700)">TriNetX 1L A+B vs Dur/Tre JGH — MODELLED/GAP</h4>
+      <ul style="margin:0 0 14px 18px;font-size:12.5px;line-height:1.55;color:var(--gray-700)">
+        <li><a href="https://doi.org/10.1111/jgh.70555" target="_blank" rel="noopener">Lin SH et al., J Gastroenterol Hepatol 2026 (TriNetX 1L)</a> — <em>J Gastroenterol Hepatol</em> 2026 Jul 10. DOI 10.1111/jgh.70555. PMID 42432450. TriNetX Global Collaborative Network retrospective 1L Atezo/Bev vs Durva/Treme. Eligible n=3,362. Final analysis 765 matched pairs. Median follow-up 14.8 months Atezo/Bev vs 17.5 months Durva/Treme. Median OS 14.6 vs 17.3 months; aHR 0.96 (95% CI 0.83–1.12). GI bleeding aHR 0.88 (0.68–1.13); non-GI bleeding aHR 1.06 (0.60–1.89); treatment-requiring irAEs less frequent with Atezo/Bev aHR 0.61 (0.48–0.77); incident hypertension aHR 1.24 (0.87–1.76) not statistically significant. Abstract does not print numeric ORR, DCR, or PFS. NCT not printed. <strong>MODELLED/GAP:</strong> retrospective PSM RWE, not RCT. Dual-eligibility unchanged.</li>
+      </ul>
+
+      <h4 style="font-size:13px;margin:0 0 8px;color:var(--gray-700)">Elderly 1L A+B except ALBI 3 — MODELLED/GAP</h4>
+      <ul style="margin:0 0 14px 18px;font-size:12.5px;line-height:1.55;color:var(--gray-700)">
+        <li><a href="https://doi.org/10.1016/j.jhepr.2026.101827" target="_blank" rel="noopener">Metivier C et al., JHEP Reports 2026 (elderly A+B)</a> — <em>JHEP Reports</em> 2026 Jun;8(6):101827. DOI 10.1016/j.jhepr.2026.101827. PMID 41856249. PMCID PMC13195595. French multicenter retrospective 1L AtezoBev. Whole cohort n=814 (248 aged 75 or older unmatched). After 1:1 PSM n=484 (242 vs 242). After PSM ORR 30.5% vs 27.3%; DCR 70.4% vs 69.9%; median OS 15.4 vs 16.1 months (p=0.936); median PFS 7.2 vs 6.5 months (p=0.706). After PSM mALBI 3 in 75 or older: median OS 5.43 months, median PFS 2.3 months. RECIST 1.1. Observational NCT06416683. Distinct from Allaire CHIEF. <strong>MODELLED/GAP:</strong> retrospective PSM RWE, not RCT. Dual-eligibility unchanged.</li>
+      </ul>
+
+      <h4 style="font-size:13px;margin:0 0 8px;color:var(--gray-700)">Cal Era camre+lenva+RALOX-HAIC — MODELLED/GAP</h4>
+      <ul style="margin:0 0 14px 18px;font-size:12.5px;line-height:1.55;color:var(--gray-700)">
+        <li><a href="https://doi.org/10.1159/000546575" target="_blank" rel="noopener">Zang M et al., Liver Cancer 2025 (Cal Era)</a> — <em>Liver Cancer</em> 2025;14(6):731–742. DOI 10.1159/000546575. PMID 40567389. PMCID PMC12187168. NCT05003700. Prospective single-arm phase II. n=39. Confirmed ORR 66.7% (95% CI 49.8–80.9) RECIST 1.1. Median PFS 13.8 months (95% CI 10.5–20.5). Median OS 21.2 months (95% CI 14.3–21.2). Grade 3–4 TRAEs 79.5%; no treatment-related deaths. <strong>MODELLED/GAP:</strong> prospective single-arm phase II, not RCT; not A+B and not STRIDE. Dual-eligibility unchanged.</li>
+      </ul>
+
+      <h4 style="font-size:13px;margin:0 0 8px;color:var(--gray-700)">Rego+pembro phase 1b — MODELLED/GAP</h4>
+      <ul style="margin:0 0 14px 18px;font-size:12.5px;line-height:1.55;color:var(--gray-700)">
+        <li><a href="https://doi.org/10.1097/HEP.0000000000001585" target="_blank" rel="noopener">El-Khoueiry AB et al., Hepatology 2026 (rego+pembro 1b)</a> — <em>Hepatology</em> 2026 Jun 1;83(6):1433–1445. DOI 10.1097/HEP.0000000000001585. PMID 41213032. PMCID PMC13178776. NCT03347292. Phase 1b first-line. Safety n=57; response-evaluable n=54. ORR 31% (17/54; 95% CI 19.9–46.3); DCR 89% RECIST 1.1. Median PFS 7.5 months (95% CI 4.4–11.7). Median OS 24.9 months (95% CI 15.2–NE). <strong>MODELLED/GAP:</strong> phase 1b, not RCT; not A+B and not STRIDE. Dual-eligibility unchanged.</li>
+      </ul>
+
+      <h4 style="font-size:13px;margin:0 0 8px;color:var(--gray-700)">AdvanTIG-206 phase 2 RCT — not GAP</h4>
+      <ul style="margin:0 0 14px 18px;font-size:12.5px;line-height:1.55;color:var(--gray-700)">
+        <li><a href="https://doi.org/10.1007/s00262-026-04399-8" target="_blank" rel="noopener">Ren Z et al., Cancer Immunol Immunother 2026 (AdvanTIG-206)</a> — DOI 10.1007/s00262-026-04399-8. PMID 42047833. PMCID PMC13125556. NCT04948697. Phase 2 RCT. First-line ociperlimab plus tislelizumab plus BAT1706 vs tislelizumab plus BAT1706. n=94 (62 vs 32). Confirmed investigator ORR 37.1% (25.2–50.3) vs 40.6% (23.7–59.4). mPFS 8.3 vs 6.9 months, HR 1.11 (0.66–1.88). mOS 19.7 vs 22.9 months, HR 1.01 (0.53–1.93). Phase 2 RCT not designed for formal hypothesis testing. <strong>RCT (not GAP)</strong> for this comparison. MODELLED: not 1L A+B vs STRIDE. Dual-eligibility unchanged.</li>
+      </ul>
+
+      <h4 style="font-size:13px;margin:0 0 8px;color:var(--gray-700)">STRIDE Turkey EAP RWE — MODELLED/GAP</h4>
+      <ul style="margin:0 0 14px 18px;font-size:12.5px;line-height:1.55;color:var(--gray-700)">
+        <li><a href="https://doi.org/10.3390/jcm15155997" target="_blank" rel="noopener">Midik MM et al., J Clin Med 2026 (STRIDE Turkey EAP)</a> — <em>J Clin Med</em> 2026;15(15):5997. DOI 10.3390/jcm15155997. PMID 42590101. First-line STRIDE (durvalumab plus tremelimumab). Turkey multicenter RWE, expanded-access programme, 18 centres. n=32. mPFS 7.25 months (3.68–22.29). mOS 11.43 months (4.50–NR). ORR not printed in the PubMed abstract. <strong>MODELLED/GAP:</strong> retrospective RWE; small n; no control. Not a 1L A+B vs STRIDE RCT. Dual-eligibility unchanged.</li>
+      </ul>
+
+      <h4 style="font-size:13px;margin:0 0 8px;color:var(--gray-700)">HAIC-FOLFOX + toripalimab vs HAIC-FOLFOX + sorafenib — RCT not GAP</h4>
+      <ul style="margin:0 0 14px 18px;font-size:12.5px;line-height:1.55;color:var(--gray-700)">
+        <li><a href="https://doi.org/10.1002/mco2.70805" target="_blank" rel="noopener">Lai Z et al., MedComm 2026 (HAIC-FOLFOX + toripalimab)</a> — <em>MedComm</em> 2026;7:e70805. DOI 10.1002/mco2.70805. PMID 42266185. NCT04135690. First-line HAIC-FOLFOX plus toripalimab vs HAIC-FOLFOX plus sorafenib. Single-centre non-comparative randomized phase 2. n=72 (36 vs 36). 6-month PFS rate 63.9% vs 61.1%. mPFS 9.1 vs 7.2 months. mOS 20.9 vs 16.4 months. ORR not printed in the PubMed abstract. <strong>RCT (not GAP)</strong> for this comparison. MODELLED: Asia-enriched HAIC setting, not global SoC vs IMbrave150, HIMALAYA, or CheckMate-9DW. Dual-eligibility unchanged.</li>
+      </ul>
+
+      <h4 style="font-size:13px;margin:0 0 8px;color:var(--gray-700)">IMMUNIB nivo + lenvatinib phase 2 — MODELLED/GAP</h4>
+      <ul style="margin:0 0 14px 18px;font-size:12.5px;line-height:1.55;color:var(--gray-700)">
+        <li><a href="https://doi.org/10.1016/j.ejca.2026.116847" target="_blank" rel="noopener">Vogel A et al., Eur J Cancer 2026 (IMMUNIB IKF-t006)</a> — DOI 10.1016/j.ejca.2026.116847. PMID 42284972. NCT03841201. First-line nivolumab plus lenvatinib. Single-arm phase 2. n=50 enrolled / 49 treated. ORR RECIST 1.1 32% (19.5–46.7). mPFS 9.0 months. mOS 26.6 months. <strong>MODELLED/GAP:</strong> single-arm, not RCT. Not a 1L A+B vs STRIDE RCT. Dual-eligibility unchanged.</li>
+      </ul>
+
+      <h4 style="font-size:13px;margin:0 0 8px;color:var(--gray-700)">SoraHAIC vs SoraTACE phase III — RCT not GAP</h4>
+      <ul style="margin:0 0 14px 18px;font-size:12.5px;line-height:1.55;color:var(--gray-700)">
+        <li><a href="https://doi.org/10.1016/j.jncc.2026.04.002" target="_blank" rel="noopener">Lai Z et al., J Natl Cancer Cent 2026 (SoraHAIC vs SoraTACE)</a> — <em>J Natl Cancer Cent</em> 2026 Aug;6(4):410–419. DOI 10.1016/j.jncc.2026.04.002. PMID 42630515. PMCID PMC13494611. NCT02856126. Open-label single-centre phase III RCT, 2:1 SoraHAIC (sorafenib 400 mg twice daily plus FOLFOX-HAIC every 3 weeks) versus SoraTACE (sorafenib 400 mg plus TACE) in BCLC-C HCC. 207 allocated (141 vs 66). Investigator-assessed ORR RECIST v1.1 46.8% (38.4–55.4) vs 10.6% (4.4–20.6); mRECIST ORR 52.5% vs 30.3%. Median OS 15.7 vs 11.2 months, HR 0.58 (0.42–0.80). Median PFS 7.2 vs 4.1 months, HR 0.48 (0.35–0.65). Distinct from Lai Z MedComm 2026 PMID 42266185 NCT04135690. <strong>RCT (not GAP)</strong> for this comparison. MODELLED: not 1L A+B vs STRIDE. Dual-eligibility unchanged.</li>
+      </ul>
+
+      <h4 style="font-size:13px;margin:0 0 8px;color:var(--gray-700)">KN046 plus lenvatinib phase II — MODELLED/GAP</h4>
+      <ul style="margin:0 0 14px 18px;font-size:12.5px;line-height:1.55;color:var(--gray-700)">
+        <li><a href="https://doi.org/10.1038/s41467-025-56537-y" target="_blank" rel="noopener">Xu D et al., Nat Commun 2025 (KN046 + lenvatinib)</a> — <em>Nat Commun</em> 2025;16(1):1443. DOI 10.1038/s41467-025-56537-y. PMID 39920148. NCT04542837. Open-label multicenter phase II, first-line KN046 5 mg/kg every 3 weeks plus lenvatinib 12 or 8 mg once daily. Fifty-five participants enrolled. ORR 45.5% (31.97–59.45) per RECIST v1.1. Median PFS 11.0 (8.21–15.24) months. Median OS 16.4 (11.20–not estimable) months. Distinct from Lai Z JNCC 2026 PMID 42630515 and from REPLACEMENT Kudo PMID 41063737 / Ueshima PMID 41178454. <strong>MODELLED/GAP:</strong> single-arm phase II, not RCT. Dual-eligibility unchanged.</li>
+      </ul>
+
+      <h4 style="font-size:13px;margin:0 0 8px;color:var(--gray-700)">BCLC 2026 society guideline — MODELLED/GAP</h4>
+      <ul style="margin:0 0 14px 18px;font-size:12.5px;line-height:1.55;color:var(--gray-700)">
+        <li><a href="https://doi.org/10.1016/j.jhep.2025.10.020" target="_blank" rel="noopener">Reig M et al., BCLC 2026 update</a> — <em>J Hepatol</em> 2026;84(3):631–654. DOI 10.1016/j.jhep.2025.10.020. PMID 41151697. Reig M, Sanduzzi-Zamparelli M, Forner A, et al. BCLC strategy for prognosis prediction and treatment recommendations: The 2026 update. Each BCLC stage stays linked to an evidence-based first-line option. Decision chapter embeds CUSE (Complexity, Uncertainty, Subjectivity, Emotion). Not a 1L A+B vs STRIDE head-to-head RCT. No 1L A+B vs STRIDE RCT HR or ORR. Distinct from Chan SL Lancet Commission 2025. <strong>MODELLED/GAP:</strong> review/guideline, not an RCT. Dual-eligibility A+B vs STRIDE unchanged.</li>
+      </ul>
+
       <h4 style="font-size:13px;margin:0 0 8px;color:var(--gray-700)">Guidelines & strategy</h4>
       <ul style="margin:0 0 14px 18px;font-size:12.5px;line-height:1.55;color:var(--gray-700)">
-        <li><a href="https://www.journal-of-hepatology.eu/article/S0168-8278(25)02571-1/fulltext" target="_blank" rel="noopener">BCLC strategy 2026 update</a> — Reig et al., <em>J Hepatol</em></li>
         <li><a href="https://sysge.org/wp-content/uploads/Systemic-Therapy-for-Advanced-HCC-.-ASCO-2024.pdf" target="_blank" rel="noopener">ASCO systemic therapy HCC</a> — Atezo+Bev or Durva+Treme as 1L options</li>
         <li><a href="https://www.nccn.org/guidelines/guidelines-detail?category=1&id=1514" target="_blank" rel="noopener">NCCN Hepatocellular Carcinoma</a> — (institutional access)</li>
       </ul>
@@ -6831,8 +7524,12 @@ function showRec(partial = false) {
   if (recAlt) recLine = 'Both A+B and STRIDE are eligible on this profile; this option leads.';
   recLine = String(recLine).replace(/\d+(\.\d+)?%/g, '').replace(/\s+/g, ' ').trim();
   if (recLine && recLine.charAt(recLine.length - 1) !== '.') recLine += '.';
-  if (_rt) _rt.textContent = recName;
-  if (_rs) _rs.textContent = recLine;
+  if (_rt) {
+    if (ds.dual) _rt.textContent = 'A+B and STRIDE both close';
+    else if (recKey === 'incomplete') _rt.textContent = 'Profile incomplete';
+    else _rt.textContent = 'Closest design on this profile';
+  }
+  if (_rs) _rs.textContent = 'The highlighted column is the nearest match. Not eligibility and not a prescription.';
 
   // Safety notes (clinical, not product picks)
   let safetyNote = '';
@@ -6990,9 +7687,9 @@ function showRec(partial = false) {
   }
 
   const toc = `<nav class="res-toc" aria-label="Results sections">
-    <a href="#resJump">Summary</a>
-    <a href="#sec-mc-mix">MODELLED mix</a>
-    <a href="#sec-funnel">HKCaR 2023</a>
+    <a href="#sec-design">Study design</a>
+    <a href="#sec-efficacy">Efficacy</a>
+    <a href="#sec-match">Trial similarity</a>
     <a href="#sec-access">HK access</a>
     <a href="#sec-hklc">HKLC</a>
     <a href="#sec-cuse">CUSE</a>
@@ -7023,9 +7720,6 @@ function showRec(partial = false) {
     <a href="#sec-wang">TACE then A+B</a>
     <a href="#sec-wangmeta">TACE+IO meta</a>
     <a href="#sec-leiy">Lei Y TACE RWE</a>
-    <a href="#sec-match">Trial match</a>
-    <a href="#sec-design">Study design</a>
-    <a href="#sec-efficacy">Efficacy</a>
   </nav>`;
 
   const recAltHtml = recAlt
@@ -7083,22 +7777,7 @@ function showRec(partial = false) {
 
   let detailInner = toc + summary;
   if (ds.dual) detailInner += dualNote + gapHtml;
-  detailInner += (function(){ try { return hkMcResultsHtml(); } catch (e) { return ''; } })();
   detailInner += safetyNote;
-  detailInner += `<div class="tier preferred" id="sec-match">
-    <div class="tier-head"><span class="badge t1">Trial baseline similarity</span><span>${ds.dual ? (dualCopy(ds).badge) : 'Highest → lowest'}</span></div>
-    <div class="regimen" style="padding-top:4px">
-      <div class="sim-big">
-        ${rankedCards.map((x, i) => simCard(x.t, i === 0 && !ds.dual, x.key, i + 1, ds.dual && (x.key === 'imbrave' || x.key === 'himalaya'))).join('')}
-      </div>
-      <p style="font-size:12px;color:var(--gray-500);line-height:1.45;margin:0">
-        ${ds.dual
-          ? (dualCopy(ds).sub + ' Illustrative only.')
-          : 'Separation is driven mainly by anti-VEGF safety and regimen design. Illustrative only.'}
-      </p>
-    </div>
-  </div>`;
-  detailInner += (function(){ try { return hkFunnelHtml(false); } catch(e) { return ''; } })();
   detailInner += (function(){ try { return hkAccessHtml(false); } catch(e) { return ''; } })();
   detailInner += (function(){ try { return hklcNoteHtml(); } catch(e) { return ''; } })();
   detailInner += (function(){ try { return cuseHtml(); } catch(e) { return ''; } })();
@@ -7132,8 +7811,21 @@ function showRec(partial = false) {
   detailInner += criteriaHtml();
 
   const matchKey = topMatchKey();
-  detailInner += studyDesignTable(matchKey);
-  detailInner += ioCompareTable(matchKey);
+  const designLead = studyDesignTable(matchKey);
+  const efficacyLead = ioCompareTable(matchKey);
+  detailInner += `<div class="tier preferred" id="sec-match">
+    <div class="tier-head"><span class="badge t1">Trial baseline similarity</span><span>${ds.dual ? (dualCopy(ds).badge) : 'Highest → lowest'}</span></div>
+    <div class="regimen" style="padding-top:4px">
+      <div class="sim-big">
+        ${rankedCards.map((x, i) => simCard(x.t, i === 0 && !ds.dual, x.key, i + 1, ds.dual && (x.key === 'imbrave' || x.key === 'himalaya'))).join('')}
+      </div>
+      <p style="font-size:12px;color:var(--gray-500);line-height:1.45;margin:0">
+        ${ds.dual
+          ? (dualCopy(ds).sub + ' Illustrative only.')
+          : 'Separation is driven mainly by anti-VEGF safety and regimen design. Illustrative only.'}
+      </p>
+    </div>
+  </div>`;
   detailInner += mdtFold('fold-break', 'Score breakdown', scoreBreakdownHtml(trials), false);
   detailInner += mdtFold('fold-sierra', 'SIERRA context (less-fit uHCC)', sierraContextHtml(), false);
   detailInner += mdtFold('fold-scores', 'Optional risk scores', hkRiskScoresHtml(), false);
@@ -7142,8 +7834,10 @@ function showRec(partial = false) {
   detailInner += mdtFold('fold-resources', 'Sources', evidenceResourcesHtml(), false);
   detailInner += mdtFold('fold-discuss', 'Discussion prompts', discussionPromptsHtml(), false);
 
-  const htmlOut = recAltHtml + rec5yHtml + rec9dwHtml +
-    `<details class="mdt-fold" id="res-details"><summary>Details</summary><div class="fold-body">${detailInner}</div></details>`;
+  const htmlOut = designLead +
+    `<details class="mdt-fold" id="fold-efficacy"><summary>Phase 3 efficacy</summary><div class="fold-body">${efficacyLead}</div></details>` +
+    `<details class="mdt-fold" id="res-details"><summary>Details</summary><div class="fold-body">${recAltHtml}${rec5yHtml}${rec9dwHtml}${detailInner}</div></details>` +
+    patientPictureHtml();
 
   const _rb = document.getElementById('resBody');
   if (_rb) _rb.innerHTML = htmlOut;
@@ -7170,7 +7864,7 @@ function internalFitHtml(d) {
     <div class="mech">${d.sub || ''}</div>
     <div class="why" style="margin-top:8px"><strong>Logic notes:</strong> ${(d.reasons || []).join('; ') || '—'}</div>
   </div>
-  <p style="font-size:11.5px;color:var(--gray-500);margin-top:10px">This block is hidden by default so field conversations stay on profile + trial alignment.</p>`;
+  <p style="font-size:11.5px;color:var(--gray-500);margin-top:10px">This block is hidden by default so field conversations stay on profile and trial comparison.</p>`;
 }
 
 
@@ -7856,8 +8550,22 @@ function fallbackCopy(text) {
 })();
 </script>
 
-<div style="text-align:center;padding:16px 20px calc(28px + env(safe-area-inset-bottom,0px));font-size:12px;color:#6b6760;line-height:1.55;border-top:1px solid #d8d2c8;background:#f4f1ea">
-  Educational only — not a prescription and not medical advice. Clinical judgement remains with the treating physician and MDT.
-</div>
+<footer class="mayo-site-foot">
+  <div class="mayo-site-foot-inner">
+    <div>
+      <h3>HCC Simulator</h3>
+      <p>Maps unresectable HCC profiles to IMbrave150, HIMALAYA + SIERRA, and CheckMate 9DW.</p>
+    </div>
+    <div>
+      <h3>For clinicians</h3>
+      <p><a href="/guidelines">Guidelines</a><br><a href="/evidence">Evidence</a><br><a href="/hcc-simulator.html">Simulator</a></p>
+    </div>
+    <div>
+      <h3>Sources</h3>
+      <p>NCCN 2026 · BCLC 2026 · cited trial reports. Not a formulary.</p>
+    </div>
+    <p class="legal">Educational only — not a prescription and not medical advice. Clinical judgement remains with the treating physician and MDT.</p>
+  </div>
+</footer>
 </body>
 </html>
