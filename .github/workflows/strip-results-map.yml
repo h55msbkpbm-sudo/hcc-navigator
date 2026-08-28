@@ -1,0 +1,64 @@
+name: strip-results-map
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Apply Results map strip
+        run: |
+          python3 << 'PY'
+          from pathlib import Path
+          files = ['index.html', 'hcc-simulator.html']
+          needle_css = 'body.view-results .res-banner { margin-bottom: 28px !important; padding-bottom: 20px !important; }\nbody.view-results .disclaimer { margin-top: 36px !important; }'
+          insert_css = '''body.view-results .res-banner { margin-bottom: 28px !important; padding-bottom: 20px !important; }
+body.view-results .burden-map,
+body.view-results .pt-pic,
+body.view-results figure.pt-pic,
+body.view-results #burdenCalcCard,
+body.view-results .panel,
+body.view-results .snap-grid { display: none !important; }
+body.view-results .disclaimer { margin-top: 36px !important; }'''
+          old_fn = 'function patientPictureHtml() {'
+          new_fn = "function patientPictureHtml() { return ''; }\nfunction patientPictureHtml_UNUSED() {"
+          old_out = '''  const htmlOut = recLead +
+    `<details class="mdt-fold" id="res-details"><summary>Details</summary><div class="fold-body">${designLead}<details class="mdt-fold" id="fold-efficacy"><summary>Phase 3 efficacy</summary><div class="fold-body">${efficacyLead}</div></details>${rec5yHtml}${detailInner}</div></details>` +
+    patientPictureHtml();
+
+  const _rb = document.getElementById('resBody');
+  if (_rb) _rb.innerHTML = htmlOut;'''
+          new_out = '''  const htmlOut = recLead +
+    `<details class="mdt-fold" id="res-details"><summary>Details</summary><div class="fold-body">${designLead}<details class="mdt-fold" id="fold-efficacy"><summary>Phase 3 efficacy</summary><div class="fold-body">${efficacyLead}</div></details>${rec5yHtml}${detailInner}</div></details>`;
+
+  const _rb = document.getElementById('resBody');
+  if (_rb) _rb.innerHTML = htmlOut;
+  document.querySelectorAll('.burden-map, figure.pt-pic, .pt-pic, #burdenCalcCard').forEach(function(el){ el.remove(); });'''
+          for name in files:
+              p = Path(name)
+              text = p.read_text(encoding='utf-8')
+              if 'function patientPictureHtml() { return' in text and 'querySelectorAll(.burden-map' in text.replace("'", ''):
+                  print(name, 'already patched')
+                  continue
+              assert needle_css in text, name + ' missing css anchor'
+              assert old_fn in text, name + ' missing patientPictureHtml'
+              assert old_out in text, name + ' missing htmlOut block'
+              text = text.replace(needle_css, insert_css, 1)
+              text = text.replace(old_fn, new_fn, 1)
+              text = text.replace(old_out, new_out, 1)
+              p.write_text(text, encoding='utf-8')
+              print(name, 'patched', p.stat().st_size)
+          PY
+      - name: Commit patched HTML
+        run: |
+          git config user.name "h55msbkpbm-sudo"
+          git config user.email "h55msbkpbm@privaterelay.appleid.com"
+          git add index.html hcc-simulator.html
+          if git diff --cached --quiet; then
+            echo "No HTML changes"
+            exit 0
+          fi
+          git commit -m "fix: strip Couinaud / patient picture from Results"
+          git push
