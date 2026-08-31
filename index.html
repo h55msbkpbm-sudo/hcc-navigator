@@ -5670,14 +5670,14 @@ function scoreTrials() {
     const factors = [];
     if (A.varices !== null) {
       let im, him, cm, detail;
-      if (A.varices === 'none') { im = 7; him = 3; cm = 1; detail = 'no varices'; }
+      if (A.varices === 'none') { im = 7; him = 5; cm = 2; detail = 'no varices'; }
       else if (A.varices === 'treated') { im = 4; him = 7; cm = 5; detail = 'treated varices (residual bev risk)'; }
       else { im = 0; him = 8; cm = 7; detail = 'untreated / high-risk varices'; }
       factors.push({ max: 8, im, him, cm, detail });
     }
     if (A.egd !== null) {
       let im, him, cm, detail;
-      if (A.egd === 'yes' && A.varices === 'none') { im = 6; him = 3; cm = 1; detail = 'EGD feasible, no varices'; }
+      if (A.egd === 'yes' && A.varices === 'none') { im = 6; him = 5; cm = 2; detail = 'EGD feasible, no varices'; }
       else if (A.egd === 'yes' && A.varices === 'treated') { im = 3; him = 6; cm = 5; detail = 'EGD done but varices treated — residual risk'; }
       else if (A.egd === 'yes') { im = 1; him = 6; cm = 6; detail = 'EGD done but high-risk varices history'; }
       else if (A.varices === 'none') { im = 4; him = 4; cm = 2; detail = 'EGD not needed (no varices)'; }
@@ -5686,7 +5686,7 @@ function scoreTrials() {
     }
     if (A.cardio !== null) {
       let im, him, cm, detail;
-      if (A.cardio === 'low') { im = 6; him = 3; cm = 1; detail = 'low CV risk'; }
+      if (A.cardio === 'low') { im = 6; him = 5; cm = 2; detail = 'low CV risk'; }
       else if (A.cardio === 'mod') { im = 3; him = 6; cm = 4; detail = 'moderate CV risk'; }
       else { im = 0; him = 7; cm = 6; detail = 'high CV risk'; }
       factors.push({ max: 7, im, him, cm, detail });
@@ -5737,7 +5737,7 @@ function scoreTrials() {
     let himD = 0, himNote = '';
     if (hardBlock) { himD = 13; himNote = 'STRIDE design: non-VEGF dual-IO when anti-VEGF blocked'; }
     else if (softBlock) { himD = 12; himNote = 'STRIDE eligible when residual anti-VEGF risk remains — A+B also discussable'; }
-    else if (open) { himD = 6; himNote = 'STRIDE eligible; IMbrave design still closer when anti-VEGF fully open'; }
+    else if (open) { himD = 9; himNote = 'STRIDE remains a first-line design when anti-VEGF is open; IMbrave is slightly closer'; }
     else { himD = 8; himNote = 'STRIDE general dual-IO fit'; }
     if (sierraLike) { himD = Math.min(14, himD + 3); himNote += '; SIERRA-like features (CP-B / ECOG 2 / Vp4) favour STRIDE column'; }
     if (A.viral === 'hbv' || A.viral === 'hbv_hcv') { himD = Math.min(14, himD + 2); }
@@ -5859,11 +5859,15 @@ function scoreTrials() {
     const near = abHimGap <= LEAN_BAND;
     const mean = raw.reduce((s, x) => s + x.p, 0) / raw.length;
     const span = Math.max(...raw.map(x => x.p)) - Math.min(...raw.map(x => x.p));
-    const factor = near ? 1.0 : (span < 12 ? 1.85 : (span < 20 ? 1.5 : (span < 30 ? 1.28 : 1.12)));
+    const factor = near ? 1.0 : (span < 12 ? 1.15 : 1.0);
     raw.forEach(x => {
+      const key = x.t === imbrave ? 'im' : x.t === himalaya ? 'him' : 'cm';
+      if (key !== 'cm') {
+        spread[key] = x.p;
+        return;
+      }
       const stretched = mean + (x.p - mean) * factor;
-      spread[x.t === imbrave ? 'im' : x.t === himalaya ? 'him' : 'cm'] =
-        Math.round(Math.max(8, Math.min(96, stretched)));
+      spread[key] = Math.round(Math.max(8, Math.min(96, stretched)));
     });
   }
 
