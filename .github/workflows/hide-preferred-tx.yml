@@ -1,0 +1,22 @@
+name: hide-preferred-tx
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'scripts/hide_preferred_tx.py'
+      - '.github/workflows/hide-preferred-tx.yml'
+permissions:
+  contents: write
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 scripts/hide_preferred_tx.py
+      - run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html hcc-simulator.html
+          if git diff --cached --quiet; then echo "No HTML changes"; exit 0; fi
+          git commit -m "Results: comparison first paint, no preferred-tx headline"
+          git push
