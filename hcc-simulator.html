@@ -3122,19 +3122,9 @@ html, body, .app, .main {
 
       <!-- STEP 1: DISEASE EXTENT -->
       <div class="step active" id="step0">
-        <div class="step-label">1 of 10</div>
-        <h1>Number of intrahepatic lesions</h1>
-        <p class="lead">Count discrete enhancing nodules on the current staging CT/MRI (or mark diffuse / infiltrative).</p>
-        <script>
-          (function () {
-            var lab = document.querySelector("#step0 .step-label");
-            var h1 = document.querySelector("#step0 h1");
-            var lead = document.querySelector("#step0 .lead");
-            if (lab) lab.textContent = "1 of 10";
-            if (h1) h1.textContent = "Number of intrahepatic lesions";
-            if (lead) lead.textContent = "Count discrete enhancing nodules on the current staging CT/MRI (or mark diffuse / infiltrative).";
-          })();
-        </script>
+        <div class="step-label">1 of 8</div>
+        <h1>Macrovascular invasion</h1>
+        <p class="lead">Vp0-Vp4, or hepatic vein / IVC, on the current staging scan.</p>
         <div class="miss-list" id="miss0"></div>
         <div class="step-meta"><span class="chip" id="meta0">Answered <b>0</b> / 6</span></div>
 
@@ -3174,7 +3164,7 @@ html, body, .app, .main {
           </div>
         </div>
 
-<div class="card q-on">
+<div class="card">
           <h3><span class="qnum">1</span> Number of intrahepatic lesions</h3>
           <p style="font-size:12.5px;color:var(--gray-500);margin:-4px 0 12px;line-height:1.45">
             Count discrete enhancing nodules on the current staging CT/MRI (or mark diffuse / infiltrative disease).
@@ -3272,8 +3262,8 @@ html, body, .app, .main {
           <p id="burdenDetail" style="font-size:12px;color:var(--gray-500);margin-top:10px;line-height:1.5"></p>
         </div>
 
-<div class="card">
-          <h3><span class="qnum">3</span> Macrovascular invasion</h3>
+<div class="card q-on">
+          <h3><span class="qnum">1</span> Macrovascular invasion</h3>
           <p style="font-size:12.5px;color:var(--gray-500);margin:-4px 0 12px;line-height:1.45">
             Portal vein tumour thrombosis (PVTT) by Japanese Vp classification, or hepatic vein / IVC involvement.
           </p>
@@ -3759,7 +3749,7 @@ html, body, .app, .main {
       <details class="mdt-fold adv-fold" id="advFold">
         <summary>Advanced (optional)</summary>
         <div class="fold-body" id="advFoldBody">
-          <p class="funnel-lead">Age, sex, etiology, and AFP — annotation only. They do not switch A+B vs STRIDE.</p>
+          <p class="funnel-lead">Age, sex, etiology, AFP, lesion count, and size — annotation only. They do not switch A+B vs STRIDE.</p>
         </div>
       </details>
 
@@ -4445,16 +4435,14 @@ function showStep(n) {
 }
 
 const QFLOW = [
-  { g:0, key:'lesions', group:'Disease', h:'Number of intrahepatic lesions', lead:'Count discrete enhancing nodules on the current staging CT/MRI (or mark diffuse / infiltrative).' },
-  { g:0, key:'largest', group:'Disease', h:'Largest tumour size', lead:'Maximum diameter of the dominant lesion.', extra:'burden' },
-  { g:0, key:'mvi', group:'Disease', h:'Macrovascular invasion', lead:'Vp1–Vp4, or hepatic vein / IVC, on the current staging scan.' },
+  { g:0, key:'mvi', group:'Disease', h:'Macrovascular invasion', lead:'Vp0-Vp4, or hepatic vein / IVC, on the current staging scan.' },
   { g:0, key:'ehs', group:'Disease', h:'Extrahepatic spread', lead:'Nodes or distant metastases.' },
-  { g:1, key:'liver', group:'Fitness', h:'Child–Pugh class', lead:'Current liver function.' },
   { g:1, key:'ecog', group:'Fitness', h:'ECOG performance status' },
+  { g:1, key:'liver', group:'Fitness', h:'Child-Pugh class', lead:'Current liver function.' },
   { g:2, key:'varices', group:'Safety', h:'Oesophageal varices' },
   { g:2, key:'egd', group:'Safety', h:'OGD within 6 months', lead:'Required before atezolizumab + bevacizumab (HA HAB-P365).' },
-  { g:2, key:'cardioFactors', group:'Safety', h:'Cardiovascular history', lead:'Select all that apply.' },
-  { g:2, key:'autoimmuneFactors', group:'Safety', h:'Autoimmune disease', lead:'Select all that apply.' }
+  { g:2, key:'cardioFactors', group:'Safety', h:'Cardiovascular / anti-VEGF safety', lead:'Select all that apply. High CV risk blocks bevacizumab.' },
+  { g:2, key:'autoimmuneFactors', group:'Safety', h:'Autoimmune / IO safety', lead:'Select all that apply. Active autoimmune blocks the IO pathway.' }
 ];
 let qIndex = 0;
 
@@ -6074,14 +6062,13 @@ function hkFunnelHtml(compact) {
     ${row('exit', 'AJCC unstaged', F.unstagedN, F.unstagedPct, 'cited', false)}
     ${row('hbv', 'HBV documented (of HCC)', F.hbvN, F.hbvPct, 'cited', pin.hbv)}
     ${row('hcv', 'HCV documented (of HCC)', F.hcvN, F.hcvPct, 'cited', pin.hcv && !pin.hbv)}
-    ${row('gap', 'Systemic-discussable uHCC (BCLC-B/C band)', F.systemicModelled, null, 'modelled', false)}
     ${gapRows}
     ${hkMcHtml()}
     <p class="funnel-note">
       Source: Hong Kong Cancer Registry. HCC n=1,416. Stage is AJCC 8th edition.
       HBV 1,057 (74.6%) and HCV 110 (7.8%) among HCC; overlap unpublished.
       <strong>AJCC-advanced is not BCLC-C and is not unresectable HCC.</strong>
-      ~503 is <strong>MODELLED/GAP</strong> — not a registry count.
+      Unresectable / IO / VEGF volumes are not published by HKCaR.
     </p>
   </div>`;
 }
@@ -6447,20 +6434,20 @@ function hkMcHtml() {
       <p class="funnel-note" style="margin:0 0 8px">
         100,000 draws through this navigator’s <code>decide()</code> / dual-eligibility rules.
         HBV 74.6% and HCV 7.8% from HKCaR 2023 (drawn mutually exclusive; overlap unpublished = GAP).
-        All other inputs MODELLED. Not epidemiology. Scaled headcount uses ~503 MODELLED/GAP only.
+        All other inputs MODELLED. Not epidemiology. No invented caseload headcount.
       </p>
       <table class="compare-table" style="font-size:12.5px">
-        <thead><tr><th>Output</th><th>%</th><th>~503 scale</th></tr></thead>
+        <thead><tr><th>Output</th><th>%</th></tr></thead>
         <tbody>
-          <tr><td>A+B only</td><td>21.8</td><td>110</td></tr>
-          <tr><td>STRIDE only</td><td>37.2</td><td>187</td></tr>
-          <tr><td>Dual (A+B and STRIDE eligible)</td><td>23.1</td><td>116</td></tr>
-          <tr><td>TKI fallback (lenvatinib)</td><td>7.1</td><td>36</td></tr>
-          <tr><td>Ineligible / BSC</td><td>10.8</td><td>54</td></tr>
-          <tr><td>Nivo+ipi (9DW)</td><td>0</td><td>0</td></tr>
-          <tr><td>VEGF-blocked</td><td>41.1</td><td>—</td></tr>
-          <tr><td>Samaritan Fund listed (A+B / STRIDE / lenvatinib)</td><td>89.2</td><td>—</td></tr>
-          <tr><td>SF not listed for HCC (nivo+ipi)</td><td>0</td><td>—</td></tr>
+          <tr><td>A+B only</td><td>21.8</td></tr>
+          <tr><td>STRIDE only</td><td>37.2</td></tr>
+          <tr><td>Dual (A+B and STRIDE eligible)</td><td>23.1</td></tr>
+          <tr><td>TKI fallback (lenvatinib)</td><td>7.1</td></tr>
+          <tr><td>Ineligible / BSC</td><td>10.8</td></tr>
+          <tr><td>Nivo+ipi (9DW)</td><td>0</td></tr>
+          <tr><td>VEGF-blocked</td><td>41.1</td></tr>
+          <tr><td>Samaritan Fund listed (A+B / STRIDE / lenvatinib)</td><td>89.2</td></tr>
+          <tr><td>SF not listed for HCC (nivo+ipi)</td><td>0</td></tr>
         </tbody>
       </table>
       <p class="funnel-note" style="margin:8px 0 0">
@@ -8223,8 +8210,8 @@ function showRec(partial = false) {
   detailInner += mdtFold('fold-resources', 'Sources', evidenceResourcesHtml(), false);
   detailInner += mdtFold('fold-discuss', 'Discussion prompts', discussionPromptsHtml(), false);
 
-  const htmlOut = matchLead + recLead +
-    `<details class="mdt-fold" id="res-details"><summary>Details</summary><div class="fold-body">${designLead}<details class="mdt-fold" id="fold-efficacy"><summary>Phase 3 efficacy</summary><div class="fold-body">${efficacyLead}</div></details>${rec5yHtml}${detailInner}</div></details>`;
+  const htmlOut = recLead +
+    `<details class="mdt-fold" id="res-details"><summary>Details</summary><div class="fold-body">${matchLead}${designLead}<details class="mdt-fold" id="fold-efficacy"><summary>Phase 3 efficacy</summary><div class="fold-body">${efficacyLead}</div></details>${rec5yHtml}${detailInner}</div></details>`;
 
   const _rb = document.getElementById('resBody');
   if (_rb) _rb.innerHTML = htmlOut;
@@ -8945,13 +8932,13 @@ function fallbackCopy(text) {
     if (!fold) return;
     const bar = document.getElementById('presetBar');
     if (bar) fold.insertBefore(bar, fold.firstChild);
-    ['age','sex','viral','metabolic','cirrhosis','afp'].forEach(function(k) {
+    ['age','sex','viral','metabolic','cirrhosis','afp','lesions','largest'].forEach(function(k) {
       const opts = document.querySelector('.options[data-key="' + k + '"]');
       if (!opts) return;
       const card = opts.closest('.card');
       if (card) fold.appendChild(card);
     });
-    ['albiCard','pagebCard'].forEach(function(id) {
+    ['albiCard','pagebCard','burdenCalcCard'].forEach(function(id) {
       const el = document.getElementById(id);
       if (el) fold.appendChild(el);
     });
