@@ -1,0 +1,22 @@
+name: tighten-scores
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'scripts/tighten_im_him.py'
+      - '.github/workflows/tighten-scores.yml'
+permissions:
+  contents: write
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 scripts/tighten_im_him.py
+      - run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html hcc-simulator.html
+          if git diff --cached --quiet; then echo "No HTML changes"; exit 0; fi
+          git commit -m "Closer IMbrave150 vs HIMALAYA match % when VEGF is open"
+          git push
