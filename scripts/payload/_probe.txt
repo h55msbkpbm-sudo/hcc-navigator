@@ -1,0 +1,1 @@
+/home/workdir/artifacts/scripts/payload/su_gz0.b64
