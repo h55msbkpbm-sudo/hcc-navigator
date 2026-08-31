@@ -2944,6 +2944,15 @@ body.view-results .compare-table td.hl-col {
 }
 body.view-results .regimen a { color: #003da5 !important; border-bottom-color: #003da5 !important; }
 body.view-results .res-banner { margin-bottom: 16px !important; padding-bottom: 16px !important; }
+body.view-results #sec-match { margin: 8px 0 24px !important; }
+body.view-results #sec-match .tier-head {
+  display: flex !important;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 0 0 10px !important;
+}
+body.view-results #sec-match .sim-big { margin: 0 0 8px !important; }
 body.view-results #res-details > summary {
   font-family: "Source Sans 3", sans-serif;
   font-size: 15px;
@@ -8048,9 +8057,9 @@ function showRec(partial = false) {
   }
 
   const toc = `<nav class="res-toc" aria-label="Results sections">
+    <a href="#sec-match">Trial similarity</a>
     <a href="#sec-design">Study design</a>
     <a href="#sec-efficacy">Efficacy</a>
-    <a href="#sec-match">Trial similarity</a>
     <a href="#sec-access">HK access</a>
     <a href="#sec-hklc">HKLC</a>
     <a href="#sec-cuse">CUSE</a>
@@ -8175,7 +8184,7 @@ function showRec(partial = false) {
   const matchKey = topMatchKey();
   const designLead = studyDesignTable(matchKey);
   const efficacyLead = ioCompareTable(matchKey);
-  detailInner += `<div class="tier preferred" id="sec-match">
+  const matchLead = rankedCards.length ? `<div class="tier preferred" id="sec-match">
     <div class="tier-head"><span class="badge t1">Trial baseline similarity</span><span>${ds.dual ? (dualCopy(ds).badge) : 'Highest → lowest'}</span></div>
     <div class="regimen" style="padding-top:4px">
       <div class="sim-big">
@@ -8187,7 +8196,7 @@ function showRec(partial = false) {
           : 'Separation is driven mainly by anti-VEGF safety and regimen design. Illustrative only.'}
       </p>
     </div>
-  </div>`;
+  </div>` : '';
   detailInner += mdtFold('fold-break', 'Score breakdown', scoreBreakdownHtml(trials), false);
   detailInner += mdtFold('fold-sierra', 'SIERRA context (less-fit uHCC)', sierraContextHtml(), false);
   detailInner += mdtFold('fold-scores', 'Optional risk scores', hkRiskScoresHtml(), false);
@@ -8196,7 +8205,7 @@ function showRec(partial = false) {
   detailInner += mdtFold('fold-resources', 'Sources', evidenceResourcesHtml(), false);
   detailInner += mdtFold('fold-discuss', 'Discussion prompts', discussionPromptsHtml(), false);
 
-  const htmlOut = recLead +
+  const htmlOut = matchLead + recLead +
     `<details class="mdt-fold" id="res-details"><summary>Details</summary><div class="fold-body">${designLead}<details class="mdt-fold" id="fold-efficacy"><summary>Phase 3 efficacy</summary><div class="fold-body">${efficacyLead}</div></details>${rec5yHtml}${detailInner}</div></details>`;
 
   const _rb = document.getElementById('resBody');
