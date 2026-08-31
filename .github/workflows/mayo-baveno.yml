@@ -1,0 +1,28 @@
+name: mayo-baveno
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'scripts/mayo_clinic_baveno.py'
+      - 'scripts/patch_mayo_engine.py'
+      - '.github/workflows/mayo-baveno.yml'
+permissions:
+  contents: write
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Apply Mayo + Baveno patch
+        run: python3 scripts/mayo_clinic_baveno.py
+      - name: Commit HTML
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html hcc-simulator.html
+          if git diff --cached --quiet; then
+            echo "No HTML changes"
+            exit 0
+          fi
+          git commit -m "Mayo first-paint + Baveno VIII Evidence card (no decide() change)"
+          git push
