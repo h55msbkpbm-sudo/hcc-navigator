@@ -2944,15 +2944,29 @@ body.view-results .compare-table td.hl-col {
 }
 body.view-results .regimen a { color: #003da5 !important; border-bottom-color: #003da5 !important; }
 body.view-results .res-banner { margin-bottom: 16px !important; padding-bottom: 16px !important; }
-body.view-results #sec-match { margin: 8px 0 24px !important; }
-body.view-results #sec-match .tier-head {
+body.view-results #sec-match,
+body.view-results .match-lead {
+  display: block !important;
+  margin: 4px 0 24px !important;
+  padding: 16px 18px 14px !important;
+  background: #fff !important;
+  border: 1px solid #d8d2c8 !important;
+  border-radius: 2px !important;
+  box-shadow: none !important;
+}
+body.view-results #sec-match .tier-head,
+body.view-results .match-lead .tier-head {
   display: flex !important;
   align-items: baseline;
   justify-content: space-between;
   gap: 12px;
-  margin: 0 0 10px !important;
+  margin: 0 0 12px !important;
+  background: transparent !important;
 }
-body.view-results #sec-match .sim-big { margin: 0 0 8px !important; }
+body.view-results #sec-match .sim-big,
+body.view-results .match-lead .sim-big {
+  margin: 0 0 8px !important;
+}
 body.view-results #res-details > summary {
   font-family: "Source Sans 3", sans-serif;
   font-size: 15px;
@@ -8184,7 +8198,7 @@ function showRec(partial = false) {
   const matchKey = topMatchKey();
   const designLead = studyDesignTable(matchKey);
   const efficacyLead = ioCompareTable(matchKey);
-  const matchLead = rankedCards.length ? `<div class="tier preferred" id="sec-match">
+  const matchLead = rankedCards.length ? `<div class="match-lead" id="sec-match">
     <div class="tier-head"><span class="badge t1">Trial baseline similarity</span><span>${ds.dual ? (dualCopy(ds).badge) : 'Highest → lowest'}</span></div>
     <div class="regimen" style="padding-top:4px">
       <div class="sim-big">
@@ -8648,13 +8662,18 @@ function fallbackCopy(text) {
   });
 
   let fromQuery = false;
+  let wantResults = false;
   try {
     const params = new URLSearchParams(location.search);
     if ([...params.keys()].some(function(k) { return k !== 'embed' && k !== 'view'; })) {
       fromQuery = applyQueryProfile(params);
       if (fromQuery && params.get('view') === 'results') {
+        wantResults = true;
         showRec(false);
       }
+    } else if (params.get('view') === 'results') {
+      wantResults = true;
+      showRec(false);
     }
   } catch (e) {}
   const restored = !fromQuery && loadState();
@@ -8688,7 +8707,7 @@ function fallbackCopy(text) {
       var uq = QFLOW.findIndex(function(q) { return !qDone(q); });
       startQ = uq < 0 ? 0 : uq;
     }
-    showQuestion(startQ);
+    if (!wantResults) showQuestion(startQ);
   } catch (eInitQ) {}
 
   // Explicit button wiring (more reliable than only delegated document click)
