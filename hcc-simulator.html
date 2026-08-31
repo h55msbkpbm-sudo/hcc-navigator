@@ -3784,7 +3784,7 @@ html, body, .app, .main {
           <p class="preset-hint">Illustrative cases — fills the profile and redraws the comparison. Not a real patient.</p>
         </div>
         <div class="res-banner" id="resJump">
-          <div class="lbl">Recommendation</div>
+          <div class="lbl">Comparison</div>
           <h2 id="resTitle">Profile incomplete</h2>
           <p class="sub" id="resSub">Finish remaining first-pass items.</p>
         </div>
@@ -7897,13 +7897,18 @@ function showRec(partial = false) {
   if (recAlt) recLine = 'Both A+B and STRIDE are eligible on this profile; this option leads.';
   recLine = String(recLine).replace(/\d+(\.\d+)?%/g, '').replace(/\s+/g, ' ').trim();
   if (recLine && recLine.charAt(recLine.length - 1) !== '.') recLine += '.';
+  const _rlbl = document.querySelector('#resJump .lbl');
+  if (_rlbl) _rlbl.textContent = recKey === 'incomplete' ? 'Results' : 'Comparison';
   if (_rt) {
     if (recKey === 'incomplete') _rt.textContent = 'Profile incomplete';
-    else _rt.textContent = recName;
+    else if (d.primary === 'bsc') _rt.textContent = 'Outside Phase III IO populations';
+    else if (d.primary === 'tki') _rt.textContent = 'IO pathway needs individual discussion';
+    else if (ds.dual) _rt.textContent = 'A+B and STRIDE both discussable';
+    else _rt.textContent = 'Trial design comparison';
   }
   if (_rs) {
     if (recKey === 'incomplete') _rs.textContent = 'Finish remaining first-pass items.';
-    else _rs.textContent = recLine;
+    else _rs.textContent = 'Closest enrolled-like design among IMbrave150, HIMALAYA + SIERRA, and CheckMate 9DW. Not a prescription and not an OS rank.';
   }
 
   // Safety notes (clinical, not product picks)
@@ -8210,8 +8215,8 @@ function showRec(partial = false) {
   detailInner += mdtFold('fold-resources', 'Sources', evidenceResourcesHtml(), false);
   detailInner += mdtFold('fold-discuss', 'Discussion prompts', discussionPromptsHtml(), false);
 
-  const htmlOut = recLead +
-    `<details class="mdt-fold" id="res-details"><summary>Details</summary><div class="fold-body">${matchLead}${designLead}<details class="mdt-fold" id="fold-efficacy"><summary>Phase 3 efficacy</summary><div class="fold-body">${efficacyLead}</div></details>${rec5yHtml}${detailInner}</div></details>`;
+  const htmlOut = matchLead +
+    `<details class="mdt-fold" id="res-details"><summary>Details</summary><div class="fold-body">${recLead}${designLead}<details class="mdt-fold" id="fold-efficacy"><summary>Phase 3 efficacy</summary><div class="fold-body">${efficacyLead}</div></details>${rec5yHtml}${detailInner}</div></details>`;
 
   const _rb = document.getElementById('resBody');
   if (_rb) _rb.innerHTML = htmlOut;
