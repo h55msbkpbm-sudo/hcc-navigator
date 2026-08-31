@@ -1,0 +1,27 @@
+name: hoist-similarity
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'scripts/hoist_similarity.py'
+      - '.github/workflows/hoist-similarity.yml'
+permissions:
+  contents: write
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Hoist similarity block
+        run: python3 scripts/hoist_similarity.py
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html hcc-simulator.html
+          if git diff --cached --quiet; then
+            echo "No HTML changes"
+            exit 0
+          fi
+          git commit -m "fix: put trial baseline similarity scores at top of Results"
+          git push
