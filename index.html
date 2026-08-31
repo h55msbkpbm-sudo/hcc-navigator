@@ -2431,7 +2431,7 @@ html.embed .topbar .meta:last-child { display: none; }
 /* touch fix embed */
 .opt, .btn, .nav-item, .m-step {
   min-height: 44px;
-  -webkit-tap-highlight-color: rgba(13,115,119,.2);
+  -webkit-tap-highlight-color: rgba(0, 61, 165,.2);
 }
 .opt.selected { outline: none; }
 
@@ -3050,6 +3050,26 @@ html, body, .app, .main { background: #f4f1ea !important; }
 body { background-color: #f4f1ea !important; }
 .topbar, .mayo-lockup, header.topbar { background: #003da5 !important; color: #fffcf7 !important; }
 .btn-primary, #next0, #next1, #next2, button.btn-primary { background: #002f7a !important; color: #fffcf7 !important; }
+
+/* Live MDT / iPad presentation polish */
+.step-meta, .miss-list { display: none !important; }
+.res-banner { border-radius: 2px !important; box-shadow: none !important; }
+#resPresetBar { display: none !important; }
+@media (max-width: 1180px) {
+  .app { grid-template-columns: minmax(0, 1fr) !important; }
+  .sidebar, .panel { display: none !important; }
+  .main { max-width: 720px; margin: 0 auto; padding: 20px 24px 48px; }
+}
+@media (orientation: landscape) and (min-width: 768px) and (max-width: 1366px) {
+  .app { grid-template-columns: minmax(0, 1fr) !important; }
+  .sidebar, .panel { display: none !important; }
+  .main { max-width: 760px; margin: 0 auto; }
+  .opt { min-height: 64px !important; padding: 14px 16px !important; }
+  .step h1 { font-size: 28px !important; letter-spacing: -.3px; }
+  .btn, .btn-primary, #next0, #next1, #next2 { min-height: 48px !important; }
+  .res-banner { padding: 20px 22px !important; }
+  .res-banner h2 { font-size: 26px !important; }
+}
 </style>
 
 
@@ -3074,9 +3094,9 @@ body { background-color: #f4f1ea !important; }
   <a class="mayo-appt" href="#content" data-action="goto" data-n="0">Open simulator</a>
 </header>
 <div class="mayo-crumb"><a href="/hcc-simulator.html">Home</a> / Unresectable HCC / First-line treatment</div>
-<div class="trust-bar">Based on NCCN 2026 and BCLC 2026 · 8 gating questions, starting at macrovascular invasion</div>
+<div class="trust-bar">NCCN 2026 · BCLC 2026 · 8 gates, starting at macrovascular invasion</div>
 <div id="iosHint">
-  <strong>iPad / iPhone:</strong> If buttons do not respond, open this page in Safari. In-app OneDrive or Files preview blocks JavaScript.
+  <strong>iPad:</strong> Open in Safari if taps do not register.
 </div>
 
 <nav class="mobile-steps" id="mobileSteps" aria-label="Care sections">
@@ -3615,7 +3635,7 @@ body { background-color: #f4f1ea !important; }
         <h1>Safety factors</h1>
         <p class="lead"></p>
         <div class="miss-list" id="miss2"></div>
-        <div class="step-meta"><span class="chip" id="meta2">Answered <b>0</b> / 4</span></div>
+        <div class="step-meta"><span class="chip" id="meta2">Answered <b>0</b> / 8</span></div>
 
 <div class="card">
           <h3><span class="qnum">7</span> Oesophageal varices status</h3>
@@ -3790,9 +3810,9 @@ body { background-color: #f4f1ea !important; }
           <p class="preset-hint">Illustrative cases — fills the profile and redraws the comparison. Not a real patient.</p>
         </div>
         <div class="res-banner" id="resJump">
-          <div class="lbl">Comparison</div>
+          <div class="lbl">Recommendation</div>
           <h2 id="resTitle">Profile incomplete</h2>
-          <p class="sub" id="resSub">Finish remaining first-pass items.</p>
+          <p class="sub" id="resSub">Finish the remaining gates.</p>
         </div>
         <div id="resBody"></div>
         <div class="disclaimer">
@@ -4446,9 +4466,9 @@ const QFLOW = [
   { g:1, key:'ecog', group:'Fitness', h:'ECOG performance status' },
   { g:1, key:'liver', group:'Fitness', h:'Child-Pugh class', lead:'Current liver function.' },
   { g:2, key:'varices', group:'Safety', h:'Oesophageal varices' },
-  { g:2, key:'egd', group:'Safety', h:'OGD within 6 months', lead:'Required before atezolizumab + bevacizumab (HA HAB-P365).' },
+  { g:2, key:'egd', group:'Safety', h:'OGD within 6 months', lead:'Required before A+B (HAB-P365).' },
   { g:2, key:'cardioFactors', group:'Safety', h:'Cardiovascular / anti-VEGF safety', lead:'Select all that apply. High CV risk blocks bevacizumab.' },
-  { g:2, key:'autoimmuneFactors', group:'Safety', h:'Autoimmune / IO safety', lead:'Select all that apply. Active autoimmune blocks the IO pathway.' }
+  { g:2, key:'autoimmuneFactors', group:'Safety', h:'Autoimmune / IO safety', lead:'Select all that apply. Active autoimmune blocks IO.' }
 ];
 let qIndex = 0;
 
@@ -7603,11 +7623,10 @@ function evidenceResourcesHtml() {
 
       <h4 style="font-size:13px;margin:0 0 8px;color:var(--gray-700)">Zuo M HAIC+camrelizumab+apatinib TRIPLET — MODELLED/GAP (Q1 MVI)</h4>
       <ul style="margin:0 0 14px 18px;font-size:12.5px;line-height:1.55;color:var(--gray-700)">
-        <li><a href="https://doi.org/10.1007/s12072-024-10690-6" target="_blank" rel="noopener">Zuo M, Cao Y, Yang Y et al. Hepatic arterial infusion chemotherapy plus camrelizumab and apatinib for advanced hepatocellular carcinoma</a> — <em>Hepatol Int</em>. 2024;18:1486–1498. DOI 10.1007/s12072-024-10690-6. PMID 38961006. PMCID PMC11461759. ChiCTR2300075828. SYSUCC retrospective RWE. n=416 (TRIPLET HAIC+camrelizumab+apatinib 207 vs C-A camrelizumab+apatinib 209); after 1:1 PSM 109/arm. Printed only: mOS NR vs 19.9 mo (p<0.001); mPFS 11.5 vs 9.6 mo (p<0.001); grade 3/4 AE 82.1% vs 71.3%. Distinct from Zhang STTT 2023 NCT04191889 TRIPLET phase 2 single-arm and from Zuo WJGO 2024 TRIPLET±MWA. Mapped to Q1 Macrovascular (Vp0–Vp4). <strong>MODELLED/GAP:</strong> Asia-enriched HAIC-add-on RWE on a camrelizumab+apatinib backbone — not a 1L rank vs IMbrave150 / HIMALAYA / CheckMate 9DW and does not displace A+B vs STRIDE. Dual-eligibility A+B vs STRIDE unchanged. CARES-310 stays the cited camre+rivoceranib 1L RCT. ORIENT-32 / CARES-310 stay Asia-enriched. HKLC / CUSE stay in closed Details.</li>
+        <li><a href="https://doi.org/10.1007/s12072-024-10690-6" target="_blank" rel="noopener">Zuo M, Cao Y, Yang Y et al. Hepatic arterial infusion chemotherapy plus camrelizumab and apatinib for advanced hepatocellular carcinoma</a> — <em>Hepatol Int</em>. 2024;18:1486–1498. DOI 10.1007/s12072-024-10690-6. PMID 38961006. PMCID PMC11461759. ChiCTR2300075828. SYSUCC retrospective RWE. n=416 (TRIPLET HAIC+camrelizumab+apatinib 207 vs C-A camrelizumab+apatinib 209); after 1:1 PSM 109/arm. Printed only: mOS NR vs 19.9 mo; mPFS 11.5 vs 9.6 mo; G3/4 AE 82.1% vs 71.3%. Distinct from Zhang STTT 2023 NCT04191889 TRIPLET phase 2 single-arm and from Zuo WJGO 2024 TRIPLET±MWA. Mapped to Q1 Macrovascular (Vp0–Vp4). <strong>MODELLED/GAP:</strong> Asia-enriched HAIC-add-on RWE on a camrelizumab+apatinib backbone — not a 1L rank vs IMbrave150 / HIMALAYA / CheckMate 9DW and does not displace A+B vs STRIDE. Dual-eligibility A+B vs STRIDE unchanged when scores are close (TIE 5 / LEAN 8). CARES-310 stays the cited camre+rivoceranib 1L RCT. ORIENT-32 / CARES-310 stay Asia-enriched. HKLC / CUSE stay in closed Details.</li>
       </ul>
 
-
-<h4 style="font-size:13px;margin:0 0 8px;color:var(--gray-700)">DHDC vs DDC donafenib+camrelizumab — MODELLED/GAP</h4>
+      <h4 style="font-size:13px;margin:0 0 8px;color:var(--gray-700)">DHDC vs DDC donafenib+camrelizumab — MODELLED/GAP</h4>
       <ul style="margin:0 0 14px 18px;font-size:12.5px;line-height:1.55;color:var(--gray-700)">
         <li><a href="https://pubmed.ncbi.nlm.nih.gov/42292418/" target="_blank" rel="noopener">Ma Y et al., Front Immunol 2026 (DHDC vs DDC)</a> — <em>Front Immunol</em> 2026;17:1779170. DOI 10.3389/fimmu.2026.1779170. PMID 42292418. PMCID PMC13260537. Ma Y, Long J, Shi S, Fang X, Wang R, Xiong F, Ren H, Li W, Zhang X. DEB-TACE-HAIC combined with donafenib and camrelizumab in the treatment of unresectable hepatocellular carcinoma: a multicenter retrospective study. Original 2026 multicenter retrospective RWE. 1L unresectable HCC. Both arms use named systemic backbone donafenib + camrelizumab; contrast is DEB-TACE-HAIC (DHDC) vs DEB-TACE alone (DDC) on that backbone. Exclusion: any previous exposure to targeted therapy or immunotherapy (treatment-naive systemic 1L). IPTW-adjusted. n=122 enrolled (DHDC n=58 vs DDC n=64). Unstratified single-arm quartet not printed. ORR DHDC 74.1% vs DDC 51.6% (P=0.010); after IPTW 72.5% vs 53.4% (P=0.036). mPFS 16 vs 11 months (P<0.001); after IPTW still 16 vs 11 (P<0.001). mOS 28 vs 18 months (P<0.001); after IPTW 28 vs 19 months (P<0.001). DCR 91.4% vs 75.0% (P=0.017); after IPTW 90.7% vs 75.3% (P=0.033). Distinct from Yu J J Hepatocell Carcinoma 2026 PMID 42633413 (HAIC vs TACE + LEN + mixed PD-1 PVTT), Fu Q Am J Cancer Res 2026 PMID 42465003 (1L TKI SIK2), Egusa M Clin Nutr ESPEN 2026 PMID 42624401, Kim J Cancers 2025 PMID 41514546, Liang J J Hepatocell Carcinoma 2026 PMID 42221602, Hong X BMC Cancer 2025 PMID 39910472 (Don-Sin), IMbrave150/HIMALAYA/9DW/CARES-310/ORIENT-32. Do not overwrite IMbrave150/HIMALAYA/9DW/REFLECT. <strong>MODELLED/GAP:</strong> 1L named donafenib + camrelizumab with DEB-TACE ± HAIC for uHCC. GAP: contrast is locoregional intensity (DEB-TACE-HAIC vs DEB-TACE) on a shared donafenib+camrelizumab backbone, not donafenib mono vs another TKI; not a pure systemic-only STRIDE/A+B cohort. Dual-eligibility unchanged. No 1L A+B vs STRIDE RCT HR.</li>
       </ul>
@@ -7917,7 +7936,7 @@ function showRec(partial = false) {
   recLine = String(recLine).replace(/\d+(\.\d+)?%/g, '').replace(/\s+/g, ' ').trim();
   if (recLine && recLine.charAt(recLine.length - 1) !== '.') recLine += '.';
   const _rlbl = document.querySelector('#resJump .lbl');
-  if (_rlbl) _rlbl.textContent = recKey === 'incomplete' ? 'Results' : 'Comparison';
+  if (_rlbl) _rlbl.textContent = recKey === 'incomplete' ? 'Results' : 'Recommendation';
   if (_rt) {
     if (recKey === 'incomplete') _rt.textContent = 'Profile incomplete';
     else if (d.primary === 'bsc') _rt.textContent = 'Outside Phase III IO populations';
@@ -7926,7 +7945,7 @@ function showRec(partial = false) {
     else _rt.textContent = 'Trial design comparison';
   }
   if (_rs) {
-    if (recKey === 'incomplete') _rs.textContent = 'Finish remaining first-pass items.';
+    if (recKey === 'incomplete') _rs.textContent = 'Finish the remaining gates.';
     else _rs.textContent = 'Closest enrolled-like design among IMbrave150, HIMALAYA + SIERRA, and CheckMate 9DW. Not a prescription and not an OS rank.';
   }
 
