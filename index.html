@@ -5919,7 +5919,8 @@ function hashProfile() {
   return h >>> 0;
 }
 
-function patientPictureHtml() {
+function patientPictureHtml() { return ''; }
+function _portraitRemoved() {
   const female = A.sex === 'F';
   const young = A.age === 'under50';
   let band = 'well';
@@ -8196,11 +8197,11 @@ function showRec(partial = false) {
   detailInner += mdtFold('fold-discuss', 'Discussion prompts', discussionPromptsHtml(), false);
 
   const htmlOut = recLead +
-    `<details class="mdt-fold" id="res-details"><summary>Details</summary><div class="fold-body">${designLead}<details class="mdt-fold" id="fold-efficacy"><summary>Phase 3 efficacy</summary><div class="fold-body">${efficacyLead}</div></details>${rec5yHtml}${detailInner}</div></details>` +
-    patientPictureHtml();
+    `<details class="mdt-fold" id="res-details"><summary>Details</summary><div class="fold-body">${designLead}<details class="mdt-fold" id="fold-efficacy"><summary>Phase 3 efficacy</summary><div class="fold-body">${efficacyLead}</div></details>${rec5yHtml}${detailInner}</div></details>`;
 
   const _rb = document.getElementById('resBody');
   if (_rb) _rb.innerHTML = htmlOut;
+  document.querySelectorAll('.burden-map, figure.pt-pic, .pt-pic, #burdenCalcCard').forEach(function(el){ el.remove(); });
 
   try { if ('scrollRestoration' in history) history.scrollRestoration = 'manual'; } catch (e) {}
   try { window.scrollTo(0, 0); } catch (e) {}
