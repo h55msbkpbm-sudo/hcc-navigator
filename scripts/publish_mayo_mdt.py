@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Assemble Mayo MDT live HTML: Q1 MVI 1of8, Yalikun/Zuo/Su Y GAP cards, cream/navy lock, iPad polish."""
+"""Assemble Mayo MDT live HTML: Q1 MVI 1of8, Wu C/Yalikun/Zuo/Su Y GAP cards, cream/navy lock, iPad polish."""
 from pathlib import Path
 import re
 
@@ -48,6 +48,13 @@ YALIKUN_CARD = """
       <h4 style=\"font-size:13px;margin:0 0 8px;color:var(--gray-700)\">Yalikun K HAIC+camrelizumab+apatinib conversion — MODELLED/GAP (Q1 MVI)</h4>
       <ul style=\"margin:0 0 14px 18px;font-size:12.5px;line-height:1.55;color:var(--gray-700)\">
         <li><a href=\"https://doi.org/10.1186/s12885-025-14250-5\" target=\"_blank\" rel=\"noopener\">Yalikun K, Li Z, Zhang J et al. Hepatic artery infusion chemotherapy combined with camrelizumab and apatinib as conversion therapy for patients with unresectable hepatocellular carcinoma: a single-arm exploratory trial</a> — <em>BMC Cancer</em>. 2025;25:838. DOI 10.1186/s12885-025-14250-5. PMID 40335980. PMCID PMC12056981. NCT05099848. Shandong Cancer Hospital single-arm exploratory conversion pilot. n=19. Printed only: conversion 14/19 (73.7%); R0 9/19 (47.4%); MPR 3/9; pCR 2/9; RECIST ORR 47.4% DCR 89.5%; mRECIST ORR/DCR 89.5%; 1-year OS 73.7%; 2-year OS 63.2%. Distinct from Zuo M Hepatol Int PMID 38961006 (HAIC+camre+apa PSM RWE, not conversion pilot), Zhang STTT 2023 NCT04191889 TRIPLET phase 2, Zhang W Front Immunol PMID 40529364, LEN-TAP PMID 41565617, PLATIC PMID 42092358, GUIDANCE007, HILL, CHANCE 2416, and Weng PMID 42666210. Mapped to Q1 Macrovascular (Vp0–Vp4). <strong>MODELLED/GAP:</strong> Asia-enriched HAIC+camrelizumab+apatinib conversion pilot — not a 1L rank vs IMbrave150 / HIMALAYA / CheckMate 9DW and does not displace A+B vs STRIDE. Dual-eligibility A+B vs STRIDE unchanged when scores are close (TIE 5 / LEAN 8). CARES-310 stays the cited camre+rivoceranib 1L RCT. ORIENT-32 / CARES-310 stay Asia-enriched. HKLC / CUSE stay in closed Details.</li>
+      </ul>
+"""
+
+WU_CARD = """
+      <h4 style=\"font-size:13px;margin:0 0 8px;color:var(--gray-700)\">Wu C VP4 HAIC+LEN+PD-1 — MODELLED/GAP (Q1 MVI)</h4>
+      <ul style=\"margin:0 0 14px 18px;font-size:12.5px;line-height:1.55;color:var(--gray-700)\">
+        <li><a href=\"https://doi.org/10.1007/s12072-025-10884-6\" target=\"_blank\" rel=\"noopener\">Wu C, Yang H, Zhang W et al. Hepatic arterial infusion chemotherapy combined with lenvatinib and programmed death receptor-1 inhibitors for hepatocellular carcinoma with Vp4 portal vein tumor thrombus: a multicenter, propensity score matching comparative study</a> — <em>Hepatol Int</em>. 2026;20(2):396–407. DOI 10.1007/s12072-025-10884-6. PMID 40760242. Multicenter retrospective RWE. HAIC-LEN-PD1 vs LEN-PD1 in Vp4 PVTT. Enrolled 158 vs 78; after 1:2 PSM 66 vs 76. Printed only: mOS 21.1 vs 11.5 mo, HR 0.51 (p=0.003); mPFS 8.4 vs 5.6 mo, HR 0.49 (p<0.001); ORR 60.6% vs 28.9%; DCR 95.4% vs 77.6%. Distinct from Liu W Fujian VP4 HAIC+TKI±PD-1 PMID 1832313, CHANCE 2416, Cao F PMID 1602031, Yalikun K PMID 40335980, Zuo M PMID 38961006, LEN-TAP PMID 41565617, and Zhang W PMID 40529364. Mapped to Q1 Macrovascular (Vp0–Vp4). <strong>MODELLED/GAP:</strong> Asia-enriched VP4 HAIC+LEN+PD-1 RWE — not a 1L rank vs IMbrave150 / HIMALAYA / CheckMate 9DW and does not displace A+B vs STRIDE. Dual-eligibility A+B vs STRIDE unchanged when scores are close (TIE 5 / LEAN 8). ORIENT-32 / CARES-310 stay Asia-enriched. HKLC / CUSE stay in closed Details.</li>
       </ul>
 """
 
@@ -209,6 +216,33 @@ def upsert_yalikun(html: str) -> str:
 
 s = upsert_yalikun(s)
 
+
+def upsert_wuc(html: str) -> str:
+    marker = "Wu C VP4 HAIC+LEN+PD-1"
+    if marker in html:
+        return html
+    for anc in (
+        "Yalikun K HAIC+camrelizumab+apatinib conversion — MODELLED/GAP (Q1 MVI)</h4>",
+        "Zhang W HAIC+LEN+PD-1/L1 conversion — MODELLED/GAP (Q1 MVI)</h4>",
+        "Zuo M HAIC+camrelizumab+apatinib TRIPLET — MODELLED/GAP (Q1 MVI)</h4>",
+        "DHDC vs DDC donafenib+camrelizumab — MODELLED/GAP</h4>",
+        "DHDC vs DDC",
+        "Guidelines & strategy",
+    ):
+        i = html.find(anc)
+        if i < 0:
+            continue
+        ul = html.find("</ul>", i)
+        if ul < 0:
+            continue
+        html = html[: ul + 5] + "\n" + WU_CARD + html[ul + 5 :]
+        html = re.sub(r"(</ul>)\n{3,}<h4", r"\1\n\n      <h4", html, count=3)
+        return html
+    raise SystemExit("no insert anchor for Wu C card")
+
+
+s = upsert_wuc(s)
+
 if decide_i >= 0:
     new_i = s.find("function decide()")
     if s[new_i: new_i + 5000] != decide_slice:
@@ -224,6 +258,10 @@ if "40335980" not in s or "NCT05099848" not in s:
     raise SystemExit("Yalikun card missing after assemble")
 if s.count("Yalikun K HAIC+camrelizumab+apatinib conversion") != 1:
     raise SystemExit("Yalikun card count drifted")
+if "40760242" not in s or "10884-6" not in s:
+    raise SystemExit("Wu C card missing after assemble")
+if s.count("Wu C VP4 HAIC+LEN+PD-1") != 1:
+    raise SystemExit("Wu C card count drifted")
 
 (root / "index.html").write_text(s, encoding="utf-8")
 (root / "hcc-simulator.html").write_text(s, encoding="utf-8")
@@ -239,6 +277,8 @@ print(
     "38961006" in s,
     "yalikun",
     "40335980" in s,
+    "wuc",
+    "40760242" in s,
     "recLead",
     "const htmlOut = recLead +" in s,
     "gates",
