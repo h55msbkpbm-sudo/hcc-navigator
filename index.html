@@ -1,1 +1,39 @@
-PLACEHOLDER
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#003da5">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>HCC Simulator</title>
+<style>
+html,body{margin:0;height:100%;font-family:system-ui,-apple-system,sans-serif;background:#f4f1ea;color:#003da5}
+.boot{display:flex;align-items:center;justify-content:center;min-height:100%;text-align:center;padding:24px}
+.boot p{opacity:.75;font-size:14px;margin:0}
+</style>
+</head>
+<body>
+<div class="boot" id="boot"><p>Loading HCC Simulator…</p></div>
+<script>
+(async function () {
+  try {
+    var n = 18;
+    var urls = [];
+    for (var i = 0; i < n; i++) urls.push(fetch('c' + i + '.b64'));
+    var parts = await Promise.all(urls);
+    for (var i = 0; i < parts.length; i++) if (!parts[i].ok) throw new Error('chunk ' + i + ' ' + parts[i].status);
+    var texts = await Promise.all(parts.map(function (r) { return r.text(); }));
+    var b64 = texts.map(function (t) { return t.trim(); }).join('');
+    var bin = atob(b64);
+    var bytes = new Uint8Array(bin.length);
+    for (var i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+    var stream = new Blob([bytes]).stream().pipeThrough(new DecompressionStream('gzip'));
+    var html = await new Response(stream).text();
+    document.open(); document.write(html); document.close();
+  } catch (e) {
+    document.getElementById('boot').innerHTML = '<p>Could not load.</p><p style="font-size:12px;opacity:.5">' + e + '</p>';
+  }
+})();
+</script>
+</body>
+</html>
